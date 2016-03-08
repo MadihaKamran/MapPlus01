@@ -1,4 +1,4 @@
-package com.directions.sample;
+package com.example.mapdemo;
 
 import android.app.ProgressDialog;
 import android.location.Location;

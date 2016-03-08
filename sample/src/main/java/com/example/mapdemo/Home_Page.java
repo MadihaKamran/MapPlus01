@@ -1,4 +1,4 @@
-package com.directions.sample;
+package com.example.mapdemo;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.content.Intent;
 
-import com.directions.sample.MainActivity;
+import com.example.mapdemo.MainActivity;
 
 public class Home_Page extends AppCompatActivity {
 

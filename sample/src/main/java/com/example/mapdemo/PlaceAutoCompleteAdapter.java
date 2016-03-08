@@ -1,4 +1,4 @@
-package com.directions.sample;
+package com.example.mapdemo;
 
 /**
  * Created by Joel on 28/06/2015.

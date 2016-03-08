@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.directions.sample">
+    package="com.example.mapdemo">
 
     <!-- Copied from Google Maps Library/AndroidManifest.xml. -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -24,6 +24,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA-DYq9Pl9EOK8S-ws4CZ-mBGycahSWvZM" />
+
 
         <activity
             android:name=".MainActivity"

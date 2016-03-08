@@ -1,4 +1,4 @@
-package com.directions.sample;
+package com.example.mapdemo;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
