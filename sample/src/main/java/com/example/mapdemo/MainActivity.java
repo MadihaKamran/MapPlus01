@@ -1,10 +1,14 @@
 package com.example.mapdemo;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.CheckBox;
 
 import com.directions.route.AbstractRouting;
 import com.directions.route.Route;
@@ -31,6 +36,7 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
@@ -46,7 +52,9 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements RoutingListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
+public class MainActivity extends AppCompatActivity implements RoutingListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks,
+        AdapterView.OnItemSelectedListener, OnMapReadyCallback,
+                ActivityCompat.OnRequestPermissionsResultCallback, GoogleMap.OnMyLocationButtonClickListener {
     protected GoogleMap map;
     protected LatLng start;
     protected LatLng end;
@@ -62,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements RoutingListener, 
     private ProgressDialog progressDialog;
     private ArrayList<Polyline> polylines;
     private int[] colors = new int[]{R.color.primary_dark,R.color.primary,R.color.primary_light,R.color.accent,R.color.primary_dark_material_light};
-
+    private CheckBox mTrafficCheckbox;
 
     private static final LatLngBounds BOUNDS_JAMAICA= new LatLngBounds(new LatLng(-57.965341647205726, 144.9987719580531),
             new LatLng(72.77492067739843, -9.998857788741589));
@@ -70,11 +78,12 @@ public class MainActivity extends AppCompatActivity implements RoutingListener, 
     /**
      * This activity loads a map and then displays the route and pushpins on it.
      */
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+@Override
+public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
+        mTrafficCheckbox = (CheckBox) findViewById(R.id.traffic);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         polylines = new ArrayList<>();
@@ -87,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements RoutingListener, 
         mGoogleApiClient.connect();
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+         mapFragment.getMapAsync(this);
 
         if (mapFragment == null) {
             mapFragment = SupportMapFragment.newInstance();
@@ -304,6 +314,54 @@ public class MainActivity extends AppCompatActivity implements RoutingListener, 
             }
         });
 
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    /**
+     * Called when the Traffic checkbox is clicked.
+     */
+    public void onTrafficToggled(View view) {
+        updateTraffic();
+    }
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        googleMap = map;
+        map.setOnMyLocationButtonClickListener(this);
+        enableMyLocation();
+        updateTraffic();
+    }
+
+
+    /* Enables the My Location layer if the fine location permission has been granted.
+    */
+    private void enableMyLocation() {
+       if (map != null) {
+            // Access to the location has been granted to the app.
+            map.setMyLocationEnabled(true);
+        }
+    }
+
+
+
+    private void updateTraffic() {
+
+        map.setTrafficEnabled(mTrafficCheckbox.isChecked());
+    }
+
+    @Override
+    public boolean onMyLocationButtonClick() {
+        return false;
     }
 
     @OnClick(R.id.send)
