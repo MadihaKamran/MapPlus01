@@ -88,6 +88,13 @@
             android:layout_height="wrap_content"
             android:onClick="onTrafficToggled"
             android:text="traffic" />
+        <CheckBox
+        android:id="@+id/my_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:onClick="onMyLocationToggled"
+        android:text="my location" />
 
     </LinearLayout>
 </FrameLayout>

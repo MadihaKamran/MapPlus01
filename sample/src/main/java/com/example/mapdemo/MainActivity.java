@@ -71,6 +71,10 @@ public class MainActivity extends AppCompatActivity implements RoutingListener, 
     private ArrayList<Polyline> polylines;
     private int[] colors = new int[]{R.color.primary_dark,R.color.primary,R.color.primary_light,R.color.accent,R.color.primary_dark_material_light};
     private CheckBox mTrafficCheckbox;
+    private CheckBox mMyLocationCheckbox;
+    private LocationListener net_listener;
+    private LocationListener gps_listener;
+    private LocationManager locationManager;
 
     private static final LatLngBounds BOUNDS_JAMAICA= new LatLngBounds(new LatLng(-57.965341647205726, 144.9987719580531),
             new LatLng(72.77492067739843, -9.998857788741589));
@@ -84,7 +88,9 @@ public void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
         mTrafficCheckbox = (CheckBox) findViewById(R.id.traffic);
+        mMyLocationCheckbox = (CheckBox) findViewById(R.id.my_location);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         polylines = new ArrayList<>();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -107,7 +113,62 @@ public void onCreate(Bundle savedInstanceState) {
         mAdapter = new PlaceAutoCompleteAdapter(this, android.R.layout.simple_list_item_1,
                 mGoogleApiClient, BOUNDS_JAMAICA, null);
 
+        net_listener= new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
 
+                CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(),location.getLongitude()));
+                CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
+
+                map.moveCamera(center);
+                map.animateCamera(zoom);
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        };
+
+        gps_listener=new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude()));
+                CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
+
+                map.moveCamera(center);
+                map.animateCamera(zoom);
+
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        };
+
+    map.setMyLocationEnabled(false);
+    map.getUiSettings().setMyLocationButtonEnabled(false);
         /*
         * Updates the bounds being used by the auto complete adapter based on the position of the
         * map.
@@ -127,65 +188,7 @@ public void onCreate(Bundle savedInstanceState) {
         map.moveCamera(center);
         map.animateCamera(zoom);
 
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        locationManager.requestLocationUpdates(
-                LocationManager.NETWORK_PROVIDER, 5000, 0,
-                new LocationListener() {
-                    @Override
-                    public void onLocationChanged(Location location) {
-
-                        CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(),location.getLongitude()));
-                        CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
-
-                        map.moveCamera(center);
-                        map.animateCamera(zoom);
-                    }
-
-                    @Override
-                    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-                    }
-
-                    @Override
-                    public void onProviderEnabled(String provider) {
-
-                    }
-
-                    @Override
-                    public void onProviderDisabled(String provider) {
-
-                    }
-                });
-
-
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                3000, 0, new LocationListener() {
-                    @Override
-                    public void onLocationChanged(Location location) {
-                        CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(),location.getLongitude()));
-                        CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
-
-                        map.moveCamera(center);
-                        map.animateCamera(zoom);
-
-                    }
-
-                    @Override
-                    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-                    }
-
-                    @Override
-                    public void onProviderEnabled(String provider) {
-
-                    }
-
-                    @Override
-                    public void onProviderDisabled(String provider) {
-
-                    }
-                });
 
 
 
@@ -352,6 +355,32 @@ public void onCreate(Bundle savedInstanceState) {
         }
     }
 
+    /**
+     * Called when the MyLocation checkbox is clicked.
+     */
+    public void onMyLocationToggled(View view) {
+        updateMyLocation();
+    }
+
+    private void updateMyLocation() {
+        if (mMyLocationCheckbox.isChecked()) {
+            map.setMyLocationEnabled(true);
+            locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(
+                    LocationManager.NETWORK_PROVIDER, 5000, 0, net_listener);
+
+
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                    3000, 0,gps_listener);
+        } else {
+            // Uncheck the box until the layer has been enabled and request missing permission.
+            mMyLocationCheckbox.setChecked(false);
+            locationManager.removeUpdates(gps_listener);
+            locationManager.removeUpdates(net_listener);
+        }
+
+    }
+
 
 
     private void updateTraffic() {
@@ -481,6 +510,7 @@ public void onCreate(Bundle savedInstanceState) {
         map.addMarker(options);
 
     }
+
 
     @Override
     public void onRoutingCancelled() {
