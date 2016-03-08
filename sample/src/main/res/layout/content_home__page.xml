@@ -9,7 +9,28 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.directions.sample.Home_Page"
-    tools:showIn="@layout/activity_home__page">
+    tools:context="com.example.mapdemo.Home"
+    tools:showIn="@layout/activity_home__page"
+    android:background="#0fefd5">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/welcome_string"
+        android:id="@+id/textView"
+        android:layout_marginTop="148dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home_str"
+        android:id="@+id/button"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="134dp"
+        android:onClick="onClick"/>
 </RelativeLayout>

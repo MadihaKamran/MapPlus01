@@ -4,4 +4,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_home__page">Home_Page</string>
+    <string name="home_str">Get Started !</string>
+    <string name="welcome_str">Welcome To MapPlus</string>
+    <string name="welcome_string">Welcome To MapPlus</string>
 </resources>
