@@ -1,7 +1,9 @@
 package com.example.mapdemo;
 
 import android.Manifest;
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -20,6 +22,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.CheckBox;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.directions.route.AbstractRouting;
 import com.directions.route.Route;
 import com.directions.route.RouteException;
@@ -167,8 +175,8 @@ public void onCreate(Bundle savedInstanceState) {
             }
         };
 
-    map.setMyLocationEnabled(false);
-    map.getUiSettings().setMyLocationButtonEnabled(false);
+        map.setMyLocationEnabled(false);
+        map.getUiSettings().setMyLocationButtonEnabled(false);
         /*
         * Updates the bounds being used by the auto complete adapter based on the position of the
         * map.
@@ -182,8 +190,8 @@ public void onCreate(Bundle savedInstanceState) {
         });
 
 
-        CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(18.013610, -77.498803));
-        CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
+        CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(43.7, -79.40));
+        CameraUpdate zoom = CameraUpdateFactory.zoomTo(2);
 
         map.moveCamera(center);
         map.animateCamera(zoom);
@@ -437,11 +445,42 @@ public void onCreate(Bundle savedInstanceState) {
         {
             progressDialog = ProgressDialog.show(this, "Please wait.",
                     "Fetching route information.", true);
+            /*
+            * Here contacts the local server to get the point we need to pass through
+            */
+
+            final Context current = this;
+            RequestQueue queue = Volley.newRequestQueue(this);
+            String url ="http://www.google.com";
+
+            // Request a string response from the provided URL.
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            // Display the first 500 characters of the response string.
+                            Toast.makeText(current,response.substring(0,500),Toast.LENGTH_SHORT).show();
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(current,"That didn't work",Toast.LENGTH_SHORT).show();
+                }
+            });
+            // Add the request to the RequestQueue.
+            queue.add(stringRequest);
+            ArrayList<LatLng> list = new ArrayList<LatLng>();
+            LatLng montreal = new LatLng(45.5087,-73.554);
+            list.add(start);
+            list.add(montreal);
+            list.add(end);
+
+
             Routing routing = new Routing.Builder()
                     .travelMode(AbstractRouting.TravelMode.DRIVING)
                     .withListener(this)
                     .alternativeRoutes(true)
-                    .waypoints(start, end)
+                    .waypoints(list)
                     .build();
             routing.execute();
         }
@@ -482,11 +521,11 @@ public void onCreate(Bundle savedInstanceState) {
 
         polylines = new ArrayList<>();
         //add route(s) to the map.
-        for (int i = 0; i <route.size(); i++) {
-
+//        for (int i = 0; i <route.size(); i++) {
+        for (int i = 0; i < 1; i++) {
+            //only display one route
             //In case of more than 5 alternative routes
             int colorIndex = i % colors.length;
-
             PolylineOptions polyOptions = new PolylineOptions();
             polyOptions.color(getResources().getColor(colors[colorIndex]));
             polyOptions.width(10 + i * 3);
@@ -494,20 +533,17 @@ public void onCreate(Bundle savedInstanceState) {
             Polyline polyline = map.addPolyline(polyOptions);
             polylines.add(polyline);
 
-            Toast.makeText(getApplicationContext(),"Route "+ (i+1) +": distance - "+ route.get(i).getDistanceValue()+": duration - "+ route.get(i).getDurationValue(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Route "+": distance - "+ route.get(i).getDistanceValue()+": duration - "+ route.get(i).getDurationValue(),Toast.LENGTH_SHORT).show();
         }
 
         // Start marker
-        MarkerOptions options = new MarkerOptions();
-        options.position(start);
-        options.icon(BitmapDescriptorFactory.fromResource(R.drawable.start_blue));
-        map.addMarker(options);
+        map.addMarker(new MarkerOptions()
+                .position(start)
+                .title("starting point"));
 
-        // End marker
-        options = new MarkerOptions();
-        options.position(end);
-        options.icon(BitmapDescriptorFactory.fromResource(R.drawable.end_green));
-        map.addMarker(options);
+        map.addMarker(new MarkerOptions()
+                .position(end)
+                .title("destination"));
 
     }
 
