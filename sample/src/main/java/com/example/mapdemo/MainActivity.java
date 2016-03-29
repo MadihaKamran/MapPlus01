@@ -55,6 +55,7 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -83,6 +84,8 @@ public class MainActivity extends AppCompatActivity implements RoutingListener, 
     private LocationListener net_listener;
     private LocationListener gps_listener;
     private LocationManager locationManager;
+    private String res;
+    private StringTokenizer token;
 
     private static final LatLngBounds BOUNDS_JAMAICA= new LatLngBounds(new LatLng(-57.965341647205726, 144.9987719580531),
             new LatLng(72.77492067739843, -9.998857788741589));
@@ -414,8 +417,7 @@ public void onCreate(Bundle savedInstanceState) {
         }
     }
 
-    public void route()
-    {
+    public void route(){
         if(start==null || end==null)
         {
             if(start==null)
@@ -451,7 +453,10 @@ public void onCreate(Bundle savedInstanceState) {
 
             final Context current = this;
             RequestQueue queue = Volley.newRequestQueue(this);
-            String url ="http://www.google.com";
+            String url ="http://52.0.129.137:8888/?";
+            url = url + "slat="+start.latitude + "&slng="+start.longitude;
+            url = url + "&elat="+end.latitude + "&elng="+end.longitude;
+
 
             // Request a string response from the provided URL.
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -459,20 +464,29 @@ public void onCreate(Bundle savedInstanceState) {
                         @Override
                         public void onResponse(String response) {
                             // Display the first 500 characters of the response string.
-                            Toast.makeText(current,response.substring(0,500),Toast.LENGTH_SHORT).show();
+                            res = response;
+                            token= new StringTokenizer(res," ");
                         }
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(current,"That didn't work",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(current,error.toString(),Toast.LENGTH_LONG).show();
                 }
             });
             // Add the request to the RequestQueue.
             queue.add(stringRequest);
             ArrayList<LatLng> list = new ArrayList<LatLng>();
-            LatLng montreal = new LatLng(45.5087,-73.554);
+
             list.add(start);
-            list.add(montreal);
+       
+            while (token.hasMoreTokens()){
+                double lat = Double.parseDouble(token.nextToken());
+                double lng = Double.parseDouble(token.nextToken());
+                LatLng tmp = new LatLng(lat,lng);
+                Toast.makeText(current,"added waypoint lat: "+lat+" lng: "+lng,Toast.LENGTH_SHORT).show();
+                list.add(tmp);
+            }
+
             list.add(end);
 
 
