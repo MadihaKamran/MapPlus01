@@ -26,6 +26,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.directions.route.AbstractRouting;
@@ -56,6 +57,9 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -86,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements RoutingListener, 
     private LocationManager locationManager;
     private String res;
     private StringTokenizer token;
+
 
     private static final LatLngBounds BOUNDS_JAMAICA= new LatLngBounds(new LatLng(-57.965341647205726, 144.9987719580531),
             new LatLng(72.77492067739843, -9.998857788741589));
@@ -273,7 +278,6 @@ public void onCreate(Bundle savedInstanceState) {
                         }
                         // Get the Place object from the buffer.
                         final Place place = places.get(0);
-
                         end=place.getLatLng();
                     }
                 });
@@ -350,7 +354,6 @@ public void onCreate(Bundle savedInstanceState) {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        googleMap = map;
         map.setOnMyLocationButtonClickListener(this);
         enableMyLocation();
         updateTraffic();
@@ -452,51 +455,70 @@ public void onCreate(Bundle savedInstanceState) {
             */
 
             final Context current = this;
-            RequestQueue queue = Volley.newRequestQueue(this);
+            RequestQueue queue = Volley.newRequestQueue(current);
             String url ="http://52.0.129.137:8888/?";
             url = url + "slat="+start.latitude + "&slng="+start.longitude;
             url = url + "&elat="+end.latitude + "&elng="+end.longitude;
 
 
-            // Request a string response from the provided URL.
+             //Request a string response from the provided URL.
+            final RoutingListener routingListener = this;
+
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            // Display the first 500 characters of the response string.
+                            // Display the first 500 characters of the response string
                             res = response;
+                            //Toast.makeText(current, res ,Toast.LENGTH_SHORT).show();
                             token= new StringTokenizer(res," ");
+                            ArrayList<LatLng> list = new ArrayList<LatLng>();
+                            list.add(start);
+                            // Start marker
+                            map.addMarker(new MarkerOptions()
+                                    .position(start)
+                                    .title("starting point"));
+
+
+                            while (token != null && token.hasMoreTokens()){
+                                double lat = Double.parseDouble(token.nextToken());
+                                double lng = Double.parseDouble(token.nextToken());
+                                LatLng tmp = new LatLng(lat,lng);
+                                map.addMarker(new MarkerOptions()
+                                        .position(tmp)
+                                        .title("way point"));
+                                Toast.makeText(current,"added waypoint lat: "+lat+" lng: "+lng,Toast.LENGTH_SHORT).show();
+
+                            }
+                            LatLng montreal = new LatLng( 45.5087,-73.554);
+                            map.addMarker(new MarkerOptions()
+                                    .position(montreal)
+                                    .title("way point"));
+                            list.add(montreal);
+
+                            map.addMarker(new MarkerOptions()
+                                    .position(end)
+                                    .title("destination"));
+                            list.add(end);
+
+                            Routing routing = new Routing.Builder()
+                                    .travelMode(AbstractRouting.TravelMode.DRIVING)
+                                    .withListener(routingListener)
+                                    .alternativeRoutes(true)
+                                    .waypoints(list)
+                                    .build();
+                            routing.execute();
+
                         }
+
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Toast.makeText(current,error.toString(),Toast.LENGTH_LONG).show();
                 }
             });
-            // Add the request to the RequestQueue.
             queue.add(stringRequest);
-            ArrayList<LatLng> list = new ArrayList<LatLng>();
 
-            list.add(start);
-       
-            while (token.hasMoreTokens()){
-                double lat = Double.parseDouble(token.nextToken());
-                double lng = Double.parseDouble(token.nextToken());
-                LatLng tmp = new LatLng(lat,lng);
-                Toast.makeText(current,"added waypoint lat: "+lat+" lng: "+lng,Toast.LENGTH_SHORT).show();
-                list.add(tmp);
-            }
-
-            list.add(end);
-
-
-            Routing routing = new Routing.Builder()
-                    .travelMode(AbstractRouting.TravelMode.DRIVING)
-                    .withListener(this)
-                    .alternativeRoutes(true)
-                    .waypoints(list)
-                    .build();
-            routing.execute();
         }
     }
 
@@ -506,7 +528,7 @@ public void onCreate(Bundle savedInstanceState) {
         // The Routing request failed
         progressDialog.dismiss();
         if(e != null) {
-            Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Error routing: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }else {
             Toast.makeText(this, "Something went wrong, Try again", Toast.LENGTH_SHORT).show();
         }
@@ -550,14 +572,7 @@ public void onCreate(Bundle savedInstanceState) {
             Toast.makeText(getApplicationContext(),"Route "+": distance - "+ route.get(i).getDistanceValue()+": duration - "+ route.get(i).getDurationValue(),Toast.LENGTH_SHORT).show();
         }
 
-        // Start marker
-        map.addMarker(new MarkerOptions()
-                .position(start)
-                .title("starting point"));
 
-        map.addMarker(new MarkerOptions()
-                .position(end)
-                .title("destination"));
 
     }
 
