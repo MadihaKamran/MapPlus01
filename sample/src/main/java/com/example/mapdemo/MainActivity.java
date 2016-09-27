@@ -461,18 +461,8 @@ public void onCreate(Bundle savedInstanceState) {
             url = url + "&elat="+end.latitude + "&elng="+end.longitude;
 
 
-             //Request a string response from the provided URL.
             final RoutingListener routingListener = this;
-
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            // Display the first 500 characters of the response string
-                            res = response;
-                            //Toast.makeText(current, res ,Toast.LENGTH_SHORT).show();
-                            token= new StringTokenizer(res," ");
-                            ArrayList<LatLng> list = new ArrayList<LatLng>();
+            ArrayList<LatLng> list = new ArrayList<LatLng>();
                             list.add(start);
                             // Start marker
                             map.addMarker(new MarkerOptions()
@@ -490,11 +480,11 @@ public void onCreate(Bundle savedInstanceState) {
                                 Toast.makeText(current,"added waypoint lat: "+lat+" lng: "+lng,Toast.LENGTH_SHORT).show();
 
                             }
-                            LatLng montreal = new LatLng( 45.5087,-73.554);
-                            map.addMarker(new MarkerOptions()
-                                    .position(montreal)
-                                    .title("way point"));
-                            list.add(montreal);
+//                            LatLng montreal = new LatLng( 45.5087,-73.554);
+//                            map.addMarker(new MarkerOptions()
+//                                    .position(montreal)
+//                                    .title("way point"));
+//                            list.add(montreal);
 
                             map.addMarker(new MarkerOptions()
                                     .position(end)
@@ -509,15 +499,64 @@ public void onCreate(Bundle savedInstanceState) {
                                     .build();
                             routing.execute();
 
-                        }
 
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(current,error.toString(),Toast.LENGTH_LONG).show();
-                }
-            });
-            queue.add(stringRequest);
+//             //Request a string response from the provided URL.
+//            final RoutingListener routingListener = this;
+//
+//            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+//                    new Response.Listener<String>() {
+//                        @Override
+//                        public void onResponse(String response) {
+//                            // Display the first 500 characters of the response string
+//                            res = response;
+//                            //Toast.makeText(current, res ,Toast.LENGTH_SHORT).show();
+//                            token= new StringTokenizer(res," ");
+//                            ArrayList<LatLng> list = new ArrayList<LatLng>();
+//                            list.add(start);
+//                            // Start marker
+//                            map.addMarker(new MarkerOptions()
+//                                    .position(start)
+//                                    .title("starting point"));
+//
+//
+//                            while (token != null && token.hasMoreTokens()){
+//                                double lat = Double.parseDouble(token.nextToken());
+//                                double lng = Double.parseDouble(token.nextToken());
+//                                LatLng tmp = new LatLng(lat,lng);
+//                                map.addMarker(new MarkerOptions()
+//                                        .position(tmp)
+//                                        .title("way point"));
+//                                Toast.makeText(current,"added waypoint lat: "+lat+" lng: "+lng,Toast.LENGTH_SHORT).show();
+//
+//                            }
+//                            LatLng montreal = new LatLng( 45.5087,-73.554);
+//                            map.addMarker(new MarkerOptions()
+//                                    .position(montreal)
+//                                    .title("way point"));
+//                            list.add(montreal);
+//
+//                            map.addMarker(new MarkerOptions()
+//                                    .position(end)
+//                                    .title("destination"));
+//                            list.add(end);
+//
+//                            Routing routing = new Routing.Builder()
+//                                    .travelMode(AbstractRouting.TravelMode.DRIVING)
+//                                    .withListener(routingListener)
+//                                    .alternativeRoutes(true)
+//                                    .waypoints(list)
+//                                    .build();
+//                            routing.execute();
+//
+//                        }
+//
+//                    }, new Response.ErrorListener() {
+//                @Override
+//                public void onErrorResponse(VolleyError error) {
+//                    Toast.makeText(current,error.toString(),Toast.LENGTH_LONG).show();
+//                }
+//            });
+//            queue.add(stringRequest);
 
         }
     }
@@ -566,6 +605,9 @@ public void onCreate(Bundle savedInstanceState) {
             polyOptions.color(getResources().getColor(colors[colorIndex]));
             polyOptions.width(10 + i * 3);
             polyOptions.addAll(route.get(i).getPoints());
+            for(LatLng l: route.get(i).getPoints()){
+               System.out.println("test_ssss" + l.toString());
+            }
             Polyline polyline = map.addPolyline(polyOptions);
             polylines.add(polyline);
 

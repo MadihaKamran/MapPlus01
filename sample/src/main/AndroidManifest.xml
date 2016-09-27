@@ -28,7 +28,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="Google Directions Sample">
+            android:label="Map Plus">
         </activity>
         <activity
             android:name=".Home_Page"
