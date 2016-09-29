@@ -25,6 +25,11 @@ public class Util
 {
 	public static HashMap<Point, String>    geoToContractId 
 				= new HashMap<Point, String>();
+
+	public static QuadTree	monitoredPlaces = new QuadTree();
+	// the QuadTree data structure provided a quick way find the nearby places
+
+
     public static HashMap<String, Double>   ContractIdToSpeed;
 
 
@@ -50,6 +55,7 @@ public class Util
 		    		double lat = Double.parseDouble(splitArray[1]);
 				    double lng = Double.parseDouble(splitArray[2]);
 				    geoToContractId.put(new Point(lat,lng), contractId);
+				    monitoredPlaces.insert(lat,lng);
 		    	}
 		       
 		    }

@@ -2,6 +2,7 @@ package org.eclipse.jetty.embedded;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -30,12 +31,19 @@ public class Handler extends AbstractHandler
 
         if (coordinates != null)
         {  
-            for (int i = 0; i < coordinates.length; i++)
+            // for (int i = 0; i < coordinates.length; i++)
+            // {
+            //     buffer.append(coordinates[i]+" ");
+            // }
+            ArrayList<Point> points = Util.monitoredPlaces.findNearby(
+                                      Double.parseDouble(coordinates[0])
+                                    , Double.parseDouble(coordinates[1])
+                                    , Double.parseDouble(coordinates[2]));
+            for (int i = 0; i < points.size(); i++)
             {
-
-                buffer.append(coordinates[i]+" ");
-
+                buffer.append(points.get(i).latitude+" " + points.get(i).longitude + "<br>");
             }
+
             out.println(buffer.toString());
         }
 

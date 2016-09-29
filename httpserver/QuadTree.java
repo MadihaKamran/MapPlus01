@@ -28,38 +28,45 @@ class QuadTree  {
         root = insert(root, x, y);
     }
 
-    private Node insert(Node h, double x, double y) {
-        if (h == null) return new Node(x, y);
-        else if ( less(x, h.x) &&  less(y, h.y)) h.SW = insert(h.SW, x, y);
-        else if ( less(x, h.x) && !less(y, h.y)) h.NW = insert(h.NW, x, y);
-        else if (!less(x, h.x) &&  less(y, h.y)) h.SE = insert(h.SE, x, y);
-        else if (!less(x, h.x) && !less(y, h.y)) h.NE = insert(h.NE, x, y);
-        return h;
+    private Node insert(Node current, double x, double y) {
+        if (current == null) return new Node(x, y);
+        else if ( less(x, current.x) &&  less(y, current.y)) current.SW = insert(current.SW, x, y);
+        else if ( less(x, current.x) && !less(y, current.y)) current.NW = insert(current.NW, x, y);
+        else if (!less(x, current.x) &&  less(y, current.y)) current.SE = insert(current.SE, x, y);
+        else if (!less(x, current.x) && !less(y, current.y)) current.NE = insert(current.NE, x, y);
+        return current;
     }
 
   /***********************************************************************
-    *  Range search.
+    *  Range search. Given the original point, we want to find all the places within
+       range meters
     ***************************************************************************/
 
-    public ArrayList<Point> query(double[] rect) {
+    public ArrayList<Point> findNearby(double lat, double lng, double range) {
+
+        double[] rect = new double[4];
+        rect[0] = lat - range/111105.44; //One degree of latitude = 111105.44m in Toronto
+        rect[1] = lng - range/80671.87; // One degree of longitude = 80671.867m in Toronto
+        rect[2] = lat + range/111105.44;
+        rect[3] = lng + range/111320;
         ArrayList<Point> points = new ArrayList<Point>();
         query2D(root, rect, points);
         return points;
     }
 
-    private void query2D(Node h, double[] rect, ArrayList<Point> points) {
-        if (h == null) return;
+    private void query2D(Node current, double[] rect, ArrayList<Point> points) {
+        if (current == null) return;
         double xmin = rect[0];
         double ymin = rect[1];
         double xmax = rect[2];
         double ymax = rect[3];
 
-        if ( (h.x < xmax) && (h.x > xmin) && (h.y < ymax) && (h.y > ymin))
-            points.add(new Point(h.x, h.y));
-        if ( less(xmin, h.x) &&  less(ymin, h.y)) query2D(h.SW, rect, points);
-        if ( less(xmin, h.x) && !less(ymax, h.y)) query2D(h.NW, rect, points);
-        if (!less(xmax, h.x) &&  less(ymin, h.y)) query2D(h.SE, rect, points);
-        if (!less(xmax, h.x) && !less(ymax, h.y)) query2D(h.NE, rect, points);
+        if ( (current.x <= xmax) && (current.x >= xmin) && (current.y <= ymax) && (current.y >= ymin))
+            points.add(new Point(current.x, current.y));
+        if ( less(xmin, current.x) &&  less(ymin, current.y)) query2D(current.SW, rect, points);
+        if ( less(xmin, current.x) && !less(ymax, current.y)) query2D(current.NW, rect, points);
+        if (!less(xmax, current.x) &&  less(ymin, current.y)) query2D(current.SE, rect, points);
+        if (!less(xmax, current.x) && !less(ymax, current.y)) query2D(current.NE, rect, points);
     }
 
     private boolean less(double k1, double k2) { return k1 < k2; }
