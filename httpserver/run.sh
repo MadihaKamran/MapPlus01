@@ -1,2 +1,2 @@
 #!/bin/bash
-java -cp classes:jetty-all-uber.jar org.eclipse.jetty.embedded.*
+java -cp classes:jetty-all-uber.jar org.eclipse.jetty.embedded.MainServer
