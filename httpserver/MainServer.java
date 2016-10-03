@@ -20,6 +20,10 @@ import org.eclipse.jetty.server.Server;
 
 	For each user request, to generate appropriate response, we need go through
 	the following steps: 
+		1. find the nearest monitered places
+		2. make sure the current location is on high way
+		3. make sure we're calculating the right direction
+		4. return the estimated time
 
 
 
@@ -35,6 +39,7 @@ public class MainServer
 
         Util.loadGeoInfo("VDS_devices.txt");	// coordinates -> contractId
 
+        Util.loadTrafficData("trafficData.xml");
         server.start();
         server.join();
     }
