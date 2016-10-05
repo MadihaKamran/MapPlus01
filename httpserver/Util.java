@@ -78,8 +78,8 @@ public class Util
 	         for (int i = 0; i < nodeList.getLength(); i++)
 	         {
 	            Node currentNode = nodeList.item(i);
-	            System.out.println("\nCurrent Element :" 
-	               + currentNode.getNodeName());
+	            //System.out.println("\nCurrent Element :" 
+	              // + currentNode.getNodeName());
 	            if (currentNode.getNodeType() == Node.ELEMENT_NODE) 
 	            {
 
@@ -89,7 +89,7 @@ public class Util
 	                  	.getElementsByTagName("contractId")
 	                    .item(0)
 	                    .getTextContent();
-	               System.out.println("contractId : " + contractId); 
+	               //System.out.println("contractId : " + contractId); 
 	               String validString = eElement
 	                     .getElementsByTagName("validThisPeriod")
 	                     .item(0)
@@ -98,7 +98,7 @@ public class Util
 	               if (!isValid)
 	               {
 	               		speed = 100;
-	               		System.out.println("Speed : Invalid, use default value: 100km/h");     
+	               		//System.out.println("Speed : Invalid, use default value: 100km/h");     
 	            
 	               }
 	               else
@@ -110,12 +110,12 @@ public class Util
 	                   .getTextContent());
 		               if (speed > 0)
 		               {
-		               		System.out.println("Speed : " + speed);                  
+		               		//System.out.println("Speed : " + speed);                  
 		               }
 		               else
 		               {
 		               		speed = 100;
-		               		System.out.println("Speed : N/A, use default value: 100km/h");     
+		               		//System.out.println("Speed : N/A, use default value: 100km/h");     
 		               }
 	               }
 	               contractIdToSpeed.put(contractId, speed);

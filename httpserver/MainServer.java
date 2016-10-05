@@ -25,9 +25,8 @@ import org.eclipse.jetty.server.Server;
 		3. make sure we're calculating the right direction
 		4. return the estimated time
 
-
-
 */
+
 
 public class MainServer
 {

@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -34,6 +35,9 @@ import com.directions.route.Route;
 import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -56,6 +60,9 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Semaphore;
@@ -100,109 +107,111 @@ public class MainActivity extends AppCompatActivity implements RoutingListener, 
      */
 @Override
 public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.inject(this);
-        mTrafficCheckbox = (CheckBox) findViewById(R.id.traffic);
-        mMyLocationCheckbox = (CheckBox) findViewById(R.id.my_location);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    ButterKnife.inject(this);
+    mTrafficCheckbox = (CheckBox) findViewById(R.id.traffic);
+    mMyLocationCheckbox = (CheckBox) findViewById(R.id.my_location);
+    getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
-        polylines = new ArrayList<>();
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addApi(Places.GEO_DATA_API)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .build();
-        MapsInitializer.initialize(this);
-        mGoogleApiClient.connect();
+    polylines = new ArrayList<>();
+    // ATTENTION: This "addApi(AppIndex.API)"was auto-generated to implement the App Indexing API.
+    // See https://g.co/AppIndexing/AndroidStudio for more information.
+    mGoogleApiClient = new GoogleApiClient.Builder(this)
+            .addApi(Places.GEO_DATA_API)
+            .addConnectionCallbacks(this)
+            .addOnConnectionFailedListener(this)
+            .addApi(AppIndex.API).build();
+    MapsInitializer.initialize(this);
+    mGoogleApiClient.connect();
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-         mapFragment.getMapAsync(this);
+    SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+    mapFragment.getMapAsync(this);
 
-        if (mapFragment == null) {
-            mapFragment = SupportMapFragment.newInstance();
-            getSupportFragmentManager().beginTransaction().replace(R.id.map, mapFragment).commit();
+    if (mapFragment == null) {
+        mapFragment = SupportMapFragment.newInstance();
+        getSupportFragmentManager().beginTransaction().replace(R.id.map, mapFragment).commit();
+    }
+    map = mapFragment.getMap();
+
+    mAdapter = new PlaceAutoCompleteAdapter(this, android.R.layout.simple_list_item_1,
+            mGoogleApiClient, BOUNDS_JAMAICA, null);
+
+    net_listener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+
+            CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude()));
+            CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
+
+            map.moveCamera(center);
+            map.animateCamera(zoom);
         }
-        map = mapFragment.getMap();
 
-        mAdapter = new PlaceAutoCompleteAdapter(this, android.R.layout.simple_list_item_1,
-                mGoogleApiClient, BOUNDS_JAMAICA, null);
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
 
-        net_listener= new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
+        }
 
-                CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(),location.getLongitude()));
-                CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
+        @Override
+        public void onProviderEnabled(String provider) {
 
-                map.moveCamera(center);
-                map.animateCamera(zoom);
-            }
+        }
 
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
+        @Override
+        public void onProviderDisabled(String provider) {
 
-            }
+        }
+    };
 
-            @Override
-            public void onProviderEnabled(String provider) {
+    gps_listener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude()));
+            CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
 
-            }
+            map.moveCamera(center);
+            map.animateCamera(zoom);
 
-            @Override
-            public void onProviderDisabled(String provider) {
+        }
 
-            }
-        };
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
 
-        gps_listener=new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude()));
-                CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
+        }
 
-                map.moveCamera(center);
-                map.animateCamera(zoom);
+        @Override
+        public void onProviderEnabled(String provider) {
 
-            }
+        }
 
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
+        @Override
+        public void onProviderDisabled(String provider) {
 
-            }
+        }
+    };
 
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-
-            }
-        };
-
-        map.setMyLocationEnabled(false);
-        map.getUiSettings().setMyLocationButtonEnabled(false);
+    map.setMyLocationEnabled(false);
+    map.getUiSettings().setMyLocationButtonEnabled(false);
         /*
         * Updates the bounds being used by the auto complete adapter based on the position of the
         * map.
         * */
-        map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
-            @Override
-            public void onCameraChange(CameraPosition position) {
-                LatLngBounds bounds = map.getProjection().getVisibleRegion().latLngBounds;
-                mAdapter.setBounds(bounds);
-            }
-        });
+    map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+        @Override
+        public void onCameraChange(CameraPosition position) {
+            LatLngBounds bounds = map.getProjection().getVisibleRegion().latLngBounds;
+            mAdapter.setBounds(bounds);
+        }
+    });
 
 
-        CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(43.7, -79.40));
-        CameraUpdate zoom = CameraUpdateFactory.zoomTo(2);
+    CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(43.7, -79.40));
+    CameraUpdate zoom = CameraUpdateFactory.zoomTo(2);
 
-        map.moveCamera(center);
-        map.animateCamera(zoom);
+    map.moveCamera(center);
+    map.animateCamera(zoom);
 
 
 
@@ -212,8 +221,8 @@ public void onCreate(Bundle savedInstanceState) {
         * Adds auto complete adapter to both auto complete
         * text views.
         * */
-        starting.setAdapter(mAdapter);
-        destination.setAdapter(mAdapter);
+    starting.setAdapter(mAdapter);
+    destination.setAdapter(mAdapter);
 
 
         /*
@@ -221,69 +230,69 @@ public void onCreate(Bundle savedInstanceState) {
         * from the autocomplete text views.
         * */
 
-        starting.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    starting.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                final PlaceAutoCompleteAdapter.PlaceAutocomplete item = mAdapter.getItem(position);
-                final String placeId = String.valueOf(item.placeId);
-                Log.i(LOG_TAG, "Autocomplete item selected: " + item.description);
-
-            /*
-             Issue a request to the Places Geo Data API to retrieve a Place object with additional
-              details about the place.
-              */
-                PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
-                        .getPlaceById(mGoogleApiClient, placeId);
-                placeResult.setResultCallback(new ResultCallback<PlaceBuffer>() {
-                    @Override
-                    public void onResult(PlaceBuffer places) {
-                        if (!places.getStatus().isSuccess()) {
-                            // Request did not complete successfully
-                            Log.e(LOG_TAG, "Place query did not complete. Error: " + places.getStatus().toString());
-                            places.release();
-                            return;
-                        }
-                        // Get the Place object from the buffer.
-                        final Place place = places.get(0);
-
-                        start=place.getLatLng();
-                    }
-                });
-
-            }
-        });
-        destination.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                final PlaceAutoCompleteAdapter.PlaceAutocomplete item = mAdapter.getItem(position);
-                final String placeId = String.valueOf(item.placeId);
-                Log.i(LOG_TAG, "Autocomplete item selected: " + item.description);
+            final PlaceAutoCompleteAdapter.PlaceAutocomplete item = mAdapter.getItem(position);
+            final String placeId = String.valueOf(item.placeId);
+            Log.i(LOG_TAG, "Autocomplete item selected: " + item.description);
 
             /*
              Issue a request to the Places Geo Data API to retrieve a Place object with additional
               details about the place.
               */
-                PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
-                        .getPlaceById(mGoogleApiClient, placeId);
-                placeResult.setResultCallback(new ResultCallback<PlaceBuffer>() {
-                    @Override
-                    public void onResult(PlaceBuffer places) {
-                        if (!places.getStatus().isSuccess()) {
-                            // Request did not complete successfully
-                            Log.e(LOG_TAG, "Place query did not complete. Error: " + places.getStatus().toString());
-                            places.release();
-                            return;
-                        }
-                        // Get the Place object from the buffer.
-                        final Place place = places.get(0);
-                        end=place.getLatLng();
+            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
+                    .getPlaceById(mGoogleApiClient, placeId);
+            placeResult.setResultCallback(new ResultCallback<PlaceBuffer>() {
+                @Override
+                public void onResult(PlaceBuffer places) {
+                    if (!places.getStatus().isSuccess()) {
+                        // Request did not complete successfully
+                        Log.e(LOG_TAG, "Place query did not complete. Error: " + places.getStatus().toString());
+                        places.release();
+                        return;
                     }
-                });
+                    // Get the Place object from the buffer.
+                    final Place place = places.get(0);
 
-            }
-        });
+                    start = place.getLatLng();
+                }
+            });
+
+        }
+    });
+    destination.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            final PlaceAutoCompleteAdapter.PlaceAutocomplete item = mAdapter.getItem(position);
+            final String placeId = String.valueOf(item.placeId);
+            Log.i(LOG_TAG, "Autocomplete item selected: " + item.description);
+
+            /*
+             Issue a request to the Places Geo Data API to retrieve a Place object with additional
+              details about the place.
+              */
+            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
+                    .getPlaceById(mGoogleApiClient, placeId);
+            placeResult.setResultCallback(new ResultCallback<PlaceBuffer>() {
+                @Override
+                public void onResult(PlaceBuffer places) {
+                    if (!places.getStatus().isSuccess()) {
+                        // Request did not complete successfully
+                        Log.e(LOG_TAG, "Place query did not complete. Error: " + places.getStatus().toString());
+                        places.release();
+                        return;
+                    }
+                    // Get the Place object from the buffer.
+                    final Place place = places.get(0);
+                    end = place.getLatLng();
+                }
+            });
+
+        }
+    });
 
         /*
         These text watchers set the start and end points to null because once there's
@@ -291,48 +300,47 @@ public void onCreate(Bundle savedInstanceState) {
         * then the value has to reselected from dropdown to get
         * the correct location.
         * */
-        starting.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    starting.addTextChangedListener(new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int startNum, int before, int count) {
+            if (start != null) {
+                start = null;
             }
+        }
 
-            @Override
-            public void onTextChanged(CharSequence s, int startNum, int before, int count) {
-                if (start != null) {
-                    start = null;
-                }
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    });
+
+    destination.addTextChangedListener(new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+            if (end != null) {
+                end = null;
             }
+        }
 
-            @Override
-            public void afterTextChanged(Editable s) {
+        @Override
+        public void afterTextChanged(Editable s) {
 
-            }
-        });
+        }
+    });
 
-        destination.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-
-                if(end!=null)
-                {
-                    end=null;
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-    }
+}
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -455,10 +463,10 @@ public void onCreate(Bundle savedInstanceState) {
             */
 
             final Context current = this;
-            RequestQueue queue = Volley.newRequestQueue(current);
-            String url ="http://52.0.129.137:8888/?";
-            url = url + "slat="+start.latitude + "&slng="+start.longitude;
-            url = url + "&elat="+end.latitude + "&elng="+end.longitude;
+//            RequestQueue queue = Volley.newRequestQueue(current);
+//            String url ="http://52.0.129.137:8888/?";
+//            url = url + "slat="+start.latitude + "&slng="+start.longitude;
+//            url = url + "&elat="+end.latitude + "&elng="+end.longitude;
 
 
             final RoutingListener routingListener = this;
@@ -498,65 +506,6 @@ public void onCreate(Bundle savedInstanceState) {
                                     .waypoints(list)
                                     .build();
                             routing.execute();
-
-
-//             //Request a string response from the provided URL.
-//            final RoutingListener routingListener = this;
-//
-//            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-//                    new Response.Listener<String>() {
-//                        @Override
-//                        public void onResponse(String response) {
-//                            // Display the first 500 characters of the response string
-//                            res = response;
-//                            //Toast.makeText(current, res ,Toast.LENGTH_SHORT).show();
-//                            token= new StringTokenizer(res," ");
-//                            ArrayList<LatLng> list = new ArrayList<LatLng>();
-//                            list.add(start);
-//                            // Start marker
-//                            map.addMarker(new MarkerOptions()
-//                                    .position(start)
-//                                    .title("starting point"));
-//
-//
-//                            while (token != null && token.hasMoreTokens()){
-//                                double lat = Double.parseDouble(token.nextToken());
-//                                double lng = Double.parseDouble(token.nextToken());
-//                                LatLng tmp = new LatLng(lat,lng);
-//                                map.addMarker(new MarkerOptions()
-//                                        .position(tmp)
-//                                        .title("way point"));
-//                                Toast.makeText(current,"added waypoint lat: "+lat+" lng: "+lng,Toast.LENGTH_SHORT).show();
-//
-//                            }
-//                            LatLng montreal = new LatLng( 45.5087,-73.554);
-//                            map.addMarker(new MarkerOptions()
-//                                    .position(montreal)
-//                                    .title("way point"));
-//                            list.add(montreal);
-//
-//                            map.addMarker(new MarkerOptions()
-//                                    .position(end)
-//                                    .title("destination"));
-//                            list.add(end);
-//
-//                            Routing routing = new Routing.Builder()
-//                                    .travelMode(AbstractRouting.TravelMode.DRIVING)
-//                                    .withListener(routingListener)
-//                                    .alternativeRoutes(true)
-//                                    .waypoints(list)
-//                                    .build();
-//                            routing.execute();
-//
-//                        }
-//
-//                    }, new Response.ErrorListener() {
-//                @Override
-//                public void onErrorResponse(VolleyError error) {
-//                    Toast.makeText(current,error.toString(),Toast.LENGTH_LONG).show();
-//                }
-//            });
-//            queue.add(stringRequest);
 
         }
     }
@@ -605,13 +554,109 @@ public void onCreate(Bundle savedInstanceState) {
             polyOptions.color(getResources().getColor(colors[colorIndex]));
             polyOptions.width(10 + i * 3);
             polyOptions.addAll(route.get(i).getPoints());
-            for(LatLng l: route.get(i).getPoints()){
-               System.out.println("test_ssss" + l.toString());
-            }
             Polyline polyline = map.addPolyline(polyOptions);
             polylines.add(polyline);
 
-            Toast.makeText(getApplicationContext(),"Route "+": distance - "+ route.get(i).getDistanceValue()+": duration - "+ route.get(i).getDurationValue(),Toast.LENGTH_SHORT).show();
+
+
+            // contact our own server to get better estimation
+            final Context current = this;
+            RequestQueue queue = Volley.newRequestQueue(current);
+            String url = "http://52.45.41.223:8080/";
+//
+            //Request a string response from the provided URL.
+            final RoutingListener routingListener = this;
+            final List<LatLng> currentRoute = new ArrayList<>(route.get(i).getPoints());
+            for(LatLng l: currentRoute){
+               System.out.println("test_ssss" + l.toString());
+            }
+
+
+//            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+//                    new Response.Listener<String>() {
+//                        @Override
+//                        public void onResponse(String response) {
+//                            // Display the first 500 characters of the response string
+//                            res = response;
+//                            Toast.makeText(current, response ,Toast.LENGTH_SHORT).show();
+//                            // Start marker
+//                            map.addMarker(new MarkerOptions()
+//                                    .position(start)
+//                                    .title("starting point"));
+//
+//                            map.addMarker(new MarkerOptions()
+//                                    .position(end)
+//                                    .title("destination"));
+//                        }
+//
+//                    }, new Response.ErrorListener() {
+//                @Override
+//                public void onErrorResponse(VolleyError error) {
+//                    Toast.makeText(current,error.toString(),Toast.LENGTH_LONG).show();
+//                }
+//
+//
+//                protected Map<String, String> getParams() {
+//
+//                    Map<String, String> params = new HashMap<String, String>();
+//                    int j=0;
+//                    System.out.println("I'm here1");
+//                    for(LatLng l: currentRoute){
+//                        System.out.println("I'm here2");
+//                        System.out.println("geo["+(j)+"]" + l.latitude + "");
+//                        params.put("geo["+(j++)+"]", l.latitude + "");
+//                        params.put("geo["+(j++)+"]", l.longitude + "");
+//
+//                    }
+//                    return params;
+//                }
+//            });
+//            queue.add(stringRequest);
+
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url , new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response)
+                {
+                    // Display the first 500 characters of the response string
+                    res = response;
+                    Toast.makeText(current, response ,Toast.LENGTH_SHORT).show();
+                    // Start marker
+                    map.addMarker(new MarkerOptions()
+                            .position(start)
+                            .title("starting point"));
+
+                    map.addMarker(new MarkerOptions()
+                            .position(end)
+                            .title("destination"));
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(current,error.toString(),Toast.LENGTH_LONG).show();
+                }
+            }){
+                @Override
+                protected Map<String,String> getParams(){
+                    Map<String, String> params = new HashMap<String, String>();
+                    int j = 0;
+                    for(LatLng l: currentRoute){
+                        System.out.println("geo["+(j)+"]" + l.latitude + "");
+                        params.put("geo["+(j++)+"]", l.latitude + "");
+                        params.put("geo["+(j++)+"]", l.longitude + "");
+
+                    }
+                    return params;
+                }
+
+            };
+            queue.add(stringRequest);
+
+
+            Toast.makeText(getApplicationContext(),"Route "+": distance - "
+                           + route.get(i).getDistanceValue()
+                           +": duration - "+ route.get(i).getDurationValue()
+                           ,Toast.LENGTH_SHORT).show();
         }
 
 
@@ -637,5 +682,41 @@ public void onCreate(Bundle savedInstanceState) {
     @Override
     public void onConnectionSuspended(int i) {
 
+    }
+
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    public Action getIndexApiAction() {
+        Thing object = new Thing.Builder()
+                .setName("Main Page") // TODO: Define a title for the content shown.
+                // TODO: Make sure this auto-generated URL is correct.
+                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
+                .build();
+        return new Action.Builder(Action.TYPE_VIEW)
+                .setObject(object)
+                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
+                .build();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        mGoogleApiClient.connect();
+        AppIndex.AppIndexApi.start(mGoogleApiClient, getIndexApiAction());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.end(mGoogleApiClient, getIndexApiAction());
+        mGoogleApiClient.disconnect();
     }
 }
