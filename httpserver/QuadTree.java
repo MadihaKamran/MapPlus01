@@ -45,8 +45,10 @@ class QuadTree  {
     public ArrayList<Point> findNearby(double lat, double lng, double range) {
 
         double[] rect = new double[4];
-        rect[0] = lat - range/111105.44; //One degree of latitude = 111105.44m in Toronto
-        rect[1] = lng - range/80671.87; // One degree of longitude = 80671.867m in Toronto
+        rect[0] = lat - range/111105.44; 
+        // One degree of latitude = 111105.44m in Toronto
+        rect[1] = lng - range/80671.87; 
+        // One degree of longitude = 80671.867m in Toronto
         rect[2] = lat + range/111105.44;
         rect[3] = lng + range/111320;
         ArrayList<Point> points = new ArrayList<Point>();

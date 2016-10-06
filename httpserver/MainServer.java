@@ -20,10 +20,12 @@ import org.eclipse.jetty.server.Server;
 
 	For each user request, to generate appropriate response, we need go through
 	the following steps: 
-		1. find the nearest monitered places
-		2. make sure the current location is on high way
-		3. make sure we're calculating the right direction
-		4. return the estimated time
+		1. parse the route(steps) planned by google
+		2. For each steps, find the nearest monitered places and
+		   replace the duration of that estimate with ATC data
+		3. make sure the current location is on high way
+		4. make sure we're calculating the right direction
+		5. return the estimated time
 
 */
 
