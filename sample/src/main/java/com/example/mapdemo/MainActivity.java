@@ -463,11 +463,6 @@ public void onCreate(Bundle savedInstanceState) {
             */
 
             final Context current = this;
-//            RequestQueue queue = Volley.newRequestQueue(current);
-//            String url ="http://52.0.129.137:8888/?";
-//            url = url + "slat="+start.latitude + "&slng="+start.longitude;
-//            url = url + "&elat="+end.latitude + "&elng="+end.longitude;
-
 
             final RoutingListener routingListener = this;
             ArrayList<LatLng> list = new ArrayList<LatLng>();
@@ -477,22 +472,6 @@ public void onCreate(Bundle savedInstanceState) {
                                     .position(start)
                                     .title("starting point"));
 
-
-                            while (token != null && token.hasMoreTokens()){
-                                double lat = Double.parseDouble(token.nextToken());
-                                double lng = Double.parseDouble(token.nextToken());
-                                LatLng tmp = new LatLng(lat,lng);
-                                map.addMarker(new MarkerOptions()
-                                        .position(tmp)
-                                        .title("way point"));
-                                Toast.makeText(current,"added waypoint lat: "+lat+" lng: "+lng,Toast.LENGTH_SHORT).show();
-
-                            }
-//                            LatLng montreal = new LatLng( 45.5087,-73.554);
-//                            map.addMarker(new MarkerOptions()
-//                                    .position(montreal)
-//                                    .title("way point"));
-//                            list.add(montreal);
 
                             map.addMarker(new MarkerOptions()
                                     .position(end)
@@ -528,7 +507,7 @@ public void onCreate(Bundle savedInstanceState) {
     }
 
     @Override
-    public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex)
+    public void onRoutingSuccess(List<Route> route, int shortestRouteIndex)
     {
         progressDialog.dismiss();
         CameraUpdate center = CameraUpdateFactory.newLatLng(start);
@@ -566,52 +545,9 @@ public void onCreate(Bundle savedInstanceState) {
 //
             //Request a string response from the provided URL.
             final RoutingListener routingListener = this;
-            final List<LatLng> currentRoute = new ArrayList<>(route.get(i).getPoints());
-            for(LatLng l: currentRoute){
-               System.out.println("test_ssss" + l.toString());
-            }
+            final Route currentRoute = route.get(i);
 
 
-//            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-//                    new Response.Listener<String>() {
-//                        @Override
-//                        public void onResponse(String response) {
-//                            // Display the first 500 characters of the response string
-//                            res = response;
-//                            Toast.makeText(current, response ,Toast.LENGTH_SHORT).show();
-//                            // Start marker
-//                            map.addMarker(new MarkerOptions()
-//                                    .position(start)
-//                                    .title("starting point"));
-//
-//                            map.addMarker(new MarkerOptions()
-//                                    .position(end)
-//                                    .title("destination"));
-//                        }
-//
-//                    }, new Response.ErrorListener() {
-//                @Override
-//                public void onErrorResponse(VolleyError error) {
-//                    Toast.makeText(current,error.toString(),Toast.LENGTH_LONG).show();
-//                }
-//
-//
-//                protected Map<String, String> getParams() {
-//
-//                    Map<String, String> params = new HashMap<String, String>();
-//                    int j=0;
-//                    System.out.println("I'm here1");
-//                    for(LatLng l: currentRoute){
-//                        System.out.println("I'm here2");
-//                        System.out.println("geo["+(j)+"]" + l.latitude + "");
-//                        params.put("geo["+(j++)+"]", l.latitude + "");
-//                        params.put("geo["+(j++)+"]", l.longitude + "");
-//
-//                    }
-//                    return params;
-//                }
-//            });
-//            queue.add(stringRequest);
 
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, url , new Response.Listener<String>() {
@@ -639,19 +575,29 @@ public void onCreate(Bundle savedInstanceState) {
                 @Override
                 protected Map<String,String> getParams(){
                     Map<String, String> params = new HashMap<String, String>();
-                    int j = 0;
-                    for(LatLng l: currentRoute){
-                        System.out.println("geo["+(j)+"]" + l.latitude + "");
-                        params.put("geo["+(j++)+"]", l.latitude + "");
-                        params.put("geo["+(j++)+"]", l.longitude + "");
+                    int i = 0;
+                    for(LatLng l: currentRoute.getPoints()){
 
+                        params.put("lat" + i, l.latitude + "");
+                        params.put("lng" + i, l.longitude + "");
+//                       System.out.println("lat" + i + ":" + l.latitude
+//                                            + " lng" + i  + ":" + l.longitude);
+                        i++;
                     }
+                    int j = 0;
+                    for(int sec : currentRoute.getDurations())
+                    {
+                        params.put("dur" + j, sec + "");
+                        j++;
+                    }
+
+                    System.out.println("sssssss" + i + " locations and "
+                                        + j + " durations");
                     return params;
                 }
 
             };
             queue.add(stringRequest);
-
 
             Toast.makeText(getApplicationContext(),"Route "+": distance - "
                            + route.get(i).getDistanceValue()
