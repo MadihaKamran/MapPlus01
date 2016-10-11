@@ -6,5 +6,6 @@
     <string name="title_activity_home__page">MapPlus</string>
     <string name="home_str">Get Started !</string>
     <string name="welcome_str">Welcome To MapPlus</string>
+    <string name="routes_str">Routing Results</string>
     <string name="welcome_string">Welcome To MapPlus</string>
 </resources>

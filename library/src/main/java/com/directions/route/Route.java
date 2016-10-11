@@ -1,6 +1,9 @@
 package com.directions.route;
 //by Haseem Saheed
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -8,7 +11,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Route {
+public class Route implements Parcelable {
     private String name;
     private final List<LatLng> points;
     private final List<Integer> durations;
@@ -211,5 +214,62 @@ public class Route {
         this.latLgnBounds = builder.build();
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.name);
+        dest.writeTypedList(this.points);
+        dest.writeList(this.durations);
+        dest.writeList(this.segments);
+        dest.writeString(this.copyright);
+        dest.writeString(this.warning);
+        dest.writeString(this.country);
+        dest.writeParcelable(this.latLgnBounds, flags);
+        dest.writeInt(this.length);
+        dest.writeString(this.polyline);
+        dest.writeString(this.durationText);
+        dest.writeInt(this.durationValue);
+        dest.writeString(this.distanceText);
+        dest.writeInt(this.distanceValue);
+        dest.writeString(this.endAddressText);
+        dest.writeParcelable(this.polyOptions, flags);
+    }
+
+    protected Route(Parcel in) {
+        this.name = in.readString();
+        this.points = in.createTypedArrayList(LatLng.CREATOR);
+        this.durations = new ArrayList<Integer>();
+        in.readList(this.durations, Integer.class.getClassLoader());
+        this.segments = new ArrayList<Segment>();
+        in.readList(this.segments, Segment.class.getClassLoader());
+        this.copyright = in.readString();
+        this.warning = in.readString();
+        this.country = in.readString();
+        this.latLgnBounds = in.readParcelable(LatLngBounds.class.getClassLoader());
+        this.length = in.readInt();
+        this.polyline = in.readString();
+        this.durationText = in.readString();
+        this.durationValue = in.readInt();
+        this.distanceText = in.readString();
+        this.distanceValue = in.readInt();
+        this.endAddressText = in.readString();
+        this.polyOptions = in.readParcelable(PolylineOptions.class.getClassLoader());
+    }
+
+    public static final Creator<Route> CREATOR = new Creator<Route>() {
+        @Override
+        public Route createFromParcel(Parcel source) {
+            return new Route(source);
+        }
+
+        @Override
+        public Route[] newArray(int size) {
+            return new Route[size];
+        }
+    };
 }
 

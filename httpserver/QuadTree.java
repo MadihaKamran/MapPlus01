@@ -53,6 +53,7 @@ class QuadTree  {
         rect[3] = lng + range/111320;
         ArrayList<Point> points = new ArrayList<Point>();
         query2D(root, rect, points);
+        //System.out.println(points.size() + " nearby location detected");
         return points;
     }
 

@@ -245,18 +245,22 @@ public class Util
     	Collections.sort(nearby, createComparator(origin));
     	for(Point p : nearby)
     	{
-    		System.out.println(p.latitude + " " + p.longitude);
     		String contractId = geoToContractId.get(p);
-    		if(contractId == null)
-    			System.out.println(" contractId is null");
-
-    		System.out.println(" contractId is " + contractId);
-    		// if they have the same direction, return 
-    		char direction = contractId.charAt(contractId.length()-2);
-    		if(dir.indexOf(direction) >= 0)
+    		if(contractId != null)
     		{
-    			return contractId;
+    			// if they have the same direction, return 
+	    		char direction = contractId.charAt(contractId.length()-2);
+	    		if(dir.indexOf(direction) >= 0)
+	    		{
+	    			return contractId;
+	    		}
+	    		// System.out.println("The speed of location " + origin.latitude 
+	    		// 					+ "/" + origin.longitude + " can be replaced by the speed of contractId " 
+	    		// 					+ contractId);
     		}
+
+    			
+    		
     	}
     	return null;
 
@@ -285,7 +289,9 @@ public class Util
           	sDirection += (end.longitude > start.longitude)? "E" : "W";
           	if(i+1 == route.size()-1)
           	{
-          		// already the last point
+          		// end point is already the last point, we just assume 
+          		// it's heading towards the same direction as the starting 
+          		// point
           		eDirection = sDirection;
           	}
           	else
@@ -302,12 +308,12 @@ public class Util
             ArrayList<Point> nearStart = monitoredPlaces.findNearby(
                                          start.latitude,
                                          start.longitude,
-                                         100);
+                                         500);
             // within 100 meters
             ArrayList<Point> nearEnd = monitoredPlaces.findNearby(
                                          end.latitude,
                                          end.longitude,
-                                         100);
+                                         500);
             if(nearStart.size() == 0 || nearEnd.size() == 0)
             {
             	return false;
@@ -316,21 +322,38 @@ public class Util
             {
             	String startId = verifyDirection(sDirection,nearStart, start);
             	String endId = verifyDirection(eDirection,nearEnd, end);
-            	if(startId == null || endId == null)
-            	{
-            		return false;
-            	}
-            	else
-            	{
-            		// now we can safely replace the old duration with our own data
-            		double distance= distanceInMeter(start, end); 
-            		int spd = (int) (contractIdToSpeed.get(startId) * 0.5 
-            						+ contractIdToSpeed.get(endId) * 0.5);
+            
+        		// now we can safely replace the old duration with our own data
+        		double distance= distanceInMeter(start, end); 
+        		
 
-            		int timeInSec = (int) distance / (spd * 1000 / 3600);
-            		duration.set(i, timeInSec);
-            		return true;
-            	}
+        		Double startSpd = (startId != null) ? 
+        						  contractIdToSpeed.get(startId) : null;
+        		Double endSpd = (endId != null) ? 
+        						  contractIdToSpeed.get(endId) : null;
+        		double spd;
+        		if(startSpd == null && endSpd == null)
+        		{
+        			return false;
+        		}
+        		else
+        		{
+        			if(startSpd != null && endSpd != null)
+        			{
+        				spd = startSpd * 0.5 + endSpd *0.5;
+        			}
+        			else
+        			{
+        				spd = (startSpd != null) ? startSpd : endSpd;
+        			}
+        		}
+        		
+        	
+        		int timeInSec = (int) (distance / (spd * 1000 / 3600) );
+        		duration.set(i, timeInSec);
+        		// System.out.println("duration updated");
+        		return true;
+            	
 
             }
     }

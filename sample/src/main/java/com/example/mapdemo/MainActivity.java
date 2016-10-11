@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -59,6 +60,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -97,6 +99,8 @@ public class MainActivity extends AppCompatActivity implements RoutingListener, 
     private LocationManager locationManager;
     private String res;
     private StringTokenizer token;
+    public final static String EXTRA_MESSAGE = "com.example.mapdemo.MainActivity";
+
 
 
     private static final LatLngBounds BOUNDS_JAMAICA= new LatLngBounds(new LatLng(-57.965341647205726, 144.9987719580531),
@@ -510,100 +514,105 @@ public void onCreate(Bundle savedInstanceState) {
     public void onRoutingSuccess(List<Route> route, int shortestRouteIndex)
     {
         progressDialog.dismiss();
-        CameraUpdate center = CameraUpdateFactory.newLatLng(start);
-        CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
-
-        map.moveCamera(center);
-
-
-        if(polylines.size()>0) {
-            for (Polyline poly : polylines) {
-                poly.remove();
-            }
-        }
-
-        polylines = new ArrayList<>();
-        //add route(s) to the map.
-//        for (int i = 0; i <route.size(); i++) {
-        for (int i = 0; i < 1; i++) {
-            //only display one route
-            //In case of more than 5 alternative routes
-            int colorIndex = i % colors.length;
-            PolylineOptions polyOptions = new PolylineOptions();
-            polyOptions.color(getResources().getColor(colors[colorIndex]));
-            polyOptions.width(10 + i * 3);
-            polyOptions.addAll(route.get(i).getPoints());
-            Polyline polyline = map.addPolyline(polyOptions);
-            polylines.add(polyline);
-
-
-
-            // contact our own server to get better estimation
-            final Context current = this;
-            RequestQueue queue = Volley.newRequestQueue(current);
-            String url = "http://52.45.41.223:8080/";
+        Intent intent = new Intent(this,Route_Results.class);
+        Bundle b = new Bundle();
+        ArrayList<Route> tmp = new ArrayList<>(route);
+        b.putParcelableArrayList("routes_object", tmp);
+        intent.putExtras(b);
+        startActivity(intent);
+//        CameraUpdate center = CameraUpdateFactory.newLatLng(start);
+//        CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
 //
-            //Request a string response from the provided URL.
-            final RoutingListener routingListener = this;
-            final Route currentRoute = route.get(i);
-
-
-
-
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, url , new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response)
-                {
-                    // Display the first 500 characters of the response string
-                    res = response;
-                    Toast.makeText(current, response ,Toast.LENGTH_SHORT).show();
-                    // Start marker
-                    map.addMarker(new MarkerOptions()
-                            .position(start)
-                            .title("starting point"));
-
-                    map.addMarker(new MarkerOptions()
-                            .position(end)
-                            .title("destination"));
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(current,error.toString(),Toast.LENGTH_LONG).show();
-                }
-            }){
-                @Override
-                protected Map<String,String> getParams(){
-                    Map<String, String> params = new HashMap<String, String>();
-                    int i = 0;
-                    for(LatLng l: currentRoute.getPoints()){
-
-                        params.put("lat" + i, l.latitude + "");
-                        params.put("lng" + i, l.longitude + "");
-//                       System.out.println("lat" + i + ":" + l.latitude
-//                                            + " lng" + i  + ":" + l.longitude);
-                        i++;
-                    }
-                    int j = 0;
-                    for(int sec : currentRoute.getDurations())
-                    {
-                        params.put("dur" + j, sec + "");
-                        j++;
-                    }
-
-                    System.out.println("sssssss" + i + " locations and "
-                                        + j + " durations");
-                    return params;
-                }
-
-            };
-            queue.add(stringRequest);
-
-            Toast.makeText(getApplicationContext(),"Route "+": distance - "
-                           + route.get(i).getDistanceValue()
-                           +": duration - "+ route.get(i).getDurationValue()
-                           ,Toast.LENGTH_SHORT).show();
-        }
+//        map.moveCamera(center);
+//
+//
+//        if(polylines.size()>0) {
+//            for (Polyline poly : polylines) {
+//                poly.remove();
+//            }
+//        }
+//
+//        polylines = new ArrayList<>();
+//        //add route(s) to the map.
+//        for (int i = 0; i < route.size(); i++) {
+//            //only display one route
+//            //In case of more than 5 alternative routes
+//            int colorIndex = i % colors.length;
+//            PolylineOptions polyOptions = new PolylineOptions();
+//            polyOptions.color(getResources().getColor(colors[colorIndex]));
+//            polyOptions.width(10 + i * 3);
+//            polyOptions.addAll(route.get(i).getPoints());
+//            Polyline polyline = map.addPolyline(polyOptions);
+//            polylines.add(polyline);
+//
+//
+//
+//            // contact our own server to get better estimation
+//            final Context current = this;
+//            RequestQueue queue = Volley.newRequestQueue(current);
+//            String url = "http://52.45.41.223:8080/";
+////
+//            //Request a string response from the provided URL.
+//            final RoutingListener routingListener = this;
+//            final Route currentRoute = route.get(i);
+//
+//
+//
+//
+//            StringRequest stringRequest = new StringRequest(Request.Method.POST, url , new Response.Listener<String>() {
+//                @Override
+//                public void onResponse(String response)
+//                {
+//                    // Display the first 500 characters of the response string
+//                    res = response;
+//                    Toast.makeText(current, response ,Toast.LENGTH_SHORT).show();
+//                    // Start marker
+//                    map.addMarker(new MarkerOptions()
+//                            .position(start)
+//                            .title("starting point"));
+//
+//                    map.addMarker(new MarkerOptions()
+//                            .position(end)
+//                            .title("destination"));
+//                }
+//            }, new Response.ErrorListener() {
+//                @Override
+//                public void onErrorResponse(VolleyError error) {
+//                    Toast.makeText(current,error.toString(),Toast.LENGTH_LONG).show();
+//                }
+//            }){
+//                @Override
+//                protected Map<String,String> getParams(){
+//                    Map<String, String> params = new HashMap<String, String>();
+//                    int i = 0;
+//                    for(LatLng l: currentRoute.getPoints()){
+//
+//                        params.put("lat" + i, l.latitude + "");
+//                        params.put("lng" + i, l.longitude + "");
+//                        System.out.println("lat" + i + ":" + l.latitude +
+//                                            " lng" + i  + ":" + l.longitude);
+//                        i++;
+//                    }
+//                    int j = 0;
+//                    for(int sec : currentRoute.getDurations())
+//                    {
+//                        params.put("dur" + j, sec + "");
+//                        System.out.println("dur" + j + ":" + sec);
+//                        j++;
+//                    }
+//
+//
+//                    return params;
+//                }
+//
+//            };
+//            queue.add(stringRequest);
+//
+//            Toast.makeText(getApplicationContext(),"Route "+": distance - "
+//                           + route.get(i).getDistanceValue()
+//                           +": duration - "+ route.get(i).getDurationValue()
+//                           ,Toast.LENGTH_SHORT).show();
+//        }
 
 
 
