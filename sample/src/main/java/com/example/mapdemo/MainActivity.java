@@ -109,6 +109,8 @@ public class MainActivity extends AppCompatActivity implements RoutingListener, 
     /**
      * This activity loads a map and then displays the route and pushpins on it.
      */
+
+
 @Override
 public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -347,6 +349,39 @@ public void onCreate(Bundle savedInstanceState) {
 }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        if (b != null) {
+            Route route = (Route) b.getParcelable("route_selected");
+            CameraUpdate center = CameraUpdateFactory.newLatLng(start);
+            CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
+            map.moveCamera(center);
+            if (polylines.size() > 0) {
+                for (Polyline poly : polylines) {
+                    poly.remove();
+                }
+            }
+
+
+            if(route != null)
+            {
+                polylines = new ArrayList<>();
+                //add route to the map.
+                //only display one route
+                int colorIndex = 0 % colors.length;
+                PolylineOptions polyOptions = new PolylineOptions();
+                polyOptions.color(getResources().getColor(colors[colorIndex]));
+                polyOptions.width(10 + 0 * 3);
+                polyOptions.addAll(route.getPoints());
+                Polyline polyline = map.addPolyline(polyOptions);
+                polylines.add(polyline);
+            }
+
+        }
+    }
+    @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
     }
@@ -511,6 +546,13 @@ public void onCreate(Bundle savedInstanceState) {
     }
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        if (intent != null)
+            setIntent(intent);
+    }
+
+
+    @Override
     public void onRoutingSuccess(List<Route> route, int shortestRouteIndex)
     {
         progressDialog.dismiss();
@@ -520,100 +562,6 @@ public void onCreate(Bundle savedInstanceState) {
         b.putParcelableArrayList("routes_object", tmp);
         intent.putExtras(b);
         startActivity(intent);
-//        CameraUpdate center = CameraUpdateFactory.newLatLng(start);
-//        CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
-//
-//        map.moveCamera(center);
-//
-//
-//        if(polylines.size()>0) {
-//            for (Polyline poly : polylines) {
-//                poly.remove();
-//            }
-//        }
-//
-//        polylines = new ArrayList<>();
-//        //add route(s) to the map.
-//        for (int i = 0; i < route.size(); i++) {
-//            //only display one route
-//            //In case of more than 5 alternative routes
-//            int colorIndex = i % colors.length;
-//            PolylineOptions polyOptions = new PolylineOptions();
-//            polyOptions.color(getResources().getColor(colors[colorIndex]));
-//            polyOptions.width(10 + i * 3);
-//            polyOptions.addAll(route.get(i).getPoints());
-//            Polyline polyline = map.addPolyline(polyOptions);
-//            polylines.add(polyline);
-//
-//
-//
-//            // contact our own server to get better estimation
-//            final Context current = this;
-//            RequestQueue queue = Volley.newRequestQueue(current);
-//            String url = "http://52.45.41.223:8080/";
-////
-//            //Request a string response from the provided URL.
-//            final RoutingListener routingListener = this;
-//            final Route currentRoute = route.get(i);
-//
-//
-//
-//
-//            StringRequest stringRequest = new StringRequest(Request.Method.POST, url , new Response.Listener<String>() {
-//                @Override
-//                public void onResponse(String response)
-//                {
-//                    // Display the first 500 characters of the response string
-//                    res = response;
-//                    Toast.makeText(current, response ,Toast.LENGTH_SHORT).show();
-//                    // Start marker
-//                    map.addMarker(new MarkerOptions()
-//                            .position(start)
-//                            .title("starting point"));
-//
-//                    map.addMarker(new MarkerOptions()
-//                            .position(end)
-//                            .title("destination"));
-//                }
-//            }, new Response.ErrorListener() {
-//                @Override
-//                public void onErrorResponse(VolleyError error) {
-//                    Toast.makeText(current,error.toString(),Toast.LENGTH_LONG).show();
-//                }
-//            }){
-//                @Override
-//                protected Map<String,String> getParams(){
-//                    Map<String, String> params = new HashMap<String, String>();
-//                    int i = 0;
-//                    for(LatLng l: currentRoute.getPoints()){
-//
-//                        params.put("lat" + i, l.latitude + "");
-//                        params.put("lng" + i, l.longitude + "");
-//                        System.out.println("lat" + i + ":" + l.latitude +
-//                                            " lng" + i  + ":" + l.longitude);
-//                        i++;
-//                    }
-//                    int j = 0;
-//                    for(int sec : currentRoute.getDurations())
-//                    {
-//                        params.put("dur" + j, sec + "");
-//                        System.out.println("dur" + j + ":" + sec);
-//                        j++;
-//                    }
-//
-//
-//                    return params;
-//                }
-//
-//            };
-//            queue.add(stringRequest);
-//
-//            Toast.makeText(getApplicationContext(),"Route "+": distance - "
-//                           + route.get(i).getDistanceValue()
-//                           +": duration - "+ route.get(i).getDurationValue()
-//                           ,Toast.LENGTH_SHORT).show();
-//        }
-
 
 
     }

@@ -1,6 +1,7 @@
 package com.example.mapdemo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import
@@ -30,6 +31,7 @@ import com.directions.route.RoutingListener;
 import com.google.android.gms.maps.model.LatLng;
 import com.squareup.picasso.RequestCreator;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -121,7 +123,16 @@ public class Route_Results extends AppCompatActivity {
                                                 .setListener(new OnActionClickListener() {
                                                     @Override
                                                     public void onActionClicked(View view, Card card) {
-                                                        Toast.makeText(current, "You have pressed the left button", Toast.LENGTH_SHORT).show();
+
+
+
+                                                        Intent intent = new Intent(current,MainActivity.class);
+                                                        Bundle b = new Bundle();
+                                                        b.putParcelable("route_selected", currentRoute);
+                                                        intent.putExtras(b);
+                                                        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                                        startActivity(intent);
+                                                        
                                                     }
                                                 }))
                                         .endConfig()
