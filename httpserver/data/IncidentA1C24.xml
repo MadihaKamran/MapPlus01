@@ -1,0 +1,1815 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TRAFFICML_INCIDENTS TIMESTAMP="10/27/2016 19:58:02 GMT" VERSION="2.2" TIMESTAMP2="2016-10-27T19:58:02Z" EXTENDED_COUNTRY_CODE="A1">
+    <TRAFFIC_ITEMS>
+        <TRAFFIC_ITEM mid="NAVTEQ/r_NAVTEQ/10072908_reverse">
+            <TRAFFIC_ITEM_ID>42726920545735307</TRAFFIC_ITEM_ID>
+            <ORIGINAL_TRAFFIC_ITEM_ID>42726920545735307</ORIGINAL_TRAFFIC_ITEM_ID>
+            <TRAFFIC_ITEM_STATUS_SHORT_DESC>ACTIVE</TRAFFIC_ITEM_STATUS_SHORT_DESC>
+            <TRAFFIC_ITEM_TYPE_DESC>ROAD_CLOSURE</TRAFFIC_ITEM_TYPE_DESC>
+            <START_TIME>10/27/2016 12:34:04</START_TIME>
+            <END_TIME>10/28/2016 01:34:04</END_TIME>
+            <ENTRY_TIME>10/27/2016 12:34:04</ENTRY_TIME>
+            <CRITICALITY>
+                <ID>0</ID>
+                <DESCRIPTION>critical</DESCRIPTION>
+            </CRITICALITY>
+            <VERIFIED>true</VERIFIED>
+            <ABBREVIATION>
+                <SHORT_DESC>CLOS</SHORT_DESC>
+                <DESCRIPTION></DESCRIPTION>
+            </ABBREVIATION>
+            <COMMENTS>due to an incident</COMMENTS>
+            <RDS-TMC_LOCATIONS>
+                <RDS-TMC>
+                    <ORIGIN>
+                        <EBU_COUNTRY_CODE>C</EBU_COUNTRY_CODE>
+                        <TABLE_ID>24</TABLE_ID>
+                        <LOCATION_ID>07806</LOCATION_ID>
+                        <LOCATION_DESC>RTE-344/Chemin Oka</LOCATION_DESC>
+                        <RDS_DIRECTION>+</RDS_DIRECTION>
+                    </ORIGIN>
+                    <DIRECTION>-</DIRECTION>
+                    <ALERTC>
+                        <TRAFFIC_CODE>401</TRAFFIC_CODE>
+                        <DESCRIPTION>Closed.</DESCRIPTION>
+                        <ALERTC_DURATION>L</ALERTC_DURATION>
+                        <ALERTC_DIRECTION>1</ALERTC_DIRECTION>
+                        <URGENCY>U</URGENCY>
+                        <UPDATE_CLASS>5</UPDATE_CLASS>
+                        <PHRASE_CODE>C1</PHRASE_CODE>
+                        <EXTENT>1</EXTENT>
+                        <DURATION>0</DURATION>
+                    </ALERTC>
+                    <PRIMARY_OFFSET>0.0</PRIMARY_OFFSET>
+                    <LENGTH>0.36187</LENGTH>
+                </RDS-TMC>
+            </RDS-TMC_LOCATIONS>
+            <LOCATION>
+                <DEFINED>
+                    <ORIGIN>
+                        <ROADWAY ID="485">
+                            <DESCRIPTION TYPE="NTCSA">Chemin Principal</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">Chemin Principal</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">Chemin Principal</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="7806">
+                            <DESCRIPTION TYPE="NTCSA">Rue Valérie-Paquin</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">Rue Valérie-Paquin</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">Rue Valérie-Paquin</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">Chemin Principal</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">DIRECTION SUD</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">DIRECTION SUD</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">DIRECTION SUD</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>AT</ID>
+                            <DESCRIPTION>at</DESCRIPTION>
+                        </PROXIMITY>
+                    </ORIGIN>
+                    <TO>
+                        <ROADWAY ID="485">
+                            <DESCRIPTION TYPE="NTCSA">Chemin Principal</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">Chemin Principal</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">Chemin Principal</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="7806">
+                            <DESCRIPTION TYPE="NTCSA">RTE-344/Chemin Oka</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">RTE-344/Chemin Oka</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">RTE-344/Chemin Oka</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">Chemin Principal</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">DIRECTION SUD</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">DIRECTION SUD</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">DIRECTION SUD</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>AT</ID>
+                            <DESCRIPTION>at</DESCRIPTION>
+                        </PROXIMITY>
+                    </TO>
+                </DEFINED>
+                <GEOLOC>
+                    <ORIGIN>
+                        <LATITUDE>45.515652</LATITUDE>
+                        <LONGITUDE>-73.981183</LONGITUDE>
+                    </ORIGIN>
+                    <TO>
+                        <LATITUDE>45.51265</LATITUDE>
+                        <LONGITUDE>-73.97697</LONGITUDE>
+                    </TO>
+                </GEOLOC>
+                <NAVTECH>
+                    <EDGE>
+                        <EDGE_ID>133803248</EDGE_ID>
+                        <EDGE_ID>133803249</EDGE_ID>
+                        <EDGE_ID>41898276</EDGE_ID>
+                        <EDGE_ID>41898379</EDGE_ID>
+                    </EDGE>
+                    <VERSION_ID>201602</VERSION_ID>
+                </NAVTECH>
+            </LOCATION>
+            <TRAFFIC_ITEM_DETAIL>
+                <ROAD_CLOSED>true</ROAD_CLOSED>
+                <INCIDENT>
+                    <RESPONSE_VEHICLES>false</RESPONSE_VEHICLES>
+                    <MISCELLANEOUS_INCIDENT>
+                        <MISCELLANEOUS_TYPE_DESC></MISCELLANEOUS_TYPE_DESC>
+                    </MISCELLANEOUS_INCIDENT>
+                </INCIDENT>
+            </TRAFFIC_ITEM_DETAIL>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="short_desc">Closed at RTE-344/Chemin Oka - Closed.</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="desc">Closed at RTE-344/Chemin Oka - Closed. due to an incident</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="no_exit_description">Closed. due to an incident</TRAFFIC_ITEM_DESCRIPTION>
+        </TRAFFIC_ITEM>
+        <TRAFFIC_ITEM mid="NAVTEQ/r_NAVTEQ/9619339_original">
+            <TRAFFIC_ITEM_ID>185295669990948622</TRAFFIC_ITEM_ID>
+            <ORIGINAL_TRAFFIC_ITEM_ID>2860555445449092636</ORIGINAL_TRAFFIC_ITEM_ID>
+            <TRAFFIC_ITEM_STATUS_SHORT_DESC>ACTIVE</TRAFFIC_ITEM_STATUS_SHORT_DESC>
+            <TRAFFIC_ITEM_TYPE_DESC>CONSTRUCTION</TRAFFIC_ITEM_TYPE_DESC>
+            <START_TIME>10/18/2016 16:27:19</START_TIME>
+            <END_TIME>01/01/2017 04:59:00</END_TIME>
+            <ENTRY_TIME>10/18/2016 16:27:19</ENTRY_TIME>
+            <CRITICALITY>
+                <ID>2</ID>
+                <DESCRIPTION>minor</DESCRIPTION>
+            </CRITICALITY>
+            <VERIFIED>true</VERIFIED>
+            <ABBREVIATION>
+                <SHORT_DESC>CONST</SHORT_DESC>
+                <DESCRIPTION>construction</DESCRIPTION>
+            </ABBREVIATION>
+            <RDS-TMC_LOCATIONS>
+                <RDS-TMC>
+                    <ORIGIN>
+                        <EBU_COUNTRY_CODE>C</EBU_COUNTRY_CODE>
+                        <TABLE_ID>24</TABLE_ID>
+                        <LOCATION_ID>04761</LOCATION_ID>
+                        <LOCATION_DESC>Boulevard de Ste-Anne-de-Bellevue</LOCATION_DESC>
+                        <RDS_DIRECTION>-</RDS_DIRECTION>
+                    </ORIGIN>
+                    <DIRECTION>+</DIRECTION>
+                    <ALERTC>
+                        <TRAFFIC_CODE>803</TRAFFIC_CODE>
+                        <QUANTIFIERS>0</QUANTIFIERS>
+                        <DESCRIPTION>Construction work.</DESCRIPTION>
+                        <ALERTC_DURATION>L</ALERTC_DURATION>
+                        <ALERTC_DIRECTION>1</ALERTC_DIRECTION>
+                        <UPDATE_CLASS>11</UPDATE_CLASS>
+                        <PHRASE_CODE>E11</PHRASE_CODE>
+                        <EXTENT>1</EXTENT>
+                        <DURATION>0</DURATION>
+                    </ALERTC>
+                    <PRIMARY_OFFSET>0.0</PRIMARY_OFFSET>
+                    <LENGTH>0.37689</LENGTH>
+                </RDS-TMC>
+            </RDS-TMC_LOCATIONS>
+            <LOCATION>
+                <DEFINED>
+                    <ORIGIN>
+                        <ROADWAY ID="83">
+                            <DESCRIPTION TYPE="NTCSA">RTE-138</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">RTE-138</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">RTE-138</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="4761">
+                            <DESCRIPTION TYPE="NTCSA">Rue Pullman</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">Rue Pullman</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">Rue Pullman</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">RTE-138</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">DIRECTION EST</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">DIRECTION EST</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">DIRECTION EST</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>AT</ID>
+                            <DESCRIPTION>at</DESCRIPTION>
+                        </PROXIMITY>
+                    </ORIGIN>
+                    <TO>
+                        <ROADWAY ID="83">
+                            <DESCRIPTION TYPE="NTCSA">RTE-138</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">RTE-138</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">RTE-138</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="4761">
+                            <DESCRIPTION TYPE="NTCSA">Boulevard de Ste-Anne-de-Bellevue</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">Boulevard de Ste-Anne-de-Bellevue</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">Boulevard de Ste-Anne-de-Bellevue</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">RTE-138</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">DIRECTION EST</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">DIRECTION EST</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">DIRECTION EST</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>AT</ID>
+                            <DESCRIPTION>at</DESCRIPTION>
+                        </PROXIMITY>
+                    </TO>
+                </DEFINED>
+                <GEOLOC>
+                    <ORIGIN>
+                        <LATITUDE>45.450611</LATITUDE>
+                        <LONGITUDE>-73.635156</LONGITUDE>
+                    </ORIGIN>
+                    <TO>
+                        <LATITUDE>45.45551</LATITUDE>
+                        <LONGITUDE>-73.63155</LONGITUDE>
+                    </TO>
+                </GEOLOC>
+                <NAVTECH>
+                    <EDGE>
+                        <EDGE_ID>1022442254</EDGE_ID>
+                        <EDGE_ID>1022442255</EDGE_ID>
+                        <EDGE_ID>34251977</EDGE_ID>
+                        <EDGE_ID>810685507</EDGE_ID>
+                        <EDGE_ID>810685508</EDGE_ID>
+                        <EDGE_ID>837692343</EDGE_ID>
+                        <EDGE_ID>837692344</EDGE_ID>
+                    </EDGE>
+                    <VERSION_ID>201602</VERSION_ID>
+                </NAVTECH>
+            </LOCATION>
+            <TRAFFIC_ITEM_DETAIL>
+                <ROAD_CLOSED>false</ROAD_CLOSED>
+                <EVENT>
+                    <EVENT_ITEM_CANCELLED>false</EVENT_ITEM_CANCELLED>
+                    <SCHEDULED_CONSTRUCTION_EVENT>
+                        <SCHEDULED_CONSTRUCTION_TYPE_DESC>CONSTRUCTION</SCHEDULED_CONSTRUCTION_TYPE_DESC>
+                        <SCHEDULED_CONSTRUCTION_DETAIL>construction</SCHEDULED_CONSTRUCTION_DETAIL>
+                    </SCHEDULED_CONSTRUCTION_EVENT>
+                </EVENT>
+            </TRAFFIC_ITEM_DETAIL>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="short_desc">At Boulevard de Ste-Anne-de-Bellevue - Construction work.</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="desc">At Boulevard de Ste-Anne-de-Bellevue - Construction work.</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="no_exit_description">Construction work.</TRAFFIC_ITEM_DESCRIPTION>
+        </TRAFFIC_ITEM>
+        <TRAFFIC_ITEM mid="NAVTEQ/r_NAVTEQ/10015272">
+            <TRAFFIC_ITEM_ID>569458229912963680</TRAFFIC_ITEM_ID>
+            <ORIGINAL_TRAFFIC_ITEM_ID>3542469178279542324</ORIGINAL_TRAFFIC_ITEM_ID>
+            <TRAFFIC_ITEM_STATUS_SHORT_DESC>ACTIVE</TRAFFIC_ITEM_STATUS_SHORT_DESC>
+            <TRAFFIC_ITEM_TYPE_DESC>CONSTRUCTION</TRAFFIC_ITEM_TYPE_DESC>
+            <START_TIME>09/28/2016 16:00:00</START_TIME>
+            <END_TIME>11/11/2016 10:00:00</END_TIME>
+            <ENTRY_TIME>10/18/2016 16:27:19</ENTRY_TIME>
+            <CRITICALITY>
+                <ID>0</ID>
+                <DESCRIPTION>critical</DESCRIPTION>
+            </CRITICALITY>
+            <VERIFIED>true</VERIFIED>
+            <ABBREVIATION>
+                <SHORT_DESC>CONST</SHORT_DESC>
+                <DESCRIPTION>construction</DESCRIPTION>
+            </ABBREVIATION>
+            <RDS-TMC_LOCATIONS>
+                <RDS-TMC>
+                    <ORIGIN>
+                        <EBU_COUNTRY_CODE>C</EBU_COUNTRY_CODE>
+                        <TABLE_ID>24</TABLE_ID>
+                        <LOCATION_ID>04303</LOCATION_ID>
+                        <LOCATION_DESC>AUT-720/Ville-Marie</LOCATION_DESC>
+                        <RDS_DIRECTION>+</RDS_DIRECTION>
+                    </ORIGIN>
+                    <DIRECTION>-</DIRECTION>
+                    <ALERTC>
+                        <TRAFFIC_CODE>735</TRAFFIC_CODE>
+                        <QUANTIFIERS>0</QUANTIFIERS>
+                        <DESCRIPTION>Closed due to roadwork.</DESCRIPTION>
+                        <ALERTC_DURATION>L</ALERTC_DURATION>
+                        <ALERTC_DIRECTION>1</ALERTC_DIRECTION>
+                        <URGENCY>U</URGENCY>
+                        <UPDATE_CLASS>5</UPDATE_CLASS>
+                        <PHRASE_CODE>E1.C1</PHRASE_CODE>
+                        <EXTENT>0</EXTENT>
+                        <DURATION>0</DURATION>
+                    </ALERTC>
+                    <PRIMARY_OFFSET>0.13048</PRIMARY_OFFSET>
+                    <LENGTH>0.00305</LENGTH>
+                </RDS-TMC>
+            </RDS-TMC_LOCATIONS>
+            <LOCATION>
+                <DEFINED>
+                    <ORIGIN>
+                        <ROADWAY ID="88">
+                            <DESCRIPTION TYPE="NTCSA">Autoroute Ville-Marie</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">Autoroute Ville-Marie</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">Autoroute Ville-Marie</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="4303">
+                            <DESCRIPTION TYPE="NTCSA">AUT-10/Rue University/Sortie 5</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">AUT-10/Rue University/Sortie 5</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">AUT-10/Rue University/Sortie 5</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">Autoroute Ville-Marie</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">DIRECTION EST</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">DIRECTION EST</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">DIRECTION EST</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>AT</ID>
+                            <DESCRIPTION>at</DESCRIPTION>
+                        </PROXIMITY>
+                    </ORIGIN>
+                    <TO>
+                        <ROADWAY ID="88">
+                            <DESCRIPTION TYPE="NTCSA">Autoroute Ville-Marie</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">Autoroute Ville-Marie</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">Autoroute Ville-Marie</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="4303">
+                            <DESCRIPTION TYPE="NTCSA">AUT-720/Ville-Marie</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">AUT-720/Ville-Marie</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">AUT-720/Ville-Marie</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">Autoroute Ville-Marie</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">DIRECTION EST</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">DIRECTION EST</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">DIRECTION EST</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>AT</ID>
+                            <DESCRIPTION>at</DESCRIPTION>
+                        </PROXIMITY>
+                    </TO>
+                </DEFINED>
+                <GEOLOC>
+                    <ORIGIN>
+                        <LATITUDE>45.49811</LATITUDE>
+                        <LONGITUDE>-73.56131</LONGITUDE>
+                    </ORIGIN>
+                    <TO>
+                        <LATITUDE>45.49811</LATITUDE>
+                        <LONGITUDE>-73.56131</LONGITUDE>
+                    </TO>
+                </GEOLOC>
+                <NAVTECH>
+                    <EDGE>
+                        <EDGE_ID>966823746</EDGE_ID>
+                    </EDGE>
+                    <VERSION_ID>201602</VERSION_ID>
+                </NAVTECH>
+            </LOCATION>
+            <TRAFFIC_ITEM_DETAIL>
+                <ROAD_CLOSED>true</ROAD_CLOSED>
+                <EVENT>
+                    <EVENT_ITEM_CANCELLED>false</EVENT_ITEM_CANCELLED>
+                    <SCHEDULED_CONSTRUCTION_EVENT>
+                        <SCHEDULED_CONSTRUCTION_TYPE_DESC>CONSTRUCTION</SCHEDULED_CONSTRUCTION_TYPE_DESC>
+                        <SCHEDULED_CONSTRUCTION_DETAIL>construction</SCHEDULED_CONSTRUCTION_DETAIL>
+                    </SCHEDULED_CONSTRUCTION_EVENT>
+                </EVENT>
+            </TRAFFIC_ITEM_DETAIL>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="short_desc">Closed at AUT-720/Ville-Marie - Closed due to roadwork.</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="desc">Closed at AUT-720/Ville-Marie - Closed due to roadwork.</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="no_exit_description">Closed due to roadwork.</TRAFFIC_ITEM_DESCRIPTION>
+        </TRAFFIC_ITEM>
+        <TRAFFIC_ITEM mid="NAVTEQ/r_NAVTEQ/9619413">
+            <TRAFFIC_ITEM_ID>790439269268390053</TRAFFIC_ITEM_ID>
+            <ORIGINAL_TRAFFIC_ITEM_ID>3356506547872355285</ORIGINAL_TRAFFIC_ITEM_ID>
+            <TRAFFIC_ITEM_STATUS_SHORT_DESC>ACTIVE</TRAFFIC_ITEM_STATUS_SHORT_DESC>
+            <TRAFFIC_ITEM_TYPE_DESC>CONSTRUCTION</TRAFFIC_ITEM_TYPE_DESC>
+            <START_TIME>10/18/2016 16:27:19</START_TIME>
+            <END_TIME>10/28/2016 01:06:08</END_TIME>
+            <ENTRY_TIME>10/25/2016 21:06:08</ENTRY_TIME>
+            <CRITICALITY>
+                <ID>1</ID>
+                <DESCRIPTION>major</DESCRIPTION>
+            </CRITICALITY>
+            <VERIFIED>true</VERIFIED>
+            <ABBREVIATION>
+                <SHORT_DESC>CONST</SHORT_DESC>
+                <DESCRIPTION>construction</DESCRIPTION>
+            </ABBREVIATION>
+            <COMMENTS>all lanes blocked periodically</COMMENTS>
+            <RDS-TMC_LOCATIONS>
+                <RDS-TMC>
+                    <ORIGIN>
+                        <EBU_COUNTRY_CODE>C</EBU_COUNTRY_CODE>
+                        <TABLE_ID>24</TABLE_ID>
+                        <LOCATION_ID>04243</LOCATION_ID>
+                        <LOCATION_DESC>63</LOCATION_DESC>
+                        <RDS_DIRECTION>+</RDS_DIRECTION>
+                    </ORIGIN>
+                    <DIRECTION>-</DIRECTION>
+                    <ALERTC>
+                        <TRAFFIC_CODE>803</TRAFFIC_CODE>
+                        <QUANTIFIERS>0</QUANTIFIERS>
+                        <DESCRIPTION>Construction work.</DESCRIPTION>
+                        <ALERTC_DURATION>L</ALERTC_DURATION>
+                        <ALERTC_DIRECTION>1</ALERTC_DIRECTION>
+                        <UPDATE_CLASS>11</UPDATE_CLASS>
+                        <PHRASE_CODE>E11</PHRASE_CODE>
+                        <EXTENT>1</EXTENT>
+                        <DURATION>0</DURATION>
+                    </ALERTC>
+                    <PRIMARY_OFFSET>0.0</PRIMARY_OFFSET>
+                    <LENGTH>0.43064</LENGTH>
+                </RDS-TMC>
+            </RDS-TMC_LOCATIONS>
+            <LOCATION>
+                <DEFINED>
+                    <ORIGIN>
+                        <ROADWAY ID="70">
+                            <DESCRIPTION TYPE="NTCSA">Autoroute du Souvenir</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">Autoroute du Souvenir</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">Autoroute du Souvenir</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="4243">
+                            <DESCRIPTION TYPE="NTCSA">63</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">63</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">63</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">Autoroute du Souvenir</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">DIRECTION OUEST</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">DIRECTION OUEST</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">DIRECTION OUEST</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>AT</ID>
+                            <DESCRIPTION>at</DESCRIPTION>
+                        </PROXIMITY>
+                    </ORIGIN>
+                    <TO>
+                        <ROADWAY ID="70">
+                            <DESCRIPTION TYPE="NTCSA">Autoroute du Souvenir</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">Autoroute du Souvenir</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">Autoroute du Souvenir</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="4243">
+                            <DESCRIPTION TYPE="NTCSA">63</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">63</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">63</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">Autoroute du Souvenir</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">DIRECTION OUEST</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">DIRECTION OUEST</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">DIRECTION OUEST</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>AT</ID>
+                            <DESCRIPTION>at</DESCRIPTION>
+                        </PROXIMITY>
+                    </TO>
+                </DEFINED>
+                <GEOLOC>
+                    <ORIGIN>
+                        <LATITUDE>45.449417</LATITUDE>
+                        <LONGITUDE>-73.633564</LONGITUDE>
+                    </ORIGIN>
+                    <TO>
+                        <LATITUDE>45.446233</LATITUDE>
+                        <LONGITUDE>-73.641092</LONGITUDE>
+                    </TO>
+                </GEOLOC>
+                <NAVTECH>
+                    <EDGE>
+                        <EDGE_ID>119657749</EDGE_ID>
+                        <EDGE_ID>34252991</EDGE_ID>
+                        <EDGE_ID>841865963</EDGE_ID>
+                        <EDGE_ID>841865964</EDGE_ID>
+                        <EDGE_ID>961557586</EDGE_ID>
+                        <EDGE_ID>961557587</EDGE_ID>
+                    </EDGE>
+                    <VERSION_ID>201602</VERSION_ID>
+                </NAVTECH>
+            </LOCATION>
+            <TRAFFIC_ITEM_DETAIL>
+                <ROAD_CLOSED>false</ROAD_CLOSED>
+                <EVENT>
+                    <EVENT_ITEM_CANCELLED>false</EVENT_ITEM_CANCELLED>
+                    <SCHEDULED_CONSTRUCTION_EVENT>
+                        <SCHEDULED_CONSTRUCTION_TYPE_DESC>CONSTRUCTION</SCHEDULED_CONSTRUCTION_TYPE_DESC>
+                        <SCHEDULED_CONSTRUCTION_DETAIL>construction</SCHEDULED_CONSTRUCTION_DETAIL>
+                    </SCHEDULED_CONSTRUCTION_EVENT>
+                </EVENT>
+            </TRAFFIC_ITEM_DETAIL>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="short_desc">At 63 - Construction work.</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="desc">At 63 - Construction work. all lanes blocked periodically</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="no_exit_description">Construction work. all lanes blocked periodically</TRAFFIC_ITEM_DESCRIPTION>
+        </TRAFFIC_ITEM>
+        <TRAFFIC_ITEM mid="NAVTEQ/r_NAVTEQ/9946982">
+            <TRAFFIC_ITEM_ID>906411440672154445</TRAFFIC_ITEM_ID>
+            <ORIGINAL_TRAFFIC_ITEM_ID>4674645259311408933</ORIGINAL_TRAFFIC_ITEM_ID>
+            <TRAFFIC_ITEM_STATUS_SHORT_DESC>ACTIVE</TRAFFIC_ITEM_STATUS_SHORT_DESC>
+            <TRAFFIC_ITEM_TYPE_DESC>CONSTRUCTION</TRAFFIC_ITEM_TYPE_DESC>
+            <START_TIME>10/18/2016 16:27:19</START_TIME>
+            <END_TIME>10/28/2016 01:27:19</END_TIME>
+            <ENTRY_TIME>10/18/2016 16:27:19</ENTRY_TIME>
+            <CRITICALITY>
+                <ID>2</ID>
+                <DESCRIPTION>minor</DESCRIPTION>
+            </CRITICALITY>
+            <VERIFIED>true</VERIFIED>
+            <ABBREVIATION>
+                <SHORT_DESC>CONST</SHORT_DESC>
+                <DESCRIPTION>construction</DESCRIPTION>
+            </ABBREVIATION>
+            <COMMENTS>blocking a lane | longterm project thru november</COMMENTS>
+            <RDS-TMC_LOCATIONS>
+                <RDS-TMC>
+                    <ORIGIN>
+                        <EBU_COUNTRY_CODE>C</EBU_COUNTRY_CODE>
+                        <TABLE_ID>24</TABLE_ID>
+                        <LOCATION_ID>04477</LOCATION_ID>
+                        <LOCATION_DESC>Boul Cavendish</LOCATION_DESC>
+                        <RDS_DIRECTION>-</RDS_DIRECTION>
+                    </ORIGIN>
+                    <TO>
+                        <EBU_COUNTRY_CODE>C</EBU_COUNTRY_CODE>
+                        <TABLE_ID>24</TABLE_ID>
+                        <LOCATION_ID>04314</LOCATION_ID>
+                        <LOCATION_DESC>Sortie 7</LOCATION_DESC>
+                        <RDS_DIRECTION>-</RDS_DIRECTION>
+                    </TO>
+                    <DIRECTION>+</DIRECTION>
+                    <ALERTC>
+                        <TRAFFIC_CODE>803</TRAFFIC_CODE>
+                        <QUANTIFIERS>0</QUANTIFIERS>
+                        <DESCRIPTION>Construction work.</DESCRIPTION>
+                        <ALERTC_DURATION>L</ALERTC_DURATION>
+                        <ALERTC_DIRECTION>1</ALERTC_DIRECTION>
+                        <UPDATE_CLASS>11</UPDATE_CLASS>
+                        <PHRASE_CODE>E11</PHRASE_CODE>
+                        <EXTENT>1</EXTENT>
+                        <DURATION>0</DURATION>
+                    </ALERTC>
+                    <PRIMARY_OFFSET>0.0</PRIMARY_OFFSET>
+                    <LENGTH>0.87168</LENGTH>
+                </RDS-TMC>
+            </RDS-TMC_LOCATIONS>
+            <LOCATION>
+                <DEFINED>
+                    <ORIGIN>
+                        <ROADWAY ID="75">
+                            <DESCRIPTION TYPE="NTCSA">AUT-520</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">AUT-520</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">AUT-520</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="4477">
+                            <DESCRIPTION TYPE="NTCSA">Boul Cavendish</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">Boul Cavendish</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">Boul Cavendish</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">AUT-520</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">DIRECTION NORD</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">DIRECTION NORD</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">DIRECTION NORD</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>AT</ID>
+                            <DESCRIPTION>at</DESCRIPTION>
+                        </PROXIMITY>
+                    </ORIGIN>
+                    <TO>
+                        <ROADWAY ID="75">
+                            <DESCRIPTION TYPE="NTCSA">AUT-520</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">AUT-520</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">AUT-520</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="4314">
+                            <DESCRIPTION TYPE="NTCSA">Sortie 7</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">Sortie 7</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">Sortie 7</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">AUT-520</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">DIRECTION NORD</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">DIRECTION NORD</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">DIRECTION NORD</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>AT</ID>
+                            <DESCRIPTION>at</DESCRIPTION>
+                        </PROXIMITY>
+                    </TO>
+                </DEFINED>
+                <GEOLOC>
+                    <ORIGIN>
+                        <LATITUDE>45.48459</LATITUDE>
+                        <LONGITUDE>-73.69301</LONGITUDE>
+                    </ORIGIN>
+                    <TO>
+                        <LATITUDE>45.492533</LATITUDE>
+                        <LONGITUDE>-73.679876</LONGITUDE>
+                    </TO>
+                </GEOLOC>
+                <NAVTECH>
+                    <EDGE>
+                        <EDGE_ID>1114152135</EDGE_ID>
+                        <EDGE_ID>1114152136</EDGE_ID>
+                        <EDGE_ID>1114152137</EDGE_ID>
+                        <EDGE_ID>1114152138</EDGE_ID>
+                        <EDGE_ID>133267858</EDGE_ID>
+                        <EDGE_ID>133267889</EDGE_ID>
+                        <EDGE_ID>783071189</EDGE_ID>
+                        <EDGE_ID>841176043</EDGE_ID>
+                        <EDGE_ID>841176044</EDGE_ID>
+                    </EDGE>
+                    <VERSION_ID>201602</VERSION_ID>
+                </NAVTECH>
+            </LOCATION>
+            <TRAFFIC_ITEM_DETAIL>
+                <ROAD_CLOSED>false</ROAD_CLOSED>
+                <EVENT>
+                    <EVENT_ITEM_CANCELLED>false</EVENT_ITEM_CANCELLED>
+                    <SCHEDULED_CONSTRUCTION_EVENT>
+                        <SCHEDULED_CONSTRUCTION_TYPE_DESC>CONSTRUCTION</SCHEDULED_CONSTRUCTION_TYPE_DESC>
+                        <SCHEDULED_CONSTRUCTION_DETAIL>construction</SCHEDULED_CONSTRUCTION_DETAIL>
+                    </SCHEDULED_CONSTRUCTION_EVENT>
+                </EVENT>
+            </TRAFFIC_ITEM_DETAIL>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="short_desc">Between Boul Cavendish and Sortie 7 - Construction work.</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="desc">Between Boul Cavendish and Sortie 7 - Construction work. blocking a lane | longterm project thru november</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="no_exit_description">Construction work. blocking a lane | longterm project thru november</TRAFFIC_ITEM_DESCRIPTION>
+        </TRAFFIC_ITEM>
+        <TRAFFIC_ITEM mid="NAVTEQ/r_NAVTEQ/9619339_reverse">
+            <TRAFFIC_ITEM_ID>926536032874624992</TRAFFIC_ITEM_ID>
+            <ORIGINAL_TRAFFIC_ITEM_ID>1807341925678161127</ORIGINAL_TRAFFIC_ITEM_ID>
+            <TRAFFIC_ITEM_STATUS_SHORT_DESC>ACTIVE</TRAFFIC_ITEM_STATUS_SHORT_DESC>
+            <TRAFFIC_ITEM_TYPE_DESC>CONSTRUCTION</TRAFFIC_ITEM_TYPE_DESC>
+            <START_TIME>10/18/2016 16:27:19</START_TIME>
+            <END_TIME>01/01/2017 04:59:00</END_TIME>
+            <ENTRY_TIME>10/18/2016 16:27:19</ENTRY_TIME>
+            <CRITICALITY>
+                <ID>2</ID>
+                <DESCRIPTION>minor</DESCRIPTION>
+            </CRITICALITY>
+            <VERIFIED>true</VERIFIED>
+            <ABBREVIATION>
+                <SHORT_DESC>CONST</SHORT_DESC>
+                <DESCRIPTION>construction</DESCRIPTION>
+            </ABBREVIATION>
+            <RDS-TMC_LOCATIONS>
+                <RDS-TMC>
+                    <ORIGIN>
+                        <EBU_COUNTRY_CODE>C</EBU_COUNTRY_CODE>
+                        <TABLE_ID>24</TABLE_ID>
+                        <LOCATION_ID>04760</LOCATION_ID>
+                        <LOCATION_DESC>Rue Pullman</LOCATION_DESC>
+                        <RDS_DIRECTION>+</RDS_DIRECTION>
+                    </ORIGIN>
+                    <DIRECTION>-</DIRECTION>
+                    <ALERTC>
+                        <TRAFFIC_CODE>803</TRAFFIC_CODE>
+                        <QUANTIFIERS>0</QUANTIFIERS>
+                        <DESCRIPTION>Construction work.</DESCRIPTION>
+                        <ALERTC_DURATION>L</ALERTC_DURATION>
+                        <ALERTC_DIRECTION>1</ALERTC_DIRECTION>
+                        <UPDATE_CLASS>11</UPDATE_CLASS>
+                        <PHRASE_CODE>E11</PHRASE_CODE>
+                        <EXTENT>1</EXTENT>
+                        <DURATION>0</DURATION>
+                    </ALERTC>
+                    <PRIMARY_OFFSET>0.12427</PRIMARY_OFFSET>
+                    <LENGTH>0.37815</LENGTH>
+                </RDS-TMC>
+            </RDS-TMC_LOCATIONS>
+            <LOCATION>
+                <DEFINED>
+                    <ORIGIN>
+                        <ROADWAY ID="83">
+                            <DESCRIPTION TYPE="NTCSA">RTE-138</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">RTE-138</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">RTE-138</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="4760">
+                            <DESCRIPTION TYPE="NTCSA">Boulevard de Ste-Anne-de-Bellevue</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">Boulevard de Ste-Anne-de-Bellevue</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">Boulevard de Ste-Anne-de-Bellevue</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">RTE-138</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">DIRECTION OUEST</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">DIRECTION OUEST</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">DIRECTION OUEST</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>AT</ID>
+                            <DESCRIPTION>at</DESCRIPTION>
+                        </PROXIMITY>
+                    </ORIGIN>
+                    <TO>
+                        <ROADWAY ID="83">
+                            <DESCRIPTION TYPE="NTCSA">RTE-138</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">RTE-138</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">RTE-138</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="4760">
+                            <DESCRIPTION TYPE="NTCSA">Rue Pullman</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">Rue Pullman</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">Rue Pullman</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">RTE-138</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">DIRECTION OUEST</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">DIRECTION OUEST</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">DIRECTION OUEST</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>AT</ID>
+                            <DESCRIPTION>at</DESCRIPTION>
+                        </PROXIMITY>
+                    </TO>
+                </DEFINED>
+                <GEOLOC>
+                    <ORIGIN>
+                        <LATITUDE>45.45548</LATITUDE>
+                        <LONGITUDE>-73.63176</LONGITUDE>
+                    </ORIGIN>
+                    <TO>
+                        <LATITUDE>45.450919</LATITUDE>
+                        <LONGITUDE>-73.635171</LONGITUDE>
+                    </TO>
+                </GEOLOC>
+                <NAVTECH>
+                    <EDGE>
+                        <EDGE_ID>1022442257</EDGE_ID>
+                        <EDGE_ID>1022442258</EDGE_ID>
+                        <EDGE_ID>1115281392</EDGE_ID>
+                        <EDGE_ID>1115281393</EDGE_ID>
+                        <EDGE_ID>34251959</EDGE_ID>
+                        <EDGE_ID>810685511</EDGE_ID>
+                        <EDGE_ID>810685512</EDGE_ID>
+                        <EDGE_ID>845566091</EDGE_ID>
+                        <EDGE_ID>845566093</EDGE_ID>
+                    </EDGE>
+                    <VERSION_ID>201602</VERSION_ID>
+                </NAVTECH>
+            </LOCATION>
+            <TRAFFIC_ITEM_DETAIL>
+                <ROAD_CLOSED>false</ROAD_CLOSED>
+                <EVENT>
+                    <EVENT_ITEM_CANCELLED>false</EVENT_ITEM_CANCELLED>
+                    <SCHEDULED_CONSTRUCTION_EVENT>
+                        <SCHEDULED_CONSTRUCTION_TYPE_DESC>CONSTRUCTION</SCHEDULED_CONSTRUCTION_TYPE_DESC>
+                        <SCHEDULED_CONSTRUCTION_DETAIL>construction</SCHEDULED_CONSTRUCTION_DETAIL>
+                    </SCHEDULED_CONSTRUCTION_EVENT>
+                </EVENT>
+            </TRAFFIC_ITEM_DETAIL>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="short_desc">At Rue Pullman - Construction work.</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="desc">At Rue Pullman - Construction work.</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="no_exit_description">Construction work.</TRAFFIC_ITEM_DESCRIPTION>
+        </TRAFFIC_ITEM>
+        <TRAFFIC_ITEM mid="NAVTEQ/r_NAVTEQ/9689494">
+            <TRAFFIC_ITEM_ID>1038287642296526197</TRAFFIC_ITEM_ID>
+            <ORIGINAL_TRAFFIC_ITEM_ID>3289989356160097293</ORIGINAL_TRAFFIC_ITEM_ID>
+            <TRAFFIC_ITEM_STATUS_SHORT_DESC>ACTIVE</TRAFFIC_ITEM_STATUS_SHORT_DESC>
+            <TRAFFIC_ITEM_TYPE_DESC>CONSTRUCTION</TRAFFIC_ITEM_TYPE_DESC>
+            <START_TIME>04/27/2016 21:00:00</START_TIME>
+            <END_TIME>11/02/2017 03:59:00</END_TIME>
+            <ENTRY_TIME>10/18/2016 16:27:19</ENTRY_TIME>
+            <CRITICALITY>
+                <ID>1</ID>
+                <DESCRIPTION>major</DESCRIPTION>
+            </CRITICALITY>
+            <VERIFIED>true</VERIFIED>
+            <ABBREVIATION>
+                <SHORT_DESC>CONST</SHORT_DESC>
+                <DESCRIPTION>construction</DESCRIPTION>
+            </ABBREVIATION>
+            <COMMENTS>2 lanes blocked</COMMENTS>
+            <RDS-TMC_LOCATIONS>
+                <RDS-TMC>
+                    <ORIGIN>
+                        <EBU_COUNTRY_CODE>C</EBU_COUNTRY_CODE>
+                        <TABLE_ID>24</TABLE_ID>
+                        <LOCATION_ID>04254</LOCATION_ID>
+                        <LOCATION_DESC>Boul St-Laurent/Sortie 6</LOCATION_DESC>
+                        <RDS_DIRECTION>-</RDS_DIRECTION>
+                    </ORIGIN>
+                    <TO>
+                        <EBU_COUNTRY_CODE>C</EBU_COUNTRY_CODE>
+                        <TABLE_ID>24</TABLE_ID>
+                        <LOCATION_ID>09365</LOCATION_ID>
+                        <LOCATION_DESC>Rue Notre-Dame E</LOCATION_DESC>
+                        <RDS_DIRECTION>-</RDS_DIRECTION>
+                    </TO>
+                    <DIRECTION>+</DIRECTION>
+                    <ALERTC>
+                        <TRAFFIC_CODE>803</TRAFFIC_CODE>
+                        <QUANTIFIERS>0</QUANTIFIERS>
+                        <DESCRIPTION>Construction work.</DESCRIPTION>
+                        <ALERTC_DURATION>L</ALERTC_DURATION>
+                        <ALERTC_DIRECTION>1</ALERTC_DIRECTION>
+                        <UPDATE_CLASS>11</UPDATE_CLASS>
+                        <PHRASE_CODE>E11</PHRASE_CODE>
+                        <EXTENT>2</EXTENT>
+                        <DURATION>0</DURATION>
+                    </ALERTC>
+                    <PRIMARY_OFFSET>0.16777</PRIMARY_OFFSET>
+                    <LENGTH>0.72801</LENGTH>
+                </RDS-TMC>
+            </RDS-TMC_LOCATIONS>
+            <LOCATION>
+                <DEFINED>
+                    <ORIGIN>
+                        <ROADWAY ID="85">
+                            <DESCRIPTION TYPE="NTCSA">AUT-720</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">AUT-720</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">AUT-720</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="4254">
+                            <DESCRIPTION TYPE="NTCSA">Boul St-Laurent/Sortie 6</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">Boul St-Laurent/Sortie 6</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">Boul St-Laurent/Sortie 6</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">AUT-720</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">DIRECTION EST</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">DIRECTION EST</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">DIRECTION EST</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>AT</ID>
+                            <DESCRIPTION>at</DESCRIPTION>
+                        </PROXIMITY>
+                    </ORIGIN>
+                    <TO>
+                        <ROADWAY ID="85">
+                            <DESCRIPTION TYPE="NTCSA">AUT-720</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">AUT-720</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">AUT-720</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="9365">
+                            <DESCRIPTION TYPE="NTCSA">Rue Notre-Dame E</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">Rue Notre-Dame E</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">Rue Notre-Dame E</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">AUT-720</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">DIRECTION EST</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">DIRECTION EST</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">DIRECTION EST</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>AT</ID>
+                            <DESCRIPTION>at</DESCRIPTION>
+                        </PROXIMITY>
+                    </TO>
+                </DEFINED>
+                <GEOLOC>
+                    <ORIGIN>
+                        <LATITUDE>45.506134</LATITUDE>
+                        <LONGITUDE>-73.559027</LONGITUDE>
+                    </ORIGIN>
+                    <TO>
+                        <LATITUDE>45.51607</LATITUDE>
+                        <LONGITUDE>-73.55105</LONGITUDE>
+                    </TO>
+                </GEOLOC>
+                <NAVTECH>
+                    <EDGE>
+                        <EDGE_ID>120335571</EDGE_ID>
+                        <EDGE_ID>120335572</EDGE_ID>
+                        <EDGE_ID>34268642</EDGE_ID>
+                        <EDGE_ID>746260453</EDGE_ID>
+                        <EDGE_ID>856122005</EDGE_ID>
+                        <EDGE_ID>927492290</EDGE_ID>
+                        <EDGE_ID>927492291</EDGE_ID>
+                        <EDGE_ID>966351522</EDGE_ID>
+                        <EDGE_ID>966809821</EDGE_ID>
+                        <EDGE_ID>966809822</EDGE_ID>
+                        <EDGE_ID>966809823</EDGE_ID>
+                    </EDGE>
+                    <VERSION_ID>201602</VERSION_ID>
+                </NAVTECH>
+            </LOCATION>
+            <TRAFFIC_ITEM_DETAIL>
+                <ROAD_CLOSED>false</ROAD_CLOSED>
+                <EVENT>
+                    <EVENT_ITEM_CANCELLED>false</EVENT_ITEM_CANCELLED>
+                    <SCHEDULED_CONSTRUCTION_EVENT>
+                        <SCHEDULED_CONSTRUCTION_TYPE_DESC>CONSTRUCTION</SCHEDULED_CONSTRUCTION_TYPE_DESC>
+                        <SCHEDULED_CONSTRUCTION_DETAIL>construction</SCHEDULED_CONSTRUCTION_DETAIL>
+                    </SCHEDULED_CONSTRUCTION_EVENT>
+                </EVENT>
+            </TRAFFIC_ITEM_DETAIL>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="short_desc">Between Boul St-Laurent/Sortie 6 and Rue Notre-Dame E - Construction work.</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="desc">Between Boul St-Laurent/Sortie 6 and Rue Notre-Dame E - Construction work. 2 lanes blocked</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="no_exit_description">Construction work. 2 lanes blocked</TRAFFIC_ITEM_DESCRIPTION>
+        </TRAFFIC_ITEM>
+        <TRAFFIC_ITEM mid="NAVTEQ/r_NAVTEQ/9949078">
+            <TRAFFIC_ITEM_ID>1931764411144134455</TRAFFIC_ITEM_ID>
+            <ORIGINAL_TRAFFIC_ITEM_ID>3222661764076371771</ORIGINAL_TRAFFIC_ITEM_ID>
+            <TRAFFIC_ITEM_STATUS_SHORT_DESC>ACTIVE</TRAFFIC_ITEM_STATUS_SHORT_DESC>
+            <TRAFFIC_ITEM_TYPE_DESC>ROAD_CLOSURE</TRAFFIC_ITEM_TYPE_DESC>
+            <START_TIME>10/18/2016 16:27:19</START_TIME>
+            <END_TIME>10/28/2016 01:27:19</END_TIME>
+            <ENTRY_TIME>10/18/2016 16:27:19</ENTRY_TIME>
+            <CRITICALITY>
+                <ID>0</ID>
+                <DESCRIPTION>critical</DESCRIPTION>
+            </CRITICALITY>
+            <VERIFIED>true</VERIFIED>
+            <ABBREVIATION>
+                <SHORT_DESC>CLOS</SHORT_DESC>
+                <DESCRIPTION></DESCRIPTION>
+            </ABBREVIATION>
+            <COMMENTS>until further notice</COMMENTS>
+            <RDS-TMC_LOCATIONS>
+                <RDS-TMC>
+                    <ORIGIN>
+                        <EBU_COUNTRY_CODE>C</EBU_COUNTRY_CODE>
+                        <TABLE_ID>24</TABLE_ID>
+                        <LOCATION_ID>06454</LOCATION_ID>
+                        <LOCATION_DESC>AUT-40/Autoroute Félix-Leclerc</LOCATION_DESC>
+                        <RDS_DIRECTION>+</RDS_DIRECTION>
+                    </ORIGIN>
+                    <DIRECTION>-</DIRECTION>
+                    <ALERTC>
+                        <TRAFFIC_CODE>401</TRAFFIC_CODE>
+                        <DESCRIPTION>Closed.</DESCRIPTION>
+                        <ALERTC_DURATION>L</ALERTC_DURATION>
+                        <ALERTC_DIRECTION>1</ALERTC_DIRECTION>
+                        <URGENCY>U</URGENCY>
+                        <UPDATE_CLASS>5</UPDATE_CLASS>
+                        <PHRASE_CODE>C1</PHRASE_CODE>
+                        <EXTENT>1</EXTENT>
+                        <DURATION>0</DURATION>
+                    </ALERTC>
+                    <PRIMARY_OFFSET>0.0</PRIMARY_OFFSET>
+                    <LENGTH>0.27537</LENGTH>
+                </RDS-TMC>
+            </RDS-TMC_LOCATIONS>
+            <LOCATION>
+                <DEFINED>
+                    <ORIGIN>
+                        <ROADWAY ID="243">
+                            <DESCRIPTION TYPE="NTCSA">RTE-343</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">RTE-343</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">RTE-343</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="6454">
+                            <DESCRIPTION TYPE="NTCSA">AUT-40/Autoroute Félix-Leclerc</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">AUT-40/Autoroute Félix-Leclerc</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">AUT-40/Autoroute Félix-Leclerc</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">RTE-343</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">DIRECTION SUD</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">DIRECTION SUD</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">DIRECTION SUD</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>AT</ID>
+                            <DESCRIPTION>at</DESCRIPTION>
+                        </PROXIMITY>
+                    </ORIGIN>
+                    <TO>
+                        <ROADWAY ID="243">
+                            <DESCRIPTION TYPE="NTCSA">RTE-343</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">RTE-343</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">RTE-343</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="6454">
+                            <DESCRIPTION TYPE="NTCSA">AUT-40/Autoroute Félix-Leclerc</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">AUT-40/Autoroute Félix-Leclerc</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">AUT-40/Autoroute Félix-Leclerc</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">RTE-343</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">DIRECTION SUD</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">DIRECTION SUD</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">DIRECTION SUD</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>AT</ID>
+                            <DESCRIPTION>at</DESCRIPTION>
+                        </PROXIMITY>
+                    </TO>
+                </DEFINED>
+                <GEOLOC>
+                    <ORIGIN>
+                        <LATITUDE>45.8243</LATITUDE>
+                        <LONGITUDE>-73.39678</LONGITUDE>
+                    </ORIGIN>
+                    <TO>
+                        <LATITUDE>45.821581</LATITUDE>
+                        <LONGITUDE>-73.393079</LONGITUDE>
+                    </TO>
+                </GEOLOC>
+                <NAVTECH>
+                    <EDGE>
+                        <EDGE_ID>1061180898</EDGE_ID>
+                        <EDGE_ID>1061180899</EDGE_ID>
+                        <EDGE_ID>1120510288</EDGE_ID>
+                        <EDGE_ID>1120510289</EDGE_ID>
+                        <EDGE_ID>1120510290</EDGE_ID>
+                    </EDGE>
+                    <VERSION_ID>201602</VERSION_ID>
+                </NAVTECH>
+            </LOCATION>
+            <TRAFFIC_ITEM_DETAIL>
+                <ROAD_CLOSED>true</ROAD_CLOSED>
+                <INCIDENT>
+                    <RESPONSE_VEHICLES>false</RESPONSE_VEHICLES>
+                    <MISCELLANEOUS_INCIDENT>
+                        <MISCELLANEOUS_TYPE_DESC></MISCELLANEOUS_TYPE_DESC>
+                    </MISCELLANEOUS_INCIDENT>
+                </INCIDENT>
+            </TRAFFIC_ITEM_DETAIL>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="short_desc">Closed at AUT-40/Autoroute Félix-Leclerc - Closed.</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="desc">Closed at AUT-40/Autoroute Félix-Leclerc - Closed. until further notice</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="no_exit_description">Closed. until further notice</TRAFFIC_ITEM_DESCRIPTION>
+        </TRAFFIC_ITEM>
+        <TRAFFIC_ITEM mid="NAVTEQ/r_NAVTEQ/10060739">
+            <TRAFFIC_ITEM_ID>2311508839834742701</TRAFFIC_ITEM_ID>
+            <ORIGINAL_TRAFFIC_ITEM_ID>2311508839834742701</ORIGINAL_TRAFFIC_ITEM_ID>
+            <TRAFFIC_ITEM_STATUS_SHORT_DESC>ACTIVE</TRAFFIC_ITEM_STATUS_SHORT_DESC>
+            <TRAFFIC_ITEM_TYPE_DESC>CONSTRUCTION</TRAFFIC_ITEM_TYPE_DESC>
+            <START_TIME>10/20/2016 18:20:56</START_TIME>
+            <END_TIME>10/28/2016 01:20:56</END_TIME>
+            <ENTRY_TIME>10/20/2016 18:20:56</ENTRY_TIME>
+            <CRITICALITY>
+                <ID>2</ID>
+                <DESCRIPTION>minor</DESCRIPTION>
+            </CRITICALITY>
+            <VERIFIED>true</VERIFIED>
+            <ABBREVIATION>
+                <SHORT_DESC>CONST</SHORT_DESC>
+                <DESCRIPTION>construction</DESCRIPTION>
+            </ABBREVIATION>
+            <COMMENTS>one lane blocked</COMMENTS>
+            <RDS-TMC_LOCATIONS>
+                <RDS-TMC>
+                    <ORIGIN>
+                        <EBU_COUNTRY_CODE>C</EBU_COUNTRY_CODE>
+                        <TABLE_ID>24</TABLE_ID>
+                        <LOCATION_ID>04247</LOCATION_ID>
+                        <LOCATION_DESC>Autoroute du Souvenir</LOCATION_DESC>
+                        <RDS_DIRECTION>-</RDS_DIRECTION>
+                    </ORIGIN>
+                    <DIRECTION>+</DIRECTION>
+                    <ALERTC>
+                        <TRAFFIC_CODE>803</TRAFFIC_CODE>
+                        <QUANTIFIERS>0</QUANTIFIERS>
+                        <DESCRIPTION>Construction work.</DESCRIPTION>
+                        <ALERTC_DURATION>L</ALERTC_DURATION>
+                        <ALERTC_DIRECTION>1</ALERTC_DIRECTION>
+                        <UPDATE_CLASS>11</UPDATE_CLASS>
+                        <PHRASE_CODE>E11</PHRASE_CODE>
+                        <EXTENT>0</EXTENT>
+                        <DURATION>0</DURATION>
+                    </ALERTC>
+                    <PRIMARY_OFFSET>0.0</PRIMARY_OFFSET>
+                    <LENGTH>0.98173</LENGTH>
+                </RDS-TMC>
+            </RDS-TMC_LOCATIONS>
+            <LOCATION>
+                <DEFINED>
+                    <ORIGIN>
+                        <ROADWAY ID="85">
+                            <DESCRIPTION TYPE="NTCSA">AUT-720</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">AUT-720</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">AUT-720</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="4247">
+                            <DESCRIPTION TYPE="NTCSA">Autoroute du Souvenir</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">Autoroute du Souvenir</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">Autoroute du Souvenir</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">AUT-720</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">DIRECTION EST</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">DIRECTION EST</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">DIRECTION EST</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>AT</ID>
+                            <DESCRIPTION>at</DESCRIPTION>
+                        </PROXIMITY>
+                    </ORIGIN>
+                    <TO>
+                        <ROADWAY ID="85">
+                            <DESCRIPTION TYPE="NTCSA">AUT-720</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">AUT-720</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">AUT-720</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="4247">
+                            <DESCRIPTION TYPE="NTCSA">Autoroute du Souvenir</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">Autoroute du Souvenir</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">Autoroute du Souvenir</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">AUT-720</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">DIRECTION EST</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">DIRECTION EST</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">DIRECTION EST</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>AT</ID>
+                            <DESCRIPTION>at</DESCRIPTION>
+                        </PROXIMITY>
+                    </TO>
+                </DEFINED>
+                <GEOLOC>
+                    <ORIGIN>
+                        <LATITUDE>45.46215</LATITUDE>
+                        <LONGITUDE>-73.6098</LONGITUDE>
+                    </ORIGIN>
+                    <TO>
+                        <LATITUDE>45.46215</LATITUDE>
+                        <LONGITUDE>-73.6098</LONGITUDE>
+                    </TO>
+                </GEOLOC>
+                <NAVTECH>
+                    <EDGE>
+                        <EDGE_ID>34249620</EDGE_ID>
+                    </EDGE>
+                    <VERSION_ID>201602</VERSION_ID>
+                </NAVTECH>
+            </LOCATION>
+            <TRAFFIC_ITEM_DETAIL>
+                <ROAD_CLOSED>false</ROAD_CLOSED>
+                <EVENT>
+                    <EVENT_ITEM_CANCELLED>false</EVENT_ITEM_CANCELLED>
+                    <SCHEDULED_CONSTRUCTION_EVENT>
+                        <SCHEDULED_CONSTRUCTION_TYPE_DESC>CONSTRUCTION</SCHEDULED_CONSTRUCTION_TYPE_DESC>
+                        <SCHEDULED_CONSTRUCTION_DETAIL>construction</SCHEDULED_CONSTRUCTION_DETAIL>
+                    </SCHEDULED_CONSTRUCTION_EVENT>
+                </EVENT>
+            </TRAFFIC_ITEM_DETAIL>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="short_desc">At Autoroute du Souvenir - Construction work.</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="desc">At Autoroute du Souvenir - Construction work. one lane blocked</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="no_exit_description">Construction work. one lane blocked</TRAFFIC_ITEM_DESCRIPTION>
+        </TRAFFIC_ITEM>
+        <TRAFFIC_ITEM mid="NAVTEQ/r_NAVTEQ/10072908_original">
+            <TRAFFIC_ITEM_ID>2777638555485683227</TRAFFIC_ITEM_ID>
+            <ORIGINAL_TRAFFIC_ITEM_ID>2777638555485683227</ORIGINAL_TRAFFIC_ITEM_ID>
+            <TRAFFIC_ITEM_STATUS_SHORT_DESC>ACTIVE</TRAFFIC_ITEM_STATUS_SHORT_DESC>
+            <TRAFFIC_ITEM_TYPE_DESC>ROAD_CLOSURE</TRAFFIC_ITEM_TYPE_DESC>
+            <START_TIME>10/27/2016 12:34:04</START_TIME>
+            <END_TIME>10/28/2016 01:34:04</END_TIME>
+            <ENTRY_TIME>10/27/2016 12:34:04</ENTRY_TIME>
+            <CRITICALITY>
+                <ID>0</ID>
+                <DESCRIPTION>critical</DESCRIPTION>
+            </CRITICALITY>
+            <VERIFIED>true</VERIFIED>
+            <ABBREVIATION>
+                <SHORT_DESC>CLOS</SHORT_DESC>
+                <DESCRIPTION></DESCRIPTION>
+            </ABBREVIATION>
+            <COMMENTS>due to an incident</COMMENTS>
+            <RDS-TMC_LOCATIONS>
+                <RDS-TMC>
+                    <ORIGIN>
+                        <EBU_COUNTRY_CODE>C</EBU_COUNTRY_CODE>
+                        <TABLE_ID>24</TABLE_ID>
+                        <LOCATION_ID>07806</LOCATION_ID>
+                        <LOCATION_DESC>RTE-344/Chemin Oka</LOCATION_DESC>
+                        <RDS_DIRECTION>-</RDS_DIRECTION>
+                    </ORIGIN>
+                    <TO>
+                        <EBU_COUNTRY_CODE>C</EBU_COUNTRY_CODE>
+                        <TABLE_ID>24</TABLE_ID>
+                        <LOCATION_ID>07807</LOCATION_ID>
+                        <LOCATION_DESC>Rue Valérie-Paquin</LOCATION_DESC>
+                        <RDS_DIRECTION>-</RDS_DIRECTION>
+                    </TO>
+                    <DIRECTION>+</DIRECTION>
+                    <ALERTC>
+                        <TRAFFIC_CODE>401</TRAFFIC_CODE>
+                        <DESCRIPTION>Closed.</DESCRIPTION>
+                        <ALERTC_DURATION>L</ALERTC_DURATION>
+                        <ALERTC_DIRECTION>1</ALERTC_DIRECTION>
+                        <URGENCY>U</URGENCY>
+                        <UPDATE_CLASS>5</UPDATE_CLASS>
+                        <PHRASE_CODE>C1</PHRASE_CODE>
+                        <EXTENT>1</EXTENT>
+                        <DURATION>0</DURATION>
+                    </ALERTC>
+                    <PRIMARY_OFFSET>0.50352</PRIMARY_OFFSET>
+                    <LENGTH>0.36187</LENGTH>
+                </RDS-TMC>
+            </RDS-TMC_LOCATIONS>
+            <LOCATION>
+                <DEFINED>
+                    <ORIGIN>
+                        <ROADWAY ID="485">
+                            <DESCRIPTION TYPE="NTCSA">Chemin Principal</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">Chemin Principal</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">Chemin Principal</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="7806">
+                            <DESCRIPTION TYPE="NTCSA">RTE-344/Chemin Oka</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">RTE-344/Chemin Oka</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">RTE-344/Chemin Oka</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">Chemin Principal</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">DIRECTION NORD</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">DIRECTION NORD</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">DIRECTION NORD</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>AT</ID>
+                            <DESCRIPTION>at</DESCRIPTION>
+                        </PROXIMITY>
+                    </ORIGIN>
+                    <TO>
+                        <ROADWAY ID="485">
+                            <DESCRIPTION TYPE="NTCSA">Chemin Principal</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">Chemin Principal</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">Chemin Principal</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="7807">
+                            <DESCRIPTION TYPE="NTCSA">Rue Valérie-Paquin</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">Rue Valérie-Paquin</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">Rue Valérie-Paquin</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">Chemin Principal</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">DIRECTION NORD</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">DIRECTION NORD</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">DIRECTION NORD</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>AT</ID>
+                            <DESCRIPTION>at</DESCRIPTION>
+                        </PROXIMITY>
+                    </TO>
+                </DEFINED>
+                <GEOLOC>
+                    <ORIGIN>
+                        <LATITUDE>45.51265</LATITUDE>
+                        <LONGITUDE>-73.97697</LONGITUDE>
+                    </ORIGIN>
+                    <TO>
+                        <LATITUDE>45.515652</LATITUDE>
+                        <LONGITUDE>-73.981183</LONGITUDE>
+                    </TO>
+                </GEOLOC>
+                <NAVTECH>
+                    <EDGE>
+                        <EDGE_ID>133803248</EDGE_ID>
+                        <EDGE_ID>133803249</EDGE_ID>
+                        <EDGE_ID>41898276</EDGE_ID>
+                        <EDGE_ID>41898379</EDGE_ID>
+                    </EDGE>
+                    <VERSION_ID>201602</VERSION_ID>
+                </NAVTECH>
+            </LOCATION>
+            <TRAFFIC_ITEM_DETAIL>
+                <ROAD_CLOSED>true</ROAD_CLOSED>
+                <INCIDENT>
+                    <RESPONSE_VEHICLES>false</RESPONSE_VEHICLES>
+                    <MISCELLANEOUS_INCIDENT>
+                        <MISCELLANEOUS_TYPE_DESC></MISCELLANEOUS_TYPE_DESC>
+                    </MISCELLANEOUS_INCIDENT>
+                </INCIDENT>
+            </TRAFFIC_ITEM_DETAIL>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="short_desc">Closed between RTE-344/Chemin Oka and Rue Valérie-Paquin - Closed.</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="desc">Closed between RTE-344/Chemin Oka and Rue Valérie-Paquin - Closed. due to an incident</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="no_exit_description">Closed. due to an incident</TRAFFIC_ITEM_DESCRIPTION>
+        </TRAFFIC_ITEM>
+        <TRAFFIC_ITEM mid="NAVTEQ/r_NAVTEQ/9684861">
+            <TRAFFIC_ITEM_ID>3068721055526574377</TRAFFIC_ITEM_ID>
+            <ORIGINAL_TRAFFIC_ITEM_ID>2840528558475545229</ORIGINAL_TRAFFIC_ITEM_ID>
+            <TRAFFIC_ITEM_STATUS_SHORT_DESC>ACTIVE</TRAFFIC_ITEM_STATUS_SHORT_DESC>
+            <TRAFFIC_ITEM_TYPE_DESC>CONSTRUCTION</TRAFFIC_ITEM_TYPE_DESC>
+            <START_TIME>04/25/2016 21:00:00</START_TIME>
+            <END_TIME>11/02/2017 03:59:00</END_TIME>
+            <ENTRY_TIME>10/18/2016 16:27:19</ENTRY_TIME>
+            <CRITICALITY>
+                <ID>1</ID>
+                <DESCRIPTION>major</DESCRIPTION>
+            </CRITICALITY>
+            <VERIFIED>true</VERIFIED>
+            <ABBREVIATION>
+                <SHORT_DESC>CONST</SHORT_DESC>
+                <DESCRIPTION>construction</DESCRIPTION>
+            </ABBREVIATION>
+            <COMMENTS>2 lanes blocked</COMMENTS>
+            <RDS-TMC_LOCATIONS>
+                <RDS-TMC>
+                    <ORIGIN>
+                        <EBU_COUNTRY_CODE>C</EBU_COUNTRY_CODE>
+                        <TABLE_ID>24</TABLE_ID>
+                        <LOCATION_ID>08887</LOCATION_ID>
+                        <LOCATION_DESC>Avenue Papineau</LOCATION_DESC>
+                        <RDS_DIRECTION>+</RDS_DIRECTION>
+                    </ORIGIN>
+                    <TO>
+                        <EBU_COUNTRY_CODE>C</EBU_COUNTRY_CODE>
+                        <TABLE_ID>24</TABLE_ID>
+                        <LOCATION_ID>04253</LOCATION_ID>
+                        <LOCATION_DESC>AUT-10/Rue University/Sortie 5</LOCATION_DESC>
+                        <RDS_DIRECTION>+</RDS_DIRECTION>
+                    </TO>
+                    <DIRECTION>-</DIRECTION>
+                    <ALERTC>
+                        <TRAFFIC_CODE>803</TRAFFIC_CODE>
+                        <QUANTIFIERS>0</QUANTIFIERS>
+                        <DESCRIPTION>Construction work.</DESCRIPTION>
+                        <ALERTC_DURATION>L</ALERTC_DURATION>
+                        <ALERTC_DIRECTION>1</ALERTC_DIRECTION>
+                        <UPDATE_CLASS>11</UPDATE_CLASS>
+                        <PHRASE_CODE>E11</PHRASE_CODE>
+                        <EXTENT>4</EXTENT>
+                        <DURATION>0</DURATION>
+                    </ALERTC>
+                    <PRIMARY_OFFSET>0.0</PRIMARY_OFFSET>
+                    <LENGTH>1.64442</LENGTH>
+                </RDS-TMC>
+            </RDS-TMC_LOCATIONS>
+            <LOCATION>
+                <DEFINED>
+                    <ORIGIN>
+                        <ROADWAY ID="85">
+                            <DESCRIPTION TYPE="NTCSA">AUT-720</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">AUT-720</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">AUT-720</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="8887">
+                            <DESCRIPTION TYPE="NTCSA">Avenue Papineau</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">Avenue Papineau</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">Avenue Papineau</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">AUT-720</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">DIRECTION OUEST</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">DIRECTION OUEST</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">DIRECTION OUEST</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>AT</ID>
+                            <DESCRIPTION>at</DESCRIPTION>
+                        </PROXIMITY>
+                    </ORIGIN>
+                    <TO>
+                        <ROADWAY ID="85">
+                            <DESCRIPTION TYPE="NTCSA">AUT-720</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">AUT-720</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">AUT-720</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="4253">
+                            <DESCRIPTION TYPE="NTCSA">AUT-10/Rue University/Sortie 5</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">AUT-10/Rue University/Sortie 5</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">AUT-10/Rue University/Sortie 5</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">AUT-720</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">DIRECTION OUEST</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">DIRECTION OUEST</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">DIRECTION OUEST</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>AT</ID>
+                            <DESCRIPTION>at</DESCRIPTION>
+                        </PROXIMITY>
+                    </TO>
+                </DEFINED>
+                <GEOLOC>
+                    <ORIGIN>
+                        <LATITUDE>45.52065</LATITUDE>
+                        <LONGITUDE>-73.5479</LONGITUDE>
+                    </ORIGIN>
+                    <TO>
+                        <LATITUDE>45.499829</LATITUDE>
+                        <LONGITUDE>-73.563583</LONGITUDE>
+                    </TO>
+                </GEOLOC>
+                <NAVTECH>
+                    <EDGE>
+                        <EDGE_ID>1116118600</EDGE_ID>
+                        <EDGE_ID>1116118601</EDGE_ID>
+                        <EDGE_ID>120335569</EDGE_ID>
+                        <EDGE_ID>120335570</EDGE_ID>
+                        <EDGE_ID>133802200</EDGE_ID>
+                        <EDGE_ID>133802201</EDGE_ID>
+                        <EDGE_ID>32989022</EDGE_ID>
+                        <EDGE_ID>34236566</EDGE_ID>
+                        <EDGE_ID>34237487</EDGE_ID>
+                        <EDGE_ID>711661513</EDGE_ID>
+                        <EDGE_ID>711661514</EDGE_ID>
+                        <EDGE_ID>717415854</EDGE_ID>
+                        <EDGE_ID>721287462</EDGE_ID>
+                        <EDGE_ID>721287468</EDGE_ID>
+                        <EDGE_ID>746260451</EDGE_ID>
+                        <EDGE_ID>747196583</EDGE_ID>
+                        <EDGE_ID>783085622</EDGE_ID>
+                        <EDGE_ID>783085623</EDGE_ID>
+                        <EDGE_ID>841556463</EDGE_ID>
+                        <EDGE_ID>841556464</EDGE_ID>
+                        <EDGE_ID>856027113</EDGE_ID>
+                        <EDGE_ID>856039636</EDGE_ID>
+                        <EDGE_ID>856122004</EDGE_ID>
+                        <EDGE_ID>927492292</EDGE_ID>
+                        <EDGE_ID>927492293</EDGE_ID>
+                        <EDGE_ID>966809824</EDGE_ID>
+                        <EDGE_ID>966809825</EDGE_ID>
+                    </EDGE>
+                    <VERSION_ID>201602</VERSION_ID>
+                </NAVTECH>
+            </LOCATION>
+            <TRAFFIC_ITEM_DETAIL>
+                <ROAD_CLOSED>false</ROAD_CLOSED>
+                <EVENT>
+                    <EVENT_ITEM_CANCELLED>false</EVENT_ITEM_CANCELLED>
+                    <SCHEDULED_CONSTRUCTION_EVENT>
+                        <SCHEDULED_CONSTRUCTION_TYPE_DESC>CONSTRUCTION</SCHEDULED_CONSTRUCTION_TYPE_DESC>
+                        <SCHEDULED_CONSTRUCTION_DETAIL>construction</SCHEDULED_CONSTRUCTION_DETAIL>
+                    </SCHEDULED_CONSTRUCTION_EVENT>
+                </EVENT>
+            </TRAFFIC_ITEM_DETAIL>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="short_desc">Between Avenue Papineau and AUT-10/Rue University/Sortie 5 - Construction work.</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="desc">Between Avenue Papineau and AUT-10/Rue University/Sortie 5 - Construction work. 2 lanes blocked</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="no_exit_description">Construction work. 2 lanes blocked</TRAFFIC_ITEM_DESCRIPTION>
+        </TRAFFIC_ITEM>
+        <TRAFFIC_ITEM mid="NAVTEQ/r_NAVTEQ/9669237">
+            <TRAFFIC_ITEM_ID>3340688841225536523</TRAFFIC_ITEM_ID>
+            <ORIGINAL_TRAFFIC_ITEM_ID>2527258663752748326</ORIGINAL_TRAFFIC_ITEM_ID>
+            <TRAFFIC_ITEM_STATUS_SHORT_DESC>ACTIVE</TRAFFIC_ITEM_STATUS_SHORT_DESC>
+            <TRAFFIC_ITEM_TYPE_DESC>ROAD_CLOSURE</TRAFFIC_ITEM_TYPE_DESC>
+            <START_TIME>10/18/2016 16:27:19</START_TIME>
+            <END_TIME>10/28/2016 01:27:19</END_TIME>
+            <ENTRY_TIME>10/18/2016 16:27:19</ENTRY_TIME>
+            <CRITICALITY>
+                <ID>0</ID>
+                <DESCRIPTION>critical</DESCRIPTION>
+            </CRITICALITY>
+            <VERIFIED>true</VERIFIED>
+            <ABBREVIATION>
+                <SHORT_DESC>CLOS</SHORT_DESC>
+                <DESCRIPTION></DESCRIPTION>
+            </ABBREVIATION>
+            <COMMENTS>construction</COMMENTS>
+            <RDS-TMC_LOCATIONS>
+                <RDS-TMC>
+                    <ORIGIN>
+                        <EBU_COUNTRY_CODE>C</EBU_COUNTRY_CODE>
+                        <TABLE_ID>24</TABLE_ID>
+                        <LOCATION_ID>08407</LOCATION_ID>
+                        <LOCATION_DESC>AUT-15/AUT-20/Sortie 1/Sortie 68</LOCATION_DESC>
+                        <RDS_DIRECTION>-</RDS_DIRECTION>
+                    </ORIGIN>
+                    <DIRECTION>+</DIRECTION>
+                    <ALERTC>
+                        <TRAFFIC_CODE>401</TRAFFIC_CODE>
+                        <DESCRIPTION>Closed.</DESCRIPTION>
+                        <ALERTC_DURATION>L</ALERTC_DURATION>
+                        <ALERTC_DIRECTION>1</ALERTC_DIRECTION>
+                        <URGENCY>U</URGENCY>
+                        <UPDATE_CLASS>5</UPDATE_CLASS>
+                        <PHRASE_CODE>C1</PHRASE_CODE>
+                        <EXTENT>1</EXTENT>
+                        <DURATION>0</DURATION>
+                    </ALERTC>
+                    <PRIMARY_OFFSET>0.0</PRIMARY_OFFSET>
+                    <LENGTH>0.28358</LENGTH>
+                </RDS-TMC>
+            </RDS-TMC_LOCATIONS>
+            <LOCATION>
+                <DEFINED>
+                    <ORIGIN>
+                        <ROADWAY ID="8406">
+                            <DESCRIPTION TYPE="NTCSA">AUT-15 Nord/AUT-20 Ouest</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">AUT-15 Nord/AUT-20 Ouest</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">AUT-15 Nord/AUT-20 Ouest</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="8407">
+                            <DESCRIPTION TYPE="NTCSA">AUT-15/AUT-20/Sortie 1/Sortie 68</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">AUT-15/AUT-20/Sortie 1/Sortie 68</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">AUT-15/AUT-20/Sortie 1/Sortie 68</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">AUT-15 Nord/AUT-20 Ouest</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">AUT-720 DIRECTION EST</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">AUT-720 DIRECTION EST</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">AUT-720 DIRECTION EST</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>RMP</ID>
+                            <DESCRIPTION>ramp(freeway connector or defined off-ramp)</DESCRIPTION>
+                        </PROXIMITY>
+                    </ORIGIN>
+                    <TO>
+                        <ROADWAY ID="8406">
+                            <DESCRIPTION TYPE="NTCSA">AUT-15 Nord/AUT-20 Ouest</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">AUT-15 Nord/AUT-20 Ouest</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">AUT-15 Nord/AUT-20 Ouest</DESCRIPTION>
+                        </ROADWAY>
+                        <POINT ID="8407">
+                            <DESCRIPTION TYPE="NTCSA">AUT-15/AUT-20/Sortie 1/Sortie 68</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">AUT-15/AUT-20/Sortie 1/Sortie 68</DESCRIPTION>
+                            <DESCRIPTION TYPE="LOCAL">AUT-15/AUT-20/Sortie 1/Sortie 68</DESCRIPTION>
+                            <DESCRIPTION TYPE="BNAME">AUT-15 Nord/AUT-20 Ouest</DESCRIPTION>
+                        </POINT>
+                        <DIRECTION ID="0">
+                            <DESCRIPTION TYPE="LOCAL">AUT-720 DIRECTION EST</DESCRIPTION>
+                            <DESCRIPTION TYPE="NTCSA">AUT-720 DIRECTION EST</DESCRIPTION>
+                            <DESCRIPTION TYPE="RDSGN">AUT-720 DIRECTION EST</DESCRIPTION>
+                        </DIRECTION>
+                        <PROXIMITY>
+                            <ID>RMP</ID>
+                            <DESCRIPTION>ramp(freeway connector or defined off-ramp)</DESCRIPTION>
+                        </PROXIMITY>
+                    </TO>
+                </DEFINED>
+                <GEOLOC>
+                    <ORIGIN>
+                        <LATITUDE>45.46694</LATITUDE>
+                        <LONGITUDE>-73.59742</LONGITUDE>
+                    </ORIGIN>
+                    <TO>
+                        <LATITUDE>45.47081</LATITUDE>
+                        <LONGITUDE>-73.59752</LONGITUDE>
+                    </TO>
+                </GEOLOC>
+                <NAVTECH>
+                    <EDGE>
+                        <EDGE_ID>1115568208</EDGE_ID>
+                        <EDGE_ID>1115568209</EDGE_ID>
+                    </EDGE>
+                    <VERSION_ID>201602</VERSION_ID>
+                </NAVTECH>
+            </LOCATION>
+            <TRAFFIC_ITEM_DETAIL>
+                <ROAD_CLOSED>true</ROAD_CLOSED>
+                <INCIDENT>
+                    <RESPONSE_VEHICLES>false</RESPONSE_VEHICLES>
+                    <MISCELLANEOUS_INCIDENT>
+                        <MISCELLANEOUS_TYPE_DESC></MISCELLANEOUS_TYPE_DESC>
+                    </MISCELLANEOUS_INCIDENT>
+                </INCIDENT>
+            </TRAFFIC_ITEM_DETAIL>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="short_desc">Ramp  closed to AUT-15/AUT-20/Sortie 1/Sortie 68 - Closed.</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="desc">Ramp  closed to AUT-15/AUT-20/Sortie 1/Sortie 68 - Closed. construction</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="no_exit_description">Closed. construction</TRAFFIC_ITEM_DESCRIPTION>
+        </TRAFFIC_ITEM>
+        <TRAFFIC_ITEM mid="NAVTEQ/r_NAVTEQ/9618964_reverse">
+            <TRAFFIC_ITEM_ID>2517718235301629091</TRAFFIC_ITEM_ID>
+            <ORIGINAL_TRAFFIC_ITEM_ID>3994677188295877955</ORIGINAL_TRAFFIC_ITEM_ID>
+            <TRAFFIC_ITEM_STATUS_SHORT_DESC>ACTIVE</TRAFFIC_ITEM_STATUS_SHORT_DESC>
+            <TRAFFIC_ITEM_TYPE_DESC>CONSTRUCTION</TRAFFIC_ITEM_TYPE_DESC>
+            <START_TIME>10/18/2016 16:27:19</START_TIME>
+            <END_TIME>01/17/2017 04:59:00</END_TIME>
+            <ENTRY_TIME>10/18/2016 16:27:19</ENTRY_TIME>
+            <CRITICALITY>
+                <ID>2</ID>
+                <DESCRIPTION>minor</DESCRIPTION>
+            </CRITICALITY>
+            <VERIFIED>true</VERIFIED>
+            <ABBREVIATION>
+                <SHORT_DESC>CONST</SHORT_DESC>
+                <DESCRIPTION>construction</DESCRIPTION>
+            </ABBREVIATION>
+            <LOCATION>
+                <INTERSECTION>
+                    <ORIGIN>
+                        <ID></ID>
+                        <STREET1>
+                            <ADDRESS1>Route du Lac-à-Pitre</ADDRESS1>
+                        </STREET1>
+                        <STREET2>
+                            <ADDRESS1>RTE-132</ADDRESS1>
+                        </STREET2>
+                        <COUNTY>Lac-au-Saumon</COUNTY>
+                        <STATE></STATE>
+                        <PROXIMITY>
+                            <ID>MID</ID>
+                            <DESCRIPTION>midway between</DESCRIPTION>
+                        </PROXIMITY>
+                    </ORIGIN>
+                    <TO>
+                        <ID></ID>
+                        <STREET1>
+                            <ADDRESS1>Route du Lac-à-Pitre</ADDRESS1>
+                        </STREET1>
+                        <STREET2>
+                            <ADDRESS1>Route St-Edmond</ADDRESS1>
+                        </STREET2>
+                        <COUNTY>Lac-au-Saumon</COUNTY>
+                        <STATE></STATE>
+                        <PROXIMITY>
+                            <ID>MID</ID>
+                            <DESCRIPTION>midway between</DESCRIPTION>
+                        </PROXIMITY>
+                    </TO>
+                </INTERSECTION>
+                <GEOLOC>
+                    <ORIGIN>
+                        <LATITUDE>48.4432</LATITUDE>
+                        <LONGITUDE>-67.35571</LONGITUDE>
+                    </ORIGIN>
+                    <TO>
+                        <LATITUDE>48.4364</LATITUDE>
+                        <LONGITUDE>-67.36171</LONGITUDE>
+                    </TO>
+                </GEOLOC>
+                <POLITICAL_BOUNDARY>
+                    <METRO_AREA ID="125"/>
+                    <COUNTY>Lac-au-Saumon</COUNTY>
+                </POLITICAL_BOUNDARY>
+                <NAVTECH>
+                    <EDGE>
+                        <EDGE_ID>117409964</EDGE_ID>
+                    </EDGE>
+                    <VERSION_ID>201602</VERSION_ID>
+                </NAVTECH>
+            </LOCATION>
+            <TRAFFIC_ITEM_DETAIL>
+                <ROAD_CLOSED>false</ROAD_CLOSED>
+                <EVENT>
+                    <EVENT_ITEM_CANCELLED>false</EVENT_ITEM_CANCELLED>
+                    <SCHEDULED_CONSTRUCTION_EVENT>
+                        <SCHEDULED_CONSTRUCTION_TYPE_DESC>CONSTRUCTION</SCHEDULED_CONSTRUCTION_TYPE_DESC>
+                        <SCHEDULED_CONSTRUCTION_DETAIL>construction</SCHEDULED_CONSTRUCTION_DETAIL>
+                    </SCHEDULED_CONSTRUCTION_EVENT>
+                </EVENT>
+            </TRAFFIC_ITEM_DETAIL>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="short_desc">Between RTE-132 and Route St-Edmond - Construction work.</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="desc">Between RTE-132 and Route St-Edmond - Construction work.</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="no_exit_description">Construction work.</TRAFFIC_ITEM_DESCRIPTION>
+        </TRAFFIC_ITEM>
+        <TRAFFIC_ITEM mid="NAVTEQ/r_NAVTEQ/10047035">
+            <TRAFFIC_ITEM_ID>2708340006717276711</TRAFFIC_ITEM_ID>
+            <ORIGINAL_TRAFFIC_ITEM_ID>1362166584297448191</ORIGINAL_TRAFFIC_ITEM_ID>
+            <TRAFFIC_ITEM_STATUS_SHORT_DESC>ACTIVE</TRAFFIC_ITEM_STATUS_SHORT_DESC>
+            <TRAFFIC_ITEM_TYPE_DESC>ROAD_CLOSURE</TRAFFIC_ITEM_TYPE_DESC>
+            <START_TIME>10/18/2016 16:27:19</START_TIME>
+            <END_TIME>01/01/2020 04:59:00</END_TIME>
+            <ENTRY_TIME>10/18/2016 16:27:19</ENTRY_TIME>
+            <CRITICALITY>
+                <ID>0</ID>
+                <DESCRIPTION>critical</DESCRIPTION>
+            </CRITICALITY>
+            <VERIFIED>true</VERIFIED>
+            <ABBREVIATION>
+                <SHORT_DESC>CLOS</SHORT_DESC>
+                <DESCRIPTION></DESCRIPTION>
+            </ABBREVIATION>
+            <COMMENTS>due to construction</COMMENTS>
+            <LOCATION>
+                <INTERSECTION>
+                    <ORIGIN>
+                        <ID></ID>
+                        <STREET1>
+                            <ADDRESS1>AUT-20 (Ouest)</ADDRESS1>
+                        </STREET1>
+                        <STREET2>
+                            <ADDRESS1>AUT-20 (Ouest)</ADDRESS1>
+                        </STREET2>
+                        <COUNTY>Montreal</COUNTY>
+                        <STATE></STATE>
+                        <PROXIMITY>
+                            <ID>MID</ID>
+                            <DESCRIPTION>midway between</DESCRIPTION>
+                        </PROXIMITY>
+                    </ORIGIN>
+                    <TO>
+                        <ID></ID>
+                        <STREET1>
+                            <ADDRESS1>AUT-20 (Ouest)</ADDRESS1>
+                        </STREET1>
+                        <STREET2>
+                            <ADDRESS1>Boulevard Montréal-Toronto</ADDRESS1>
+                        </STREET2>
+                        <COUNTY>Montreal</COUNTY>
+                        <STATE></STATE>
+                        <PROXIMITY>
+                            <ID>MID</ID>
+                            <DESCRIPTION>midway between</DESCRIPTION>
+                        </PROXIMITY>
+                    </TO>
+                </INTERSECTION>
+                <GEOLOC>
+                    <ORIGIN>
+                        <LATITUDE>45.44168</LATITUDE>
+                        <LONGITUDE>-73.6514</LONGITUDE>
+                    </ORIGIN>
+                    <TO>
+                        <LATITUDE>45.44402</LATITUDE>
+                        <LONGITUDE>-73.64462</LONGITUDE>
+                    </TO>
+                </GEOLOC>
+                <POLITICAL_BOUNDARY>
+                    <METRO_AREA ID="103"/>
+                    <COUNTY>Montreal</COUNTY>
+                    <MUNICIPALITY>
+                        <NAME>Montreal</NAME>
+                    </MUNICIPALITY>
+                </POLITICAL_BOUNDARY>
+                <NAVTECH>
+                    <EDGE>
+                        <EDGE_ID>845439934</EDGE_ID>
+                        <EDGE_ID>845439935</EDGE_ID>
+                        <EDGE_ID>845676816</EDGE_ID>
+                        <EDGE_ID>845676817</EDGE_ID>
+                    </EDGE>
+                    <VERSION_ID>201602</VERSION_ID>
+                </NAVTECH>
+            </LOCATION>
+            <TRAFFIC_ITEM_DETAIL>
+                <ROAD_CLOSED>true</ROAD_CLOSED>
+                <INCIDENT>
+                    <RESPONSE_VEHICLES>false</RESPONSE_VEHICLES>
+                    <MISCELLANEOUS_INCIDENT>
+                        <MISCELLANEOUS_TYPE_DESC></MISCELLANEOUS_TYPE_DESC>
+                    </MISCELLANEOUS_INCIDENT>
+                </INCIDENT>
+            </TRAFFIC_ITEM_DETAIL>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="short_desc">Closed between AUT-20 (Ouest) and Boulevard Montréal-Toronto - Closed.</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="desc">Closed between AUT-20 (Ouest) and Boulevard Montréal-Toronto - Closed. due to construction</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="no_exit_description">Closed. due to construction</TRAFFIC_ITEM_DESCRIPTION>
+        </TRAFFIC_ITEM>
+        <TRAFFIC_ITEM mid="NAVTEQ/r_NAVTEQ/9618964_original">
+            <TRAFFIC_ITEM_ID>3892722325720994727</TRAFFIC_ITEM_ID>
+            <ORIGINAL_TRAFFIC_ITEM_ID>1067781289957545129</ORIGINAL_TRAFFIC_ITEM_ID>
+            <TRAFFIC_ITEM_STATUS_SHORT_DESC>ACTIVE</TRAFFIC_ITEM_STATUS_SHORT_DESC>
+            <TRAFFIC_ITEM_TYPE_DESC>CONSTRUCTION</TRAFFIC_ITEM_TYPE_DESC>
+            <START_TIME>10/18/2016 16:27:19</START_TIME>
+            <END_TIME>01/17/2017 04:59:00</END_TIME>
+            <ENTRY_TIME>10/18/2016 16:27:19</ENTRY_TIME>
+            <CRITICALITY>
+                <ID>2</ID>
+                <DESCRIPTION>minor</DESCRIPTION>
+            </CRITICALITY>
+            <VERIFIED>true</VERIFIED>
+            <ABBREVIATION>
+                <SHORT_DESC>CONST</SHORT_DESC>
+                <DESCRIPTION>construction</DESCRIPTION>
+            </ABBREVIATION>
+            <LOCATION>
+                <INTERSECTION>
+                    <ORIGIN>
+                        <ID></ID>
+                        <STREET1>
+                            <ADDRESS1>Route du Lac-à-Pitre</ADDRESS1>
+                        </STREET1>
+                        <STREET2>
+                            <ADDRESS1>Route St-Edmond</ADDRESS1>
+                        </STREET2>
+                        <COUNTY>Lac-au-Saumon</COUNTY>
+                        <STATE></STATE>
+                        <PROXIMITY>
+                            <ID>MID</ID>
+                            <DESCRIPTION>midway between</DESCRIPTION>
+                        </PROXIMITY>
+                    </ORIGIN>
+                    <TO>
+                        <ID></ID>
+                        <STREET1>
+                            <ADDRESS1>Route du Lac-à-Pitre</ADDRESS1>
+                        </STREET1>
+                        <STREET2>
+                            <ADDRESS1>RTE-132</ADDRESS1>
+                        </STREET2>
+                        <COUNTY>Lac-au-Saumon</COUNTY>
+                        <STATE></STATE>
+                        <PROXIMITY>
+                            <ID>MID</ID>
+                            <DESCRIPTION>midway between</DESCRIPTION>
+                        </PROXIMITY>
+                    </TO>
+                </INTERSECTION>
+                <GEOLOC>
+                    <ORIGIN>
+                        <LATITUDE>48.4364</LATITUDE>
+                        <LONGITUDE>-67.36171</LONGITUDE>
+                    </ORIGIN>
+                    <TO>
+                        <LATITUDE>48.4432</LATITUDE>
+                        <LONGITUDE>-67.35571</LONGITUDE>
+                    </TO>
+                </GEOLOC>
+                <POLITICAL_BOUNDARY>
+                    <METRO_AREA ID="125"/>
+                    <COUNTY>Lac-au-Saumon</COUNTY>
+                </POLITICAL_BOUNDARY>
+                <NAVTECH>
+                    <EDGE>
+                        <EDGE_ID>117409964</EDGE_ID>
+                    </EDGE>
+                    <VERSION_ID>201602</VERSION_ID>
+                </NAVTECH>
+            </LOCATION>
+            <TRAFFIC_ITEM_DETAIL>
+                <ROAD_CLOSED>false</ROAD_CLOSED>
+                <EVENT>
+                    <EVENT_ITEM_CANCELLED>false</EVENT_ITEM_CANCELLED>
+                    <SCHEDULED_CONSTRUCTION_EVENT>
+                        <SCHEDULED_CONSTRUCTION_TYPE_DESC>CONSTRUCTION</SCHEDULED_CONSTRUCTION_TYPE_DESC>
+                        <SCHEDULED_CONSTRUCTION_DETAIL>construction</SCHEDULED_CONSTRUCTION_DETAIL>
+                    </SCHEDULED_CONSTRUCTION_EVENT>
+                </EVENT>
+            </TRAFFIC_ITEM_DETAIL>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="short_desc">Between Route St-Edmond and RTE-132 - Construction work.</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="desc">Between Route St-Edmond and RTE-132 - Construction work.</TRAFFIC_ITEM_DESCRIPTION>
+            <TRAFFIC_ITEM_DESCRIPTION TYPE="no_exit_description">Construction work.</TRAFFIC_ITEM_DESCRIPTION>
+        </TRAFFIC_ITEM>
+    </TRAFFIC_ITEMS>
+    <diagnostic sfile="Incident-A1C24-1477598282074.xml.gz" pdd="a8e2416a-dc8f-4f5c-bc82-1c64260d8d83"/>
+</TRAFFICML_INCIDENTS>

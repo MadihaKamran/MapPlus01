@@ -22,10 +22,10 @@ public class Handler extends AbstractHandler
 {
    
 
-     public static void parseRouteDurationInfo(String query,  
+     public static void parseRouteDurationInfo(String input,  
      					ArrayList<Point> route , ArrayList<Integer> duration)  
      {  
-         String[] params = query.split("&");  
+         String[] params = input.split("&");  
         
          HashMap<Integer,Double> lat = new HashMap<Integer,Double>(); 
          HashMap<Integer,Double> lng = new HashMap<Integer,Double>(); 
@@ -53,14 +53,11 @@ public class Handler extends AbstractHandler
          for(int i = 0; i< lat.size(); i++)
          {
             route.add(new Point(lat.get(i),lng.get(i)));
-         //   System.out.println("lat" + i + ":" + lat.get(i) +
-         //                      " lng" + i  + ":" + lng.get(i));
          }
 
          for(int i = 0; i< dur.size(); i++)
          {
             duration.add(dur.get(i));
-         //  System.out.println("dur" + i + ":" + dur.get(i));
          }
 
      }  
@@ -96,7 +93,6 @@ public class Handler extends AbstractHandler
                 }
             }
         }
-
         body = stringBuilder.toString();
         return body;
     }

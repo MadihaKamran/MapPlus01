@@ -65,29 +65,24 @@ class Point
 }
 
 
-class trafficData
-{
-	// we only extract the data we're interested in
-	String contractId;
-	double speed;
-}
 
 
 public class Util
 {
-	public static HashMap<Point, String>    geoToContractId; 
-	public static QuadTree	monitoredPlaces ; 
-	// the QuadTree data structure provided a quick way find the nearby places
+  	public static HashMap<Point, String>    geoToContractId; 
+  	public static QuadTree	                monitoredPlaces ; 
+  	// the QuadTree data structure provided a quick way find the nearby places
     public static HashMap<String, Double>   contractIdToSpeed;
+    public static HashMap<Point, String[]>  coordinateToIncidents;
+    // the incident data include an origin and destination, we will store the 
+    // origin and the direction(since incident usually block only one direction)
+    // and use a second string to store the description of the incident
 
 
     public static void loadTrafficData(String file)
     {
     	// load the traffic data 
     	contractIdToSpeed = new HashMap<String, Double>();
-    	System.out.println("Loading traffic data from \"" + file +"\"");
-  
-
     	try {
 	         File inputFile = new File(file);
 	         DocumentBuilderFactory dbFactory 
@@ -102,7 +97,8 @@ public class Util
 	         XPath xPath =  XPathFactory.newInstance().newXPath();
 
 	         String expression = "/vdsDataSet/vdsData";	        
-	         NodeList nodeList = (NodeList) xPath.compile(expression).evaluate(doc, XPathConstants.NODESET);
+	         NodeList nodeList = (NodeList) xPath.compile(expression)
+                               .evaluate(doc, XPathConstants.NODESET);
 	         for (int i = 0; i < nodeList.getLength(); i++)
 	         {
 	            Node currentNode = nodeList.item(i);
@@ -166,10 +162,131 @@ public class Util
     }
 
 
+
+    public static void loadIncidentData(String file)
+    {
+      // load the traffic data 
+      coordinateToIncidents = new HashMap<Point, String[]>();
+      try {
+           File inputFile = new File(file);
+           DocumentBuilderFactory dbFactory 
+              = DocumentBuilderFactory.newInstance();
+           DocumentBuilder dBuilder;
+
+           dBuilder = dbFactory.newDocumentBuilder();
+
+           Document doc = dBuilder.parse(inputFile);
+           doc.getDocumentElement().normalize();
+
+           XPath xPath =  XPathFactory.newInstance().newXPath();
+
+           String expression = "/TRAFFICML_INCIDENTS//TRAFFIC_ITEM";         
+           NodeList nodeList = (NodeList) xPath.compile(expression)
+                              .evaluate(doc, XPathConstants.NODESET);
+           int count = 0;
+           for (int i = 0; i < nodeList.getLength(); i++)
+           {
+              Node currentNode = nodeList.item(i);
+              if (currentNode.getNodeType() == Node.ELEMENT_NODE) 
+              {
+
+                 Element eElement = (Element) currentNode;
+
+                 String validString = eElement
+                      .getElementsByTagName("TRAFFIC_ITEM_STATUS_SHORT_DESC")
+                      .item(0)
+                      .getTextContent();
+                 boolean isValid = validString.equals("ACTIVE") ? true : false;
+                
+
+                 if(isValid)
+                 {
+
+                      Element location = (Element) eElement
+                                        .getElementsByTagName("LOCATION")
+                                        .item(0);
+                      Element geo = (Element) location
+                                    .getElementsByTagName("GEOLOC")
+                                    .item(0);
+
+                      Element org = (Element) geo
+                                    .getElementsByTagName("ORIGIN")
+                                    .item(0);
+
+
+                      Element dest = (Element) geo
+                                    .getElementsByTagName("TO")
+                                    .item(0);
+
+
+                      double origin_lat = Double.parseDouble(
+                                          org
+                                          .getElementsByTagName("LATITUDE")
+                                          .item(0)
+                                          .getTextContent()); 
+                      double origin_lng = Double.parseDouble(
+                                           org
+                                          .getElementsByTagName("LONGITUDE")
+                                          .item(0)
+                                          .getTextContent()); 
+
+                      double dest_lat = Double.parseDouble(
+                                           dest
+                                          .getElementsByTagName("LATITUDE")
+                                          .item(0)
+                                          .getTextContent()); 
+
+                      double dest_lng = Double.parseDouble(
+                                           dest
+                                          .getElementsByTagName("LONGITUDE")
+                                          .item(0)
+                                          .getTextContent()); 
+
+                      String description = null;
+
+                      NodeList desc_list =  eElement
+                                           .getElementsByTagName("TRAFFIC_ITEM_DESCRIPTION");
+                       for (int j = 0; j < desc_list.getLength(); j++) {
+                           Element el = (org.w3c.dom.Element) desc_list.item(j);
+                           if (el.hasAttribute("TYPE") && el.getAttribute("TYPE").equals("desc")) 
+                           {
+                               description = el.getTextContent();
+                           }
+                       }
+
+                      Point orign = new Point(origin_lat,origin_lng);
+                      String dir = "";
+                      dir += dest_lat > origin_lat ? "N" : "S";
+                      dir += dest_lng > origin_lng ? "E" : "W";
+                      String value[] = new String[2];
+                      value[0] = dir;
+                      value[1] = description;
+                      coordinateToIncidents.put(orign,value);
+                      count++;
+                 }
+                 
+               }
+           }
+           System.out.println(count + " incidents data loaded");
+        } 
+
+      catch (ParserConfigurationException e) {
+         e.printStackTrace();
+      } catch (SAXException e) {
+         e.printStackTrace();
+      } catch (IOException e) {
+         e.printStackTrace();
+      } catch (XPathExpressionException e) {
+         e.printStackTrace();
+      }
+
+    }
+
+
+
     public static void loadGeoInfo(String file)
     {	// load the of coordinates -> contractId
 
-    	System.out.println("Loading data from geo-coordinates to contractId from \"" + file +"\"");
     	geoToContractId = new HashMap<Point, String>();
     	monitoredPlaces = new QuadTree();
 

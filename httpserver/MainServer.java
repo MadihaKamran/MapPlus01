@@ -3,6 +3,7 @@ package org.eclipse.jetty.embedded;
 
 import org.eclipse.jetty.server.HttpConnectionFactory;
 import org.eclipse.jetty.server.Server;
+import java.util.Scanner;
 
 /*
 	The purpose of this server is to get a better estimate of the travelling 
@@ -33,14 +34,42 @@ import org.eclipse.jetty.server.Server;
 public class MainServer
 {
 
+	public static void loadAllData()
+	{
+
+        // MTO contractID -> geo-coordinates
+        System.out.println("Enter the file name for geo-coordinates to contractId: ");
+		Scanner scanner = new Scanner(System.in);
+		String geo = scanner.nextLine();
+		System.out.println("Loading data from geo-coordinates to contractId from \"" 
+        				  + geo +"\"");
+        Util.loadGeoInfo(geo);	// coordinates -> contractId
+      
+
+       	
+       	// MTO traffic data
+        String traffic = scanner.nextLine();
+        Util.loadTrafficData(traffic);
+        System.out.println("Loading traffic data from \"" + traffic +"\"");
+
+
+        // traffic data information coming from cellphone based probes.
+        while (scanner.hasNextLine()) {
+			
+			String file = scanner.nextLine();
+			System.out.println("Loading addtional traffic data from \"" + file +"\"");
+			Util.loadIncidentData(file);	
+		}
+	}
+
     public static void main( String[] args ) throws Exception
     {
         Server server = new Server(8080);
         server.setHandler(new Handler());
 
-        Util.loadGeoInfo("VDS_devices.txt");	// coordinates -> contractId
+        // load all the data required to start the server
+        loadAllData();
 
-        Util.loadTrafficData("trafficData.xml");
         server.start();
         server.join();
     }
