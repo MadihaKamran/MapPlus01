@@ -185,7 +185,7 @@ public class Handler extends AbstractHandler
                 dur.put("MTO", MTODuration);
                 dur.put("weightedAvg", weightedAvg);
                 duration_list.put(dur);
-                json.put("duration", duration_list);
+                json.put("durations", duration_list);
 
               
                 incidents_list = new JSONArray();

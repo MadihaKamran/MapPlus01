@@ -6,6 +6,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -16,11 +19,15 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.CheckBox;
 
@@ -56,13 +63,19 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -76,7 +89,8 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements RoutingListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks,
         AdapterView.OnItemSelectedListener, OnMapReadyCallback,
-                ActivityCompat.OnRequestPermissionsResultCallback, GoogleMap.OnMyLocationButtonClickListener {
+                ActivityCompat.OnRequestPermissionsResultCallback, GoogleMap.OnMyLocationButtonClickListener
+{
     protected GoogleMap map;
     protected LatLng start;
     protected LatLng end;
@@ -111,262 +125,313 @@ public class MainActivity extends AppCompatActivity implements RoutingListener, 
      */
 
 
-@Override
-public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    ButterKnife.inject(this);
-    mTrafficCheckbox = (CheckBox) findViewById(R.id.traffic);
-    mMyLocationCheckbox = (CheckBox) findViewById(R.id.my_location);
-    getSupportActionBar().setDisplayShowHomeEnabled(true);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.inject(this);
+        mTrafficCheckbox = (CheckBox) findViewById(R.id.traffic);
+        mMyLocationCheckbox = (CheckBox) findViewById(R.id.my_location);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        polylines = new ArrayList<>();
+        // ATTENTION: This "addApi(AppIndex.API)"was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Places.GEO_DATA_API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(AppIndex.API).build();
+        MapsInitializer.initialize(this);
+        mGoogleApiClient.connect();
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
+        if (mapFragment == null) {
+            mapFragment = SupportMapFragment.newInstance();
+            getSupportFragmentManager().beginTransaction().replace(R.id.map, mapFragment).commit();
+        }
+        map = mapFragment.getMap();
+
+        mAdapter = new PlaceAutoCompleteAdapter(this, android.R.layout.simple_list_item_1,
+                mGoogleApiClient, BOUNDS_JAMAICA, null);
+
+        net_listener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+
+                CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude()));
+                CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
+
+                map.moveCamera(center);
+                map.animateCamera(zoom);
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        };
+
+        gps_listener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude()));
+                CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
+
+                map.moveCamera(center);
+                map.animateCamera(zoom);
+
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        };
+
+        map.setMyLocationEnabled(false);
+        map.getUiSettings().setMyLocationButtonEnabled(false);
+            /*
+            * Updates the bounds being used by the auto complete adapter based on the position of the
+            * map.
+            * */
+        map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+            @Override
+            public void onCameraChange(CameraPosition position) {
+                LatLngBounds bounds = map.getProjection().getVisibleRegion().latLngBounds;
+                mAdapter.setBounds(bounds);
+            }
+        });
 
 
-    polylines = new ArrayList<>();
-    // ATTENTION: This "addApi(AppIndex.API)"was auto-generated to implement the App Indexing API.
-    // See https://g.co/AppIndexing/AndroidStudio for more information.
-    mGoogleApiClient = new GoogleApiClient.Builder(this)
-            .addApi(Places.GEO_DATA_API)
-            .addConnectionCallbacks(this)
-            .addOnConnectionFailedListener(this)
-            .addApi(AppIndex.API).build();
-    MapsInitializer.initialize(this);
-    mGoogleApiClient.connect();
+        CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(43.7, -79.40));
+        CameraUpdate zoom = CameraUpdateFactory.zoomTo(2);
 
-    SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-    mapFragment.getMapAsync(this);
+        map.moveCamera(center);
+        map.animateCamera(zoom);
 
-    if (mapFragment == null) {
-        mapFragment = SupportMapFragment.newInstance();
-        getSupportFragmentManager().beginTransaction().replace(R.id.map, mapFragment).commit();
+
+
+            /*
+            * Adds auto complete adapter to both auto complete
+            * text views.
+            * */
+        starting.setAdapter(mAdapter);
+        destination.setAdapter(mAdapter);
+
+
+            /*
+            * Sets the start and destination points based on the values selected
+            * from the autocomplete text views.
+            * */
+
+        starting.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                final PlaceAutoCompleteAdapter.PlaceAutocomplete item = mAdapter.getItem(position);
+                final String placeId = String.valueOf(item.placeId);
+                Log.i(LOG_TAG, "Autocomplete item selected: " + item.description);
+
+                /*
+                 Issue a request to the Places Geo Data API to retrieve a Place object with additional
+                  details about the place.
+                  */
+                PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
+                        .getPlaceById(mGoogleApiClient, placeId);
+                placeResult.setResultCallback(new ResultCallback<PlaceBuffer>() {
+                    @Override
+                    public void onResult(PlaceBuffer places) {
+                        if (!places.getStatus().isSuccess()) {
+                            // Request did not complete successfully
+                            Log.e(LOG_TAG, "Place query did not complete. Error: " + places.getStatus().toString());
+                            places.release();
+                            return;
+                        }
+                        // Get the Place object from the buffer.
+                        final Place place = places.get(0);
+
+                        start = place.getLatLng();
+                    }
+                });
+
+            }
+        });
+        destination.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                final PlaceAutoCompleteAdapter.PlaceAutocomplete item = mAdapter.getItem(position);
+                final String placeId = String.valueOf(item.placeId);
+                Log.i(LOG_TAG, "Autocomplete item selected: " + item.description);
+
+                /*
+                 Issue a request to the Places Geo Data API to retrieve a Place object with additional
+                  details about the place.
+                  */
+                PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
+                        .getPlaceById(mGoogleApiClient, placeId);
+                placeResult.setResultCallback(new ResultCallback<PlaceBuffer>() {
+                    @Override
+                    public void onResult(PlaceBuffer places) {
+                        if (!places.getStatus().isSuccess()) {
+                            // Request did not complete successfully
+                            Log.e(LOG_TAG, "Place query did not complete. Error: " + places.getStatus().toString());
+                            places.release();
+                            return;
+                        }
+                        // Get the Place object from the buffer.
+                        final Place place = places.get(0);
+                        end = place.getLatLng();
+                    }
+                });
+
+            }
+        });
+
+            /*
+            These text watchers set the start and end points to null because once there's
+            * a change after a value has been selected from the dropdown
+            * then the value has to reselected from dropdown to get
+            * the correct location.
+            * */
+        starting.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int startNum, int before, int count) {
+                if (start != null) {
+                    start = null;
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        destination.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+                if (end != null) {
+                    end = null;
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
     }
-    map = mapFragment.getMap();
-
-    mAdapter = new PlaceAutoCompleteAdapter(this, android.R.layout.simple_list_item_1,
-            mGoogleApiClient, BOUNDS_JAMAICA, null);
-
-    net_listener = new LocationListener() {
-        @Override
-        public void onLocationChanged(Location location) {
-
-            CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude()));
-            CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
-
-            map.moveCamera(center);
-            map.animateCamera(zoom);
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-
-        }
-    };
-
-    gps_listener = new LocationListener() {
-        @Override
-        public void onLocationChanged(Location location) {
-            CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude()));
-            CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
-
-            map.moveCamera(center);
-            map.animateCamera(zoom);
-
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-
-        }
-    };
-
-    map.setMyLocationEnabled(false);
-    map.getUiSettings().setMyLocationButtonEnabled(false);
-        /*
-        * Updates the bounds being used by the auto complete adapter based on the position of the
-        * map.
-        * */
-    map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
-        @Override
-        public void onCameraChange(CameraPosition position) {
-            LatLngBounds bounds = map.getProjection().getVisibleRegion().latLngBounds;
-            mAdapter.setBounds(bounds);
-        }
-    });
-
-
-    CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(43.7, -79.40));
-    CameraUpdate zoom = CameraUpdateFactory.zoomTo(2);
-
-    map.moveCamera(center);
-    map.animateCamera(zoom);
-
-
-
-
-
-        /*
-        * Adds auto complete adapter to both auto complete
-        * text views.
-        * */
-    starting.setAdapter(mAdapter);
-    destination.setAdapter(mAdapter);
-
-
-        /*
-        * Sets the start and destination points based on the values selected
-        * from the autocomplete text views.
-        * */
-
-    starting.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            final PlaceAutoCompleteAdapter.PlaceAutocomplete item = mAdapter.getItem(position);
-            final String placeId = String.valueOf(item.placeId);
-            Log.i(LOG_TAG, "Autocomplete item selected: " + item.description);
-
-            /*
-             Issue a request to the Places Geo Data API to retrieve a Place object with additional
-              details about the place.
-              */
-            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
-                    .getPlaceById(mGoogleApiClient, placeId);
-            placeResult.setResultCallback(new ResultCallback<PlaceBuffer>() {
-                @Override
-                public void onResult(PlaceBuffer places) {
-                    if (!places.getStatus().isSuccess()) {
-                        // Request did not complete successfully
-                        Log.e(LOG_TAG, "Place query did not complete. Error: " + places.getStatus().toString());
-                        places.release();
-                        return;
-                    }
-                    // Get the Place object from the buffer.
-                    final Place place = places.get(0);
-
-                    start = place.getLatLng();
-                }
-            });
-
-        }
-    });
-    destination.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            final PlaceAutoCompleteAdapter.PlaceAutocomplete item = mAdapter.getItem(position);
-            final String placeId = String.valueOf(item.placeId);
-            Log.i(LOG_TAG, "Autocomplete item selected: " + item.description);
-
-            /*
-             Issue a request to the Places Geo Data API to retrieve a Place object with additional
-              details about the place.
-              */
-            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
-                    .getPlaceById(mGoogleApiClient, placeId);
-            placeResult.setResultCallback(new ResultCallback<PlaceBuffer>() {
-                @Override
-                public void onResult(PlaceBuffer places) {
-                    if (!places.getStatus().isSuccess()) {
-                        // Request did not complete successfully
-                        Log.e(LOG_TAG, "Place query did not complete. Error: " + places.getStatus().toString());
-                        places.release();
-                        return;
-                    }
-                    // Get the Place object from the buffer.
-                    final Place place = places.get(0);
-                    end = place.getLatLng();
-                }
-            });
-
-        }
-    });
-
-        /*
-        These text watchers set the start and end points to null because once there's
-        * a change after a value has been selected from the dropdown
-        * then the value has to reselected from dropdown to get
-        * the correct location.
-        * */
-    starting.addTextChangedListener(new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int startNum, int before, int count) {
-            if (start != null) {
-                start = null;
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-
-        }
-    });
-
-    destination.addTextChangedListener(new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-
-            if (end != null) {
-                end = null;
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-
-        }
-    });
-
-}
 
     @Override
     protected void onResume() {
         super.onResume();
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
+        final Context ctx = this;
         if (b != null) {
             Route route = (Route) b.getParcelable("route_selected");
-            CameraUpdate center = CameraUpdateFactory.newLatLng(start);
-            CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
-            map.moveCamera(center);
-            if (polylines.size() > 0) {
-                for (Polyline poly : polylines) {
-                    poly.remove();
-                }
-            }
-
+            String incidents = b.getString("incidents");
 
             if(route != null)
             {
+
+                // Start marker
+                map.clear();
+                map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+
+                    @Override
+                    public View getInfoWindow(Marker arg0) {
+                        return null;
+                    }
+
+                    @Override
+                    public View getInfoContents(Marker marker) {
+
+                        LinearLayout info = new LinearLayout(ctx);
+                        info.setOrientation(LinearLayout.VERTICAL);
+
+                        TextView title = new TextView(ctx);
+                        title.setTextColor(Color.BLACK);
+                        title.setGravity(Gravity.CENTER);
+                        title.setTypeface(null, Typeface.BOLD);
+                        title.setText(marker.getTitle());
+
+                        TextView snippet = new TextView(ctx);
+                        snippet.setTextColor(Color.GRAY);
+                        snippet.setText(marker.getSnippet());
+
+                        info.addView(title);
+                        info.addView(snippet);
+                        return info;
+                    }
+                });
+                MarkerOptions start = new MarkerOptions()
+                        .position(route.getPoints().get(0))
+                        .title("starting point")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
+
+
+                MarkerOptions dest = new MarkerOptions()
+                        .position(route.getPoints().get(route.getPoints().size()-1))
+                        .title("destination")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                map.addMarker(start);
+                map.addMarker(dest);
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+
+                builder.include(start.getPosition());
+                builder.include(dest.getPosition());
+                LatLngBounds bounds = builder.build();
+                Resources resources = this.getResources();
+                DisplayMetrics metrics = resources.getDisplayMetrics();
+                float px = 50 * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+                int padding = (int) px; // offset from edges of the map in pixels
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                //Finally move the map:
+                map.animateCamera(cu);
+
+                if (polylines.size() > 0) {
+                    for (Polyline poly : polylines) {
+                        poly.remove();
+                    }
+                }
                 polylines = new ArrayList<>();
                 //add route to the map.
                 //only display one route
@@ -379,8 +444,38 @@ public void onCreate(Bundle savedInstanceState) {
                 polylines.add(polyline);
             }
 
+            if(incidents != null)
+            {
+                try{
+                    JSONArray json = new JSONArray(incidents);
+                    for(int i=0; i < json.length(); i++){
+                        JSONObject tmp = json.getJSONObject(i);
+                        Iterator<String> iter = tmp.keys();
+                        while (iter.hasNext()) {
+                            String key = iter.next();
+                            String incident_details = tmp.getString(key);
+                            String[] latlng = key.split(",");
+                            LatLng location = new LatLng(Double.parseDouble(latlng[0]),
+                                                  Double.parseDouble(latlng[1]));
+                            MarkerOptions incident = new MarkerOptions()
+                                    .position(location)
+                                    .title("incident")
+                                    .snippet(incident_details);
+                            map.addMarker(incident);
+
+                        }
+                    }
+
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+
         }
     }
+
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -419,7 +514,8 @@ public void onCreate(Bundle savedInstanceState) {
     /**
      * Called when the MyLocation checkbox is clicked.
      */
-    public void onMyLocationToggled(View view) {
+    public void onMyLocationToggled(View view)
+    {
         updateMyLocation();
     }
 
@@ -505,25 +601,15 @@ public void onCreate(Bundle savedInstanceState) {
 
             final RoutingListener routingListener = this;
             ArrayList<LatLng> list = new ArrayList<LatLng>();
-                            list.add(start);
-                            // Start marker
-                            map.addMarker(new MarkerOptions()
-                                    .position(start)
-                                    .title("starting point"));
-
-
-                            map.addMarker(new MarkerOptions()
-                                    .position(end)
-                                    .title("destination"));
-                            list.add(end);
-
-                            Routing routing = new Routing.Builder()
-                                    .travelMode(AbstractRouting.TravelMode.DRIVING)
-                                    .withListener(routingListener)
-                                    .alternativeRoutes(true)
-                                    .waypoints(list)
-                                    .build();
-                            routing.execute();
+            list.add(start);
+            list.add(end);
+            Routing routing = new Routing.Builder()
+                    .travelMode(AbstractRouting.TravelMode.DRIVING)
+                    .withListener(routingListener)
+                    .alternativeRoutes(true)
+                    .waypoints(list)
+                    .build();
+            routing.execute();
 
         }
     }
