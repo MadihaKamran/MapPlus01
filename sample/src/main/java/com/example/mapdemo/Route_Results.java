@@ -28,8 +28,13 @@ import com.dexafree.materialList.card.action.WelcomeButtonAction;
 import com.dexafree.materialList.view.MaterialListView;
 import com.directions.route.Route;
 import com.directions.route.RoutingListener;
+import com.directions.route.Segment;
 import com.google.android.gms.maps.model.LatLng;
 import com.squareup.picasso.RequestCreator;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,9 +45,9 @@ import static com.example.mapdemo.R.id.map;
 
 public class Route_Results extends AppCompatActivity {
 
-    private String secondsToString(int pTime) {
-        final int hour = pTime/3600;
-        final int min = (pTime%3600)/60;
+    private String secondsToString(double pTime) {
+        final int hour =(int) pTime/3600;
+        final int min = (int)(pTime%3600)/60;
         String strMin = (min > 1) ? new String(min + " mins") : new String(min + " min");
         String strHour;
         if(hour == 0)
@@ -66,15 +71,20 @@ public class Route_Results extends AppCompatActivity {
 
         if (b != null)
         {
-            List<Route> route= ( List<Route> )b.getSerializable("routes_object");
+            final List<Route> route= ( List<Route> )b.getSerializable("routes_object");
             final MaterialListView mListView = (MaterialListView) findViewById(R.id.routes_result_material);
             final Context current = this;
+            String route_name = route.get(0).getName();
+            final String route_start = route_name.substring(0,route_name.indexOf("Canada"));
+            String dest = route_name.substring(route_name.indexOf(" to ") + 4);
+            final String route_end = dest.substring(0, dest.indexOf("Canada"));
+
             Card card = new Card.Builder(this)
                     .withProvider(new CardProvider())
                     .setLayout(R.layout.material_welcome_card_layout)
                     .setTitle("Recommended routes")
                     .setTitleColor(Color.WHITE)
-                    .setDescription("Data from Google and MTO")
+                    .setDescription(route_start + "\nTo\n"+route_end)
                     .setDescriptionColor(Color.WHITE)
                     .setSubtitle(route.size() + " possible routes")
                     .setSubtitleColor(Color.WHITE)
@@ -102,43 +112,63 @@ public class Route_Results extends AppCompatActivity {
                     public void onResponse(String response)
                     {
                         // Display the first 500 characters of the response string
-                        int start = response.indexOf("is");
-                        int end = response.indexOf("sec");
-                        int sec = Integer.parseInt(response.substring(start + 3,end));
 
+                        double sec = 0;
+                        JSONObject  json = null;
+                        JSONArray duration = null;
+                        JSONArray incidents = null;
+                        try
+                        {
+                            json = new JSONObject(response);
+                            duration =  json.getJSONArray("durations");
+                            incidents =  json.getJSONArray("incidents");
+                            for(int i=0; i < duration.length(); i++){
+                                JSONObject tmp = duration.getJSONObject(i);
+                                if(tmp.has("weightedAvg"))
+                                {
+                                    sec = tmp.getDouble("weightedAvg");
+                                }
+                            }
+
+                        }
+                        catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
+
+                        final String incidents_pass = (incidents==null)?null:incidents.toString();
+                        System.out.println("response: " + response);
+                        List<Segment> segs = route.get(index-1).getSegments();
                         Card updated =
                                 new Card.Builder(current)
                                         .withProvider(new CardProvider())
                                         .setLayout(R.layout.material_basic_buttons_card)
-                                        .setTitle("Route Details")
-                                        .setDescription("Data from Google\n"
-                                                        + "distance: " + distance
-                                                        + " duration: " + duration + "\n"
-                                                        + "Data from MTO\n"
-                                                        + "distance: " + distance
-                                                        + " duration: " + secondsToString(sec) + "\n")
+                                        .setTitle("Route  Recommend")
+                                        .setDescription(segs.get(0).getInstruction()
+                                                        + "\n ... \n"
+                                                        + segs.get(segs.size()-1).getInstruction()
+                                                        + "\n duration: " + secondsToString(sec) + "\n")
                                         .addAction(R.id.left_text_button, new TextViewAction(current)
-                                                .setText("go")
+                                                .setText("Go")
                                                 .setTextResourceColor(R.color.black_button)
                                                 .setListener(new OnActionClickListener() {
                                                     @Override
                                                     public void onActionClicked(View view, Card card) {
 
-
-
                                                         Intent intent = new Intent(current,MainActivity.class);
                                                         Bundle b = new Bundle();
                                                         b.putParcelable("route_selected", currentRoute);
+                                                        b.putString("incidents",incidents_pass);
                                                         intent.putExtras(b);
                                                         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                                                         startActivity(intent);
-                                                        
+
                                                     }
                                                 }))
                                         .endConfig()
                                         .build();
                         mListView.getAdapter().add(updated);
-                       // Toast.makeText(current, response ,Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(current, response ,Toast.LENGTH_LONG).show();
 
                     }
                 }, new Response.ErrorListener() {
