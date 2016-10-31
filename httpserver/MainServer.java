@@ -1,5 +1,5 @@
 
-package org.eclipse.jetty.embedded;
+package server;
 
 import org.eclipse.jetty.server.HttpConnectionFactory;
 import org.eclipse.jetty.server.Server;

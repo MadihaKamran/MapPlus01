@@ -1,4 +1,4 @@
-package org.eclipse.jetty.embedded;
+package server;
 
 import java.io.IOException;
 import java.io.BufferedReader;
@@ -146,10 +146,13 @@ public class Handler extends AbstractHandler
                 googleDuration += d;
             }
 
+            System.out.println("I'm here");
+
             int updated = 0;
-            for(int i = 0; i <= duration.size()-1 ; i++)
+            for(int i = 0; i <= duration.size()-2 ; i++)
             {
                 // update the i-th duration
+                System.out.println("Try updating duration data");
                 boolean ret = Util.tryUpdateDurations(route, duration, i);
                 if (ret)
                 {
@@ -188,6 +191,7 @@ public class Handler extends AbstractHandler
 
                 incidents = new JSONObject();
                 incidents_list = new JSONArray();
+                System.out.println("Try adding incidents nearby");
                 for(int i = 0; i <= route.size() - 2 ; i++)
                 {
                 

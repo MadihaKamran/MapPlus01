@@ -1,5 +1,5 @@
 
-package org.eclipse.jetty.embedded;
+package server;
 
 import java.util.HashMap;
 import java.io.FileReader;
@@ -511,6 +511,8 @@ public class Util
                             // also in the same direction
                             incidents.put(start.latitude + "," + start.longitude
                                       , res[1]);
+                            System.out.println(start.latitude + "," + start.longitude
+                                      + " :" + res[1]);
                         }
                         catch (JSONException e) 
                         {

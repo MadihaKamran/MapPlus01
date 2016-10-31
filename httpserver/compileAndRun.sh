@@ -1,4 +1,3 @@
-#!/bin/bash
-javac -cp \*  *.java
-java -cp classes:jetty-all-uber.jar org.eclipse.jetty.embedded.MainServer  < config
-
+# #!/bin/bash
+javac -cp .:./lib/* *.java -d classes
+java -cp .:./lib/*:./classes/  server.MainServer  < config
