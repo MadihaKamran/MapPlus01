@@ -17,11 +17,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
+import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+
 
 public class Handler extends AbstractHandler
 {
-   
-
+    public static double googleWeight = 0.5;
+    public static double MTOWeight = 0.5;
+     // The request comes in the query  string format from the user(mobile
+     // application), so we need a parser function to extract the info we needed
+     // from the query string
      public static void parseRouteDurationInfo(String input,  
      					ArrayList<Point> route , ArrayList<Integer> duration)  
      {  
@@ -62,7 +69,7 @@ public class Handler extends AbstractHandler
 
      }  
 
-
+    // Since this is a HTTPREQUEST, we only need care about the body part
     public static String getBody(HttpServletRequest request) throws IOException 
     {
 
@@ -98,6 +105,8 @@ public class Handler extends AbstractHandler
     }
 
 
+
+
     public void handle( String target,
                         Request baseRequest,
                         HttpServletRequest request,
@@ -119,40 +128,87 @@ public class Handler extends AbstractHandler
 
         // Step 1 
         response.setContentType("text/html; charset=utf-8");
-        String payloadRequest = getBody(request);
-        ArrayList<Point> route = new ArrayList<Point>();
-        // the steps of that route 
-        ArrayList<Integer> duration = new ArrayList<Integer>();
-        // the duration of each step in that route
-        parseRouteDurationInfo(payloadRequest, route, duration);   
-        System.out.println(route.size() + " points parsed " + 
-        					duration.size() + " durations parsed"); 
-        
-        // Step 2 - 5 combined
-        int updated = 0;
-        for(int i = 0; i < route.size()-2 ; i++)
-        {
-            boolean ret = Util.tryUpdateDurations(route, duration, i);
-            if (ret)
-            {
-                updated++;
-            }
-        }
-
-        int sum = 0;
-        for (int d : duration)
-        {
-            sum += d;
-        }
-       
-        response.setStatus(HttpServletResponse.SC_OK);
-        PrintWriter out = response.getWriter();  
-
-        if (payloadRequest != null)
+        String reqBody = getBody(request);
+        if (reqBody != null)
         {  
+            ArrayList<Point> route = new ArrayList<Point>();
+            // the steps of that route 
+            ArrayList<Integer> duration = new ArrayList<Integer>();
+            // the duration of each step in that route
+            parseRouteDurationInfo(reqBody, route, duration);   
+            System.out.println(route.size() + " points parsed " + 
+            					duration.size() + " durations parsed"); 
+            
+            // Step 2 - 5 combined
+            double googleDuration = 0;
+            for(double d : duration)
+            {
+                googleDuration += d;
+            }
+
+            int updated = 0;
+            for(int i = 0; i <= duration.size()-1 ; i++)
+            {
+                // update the i-th duration
+                boolean ret = Util.tryUpdateDurations(route, duration, i);
+                if (ret)
+                {
+                    updated++;
+                }
+            }
+
+            int MTODuration = 0;
+            for (int d : duration)
+            {
+                MTODuration += d;
+            }
+       
+            response.setStatus(HttpServletResponse.SC_OK);
+            PrintWriter out = response.getWriter();  
+
+            double weightedAvg = googleDuration * googleWeight 
+                                 + MTODuration * MTOWeight;
+          
+
+            String message = "";
+            JSONObject json, dur, incidents ;
+            JSONArray duration_list,incidents_list ;
+            json = new JSONObject();
+
+            try
+            {
+               
+                duration_list = new JSONArray();
+                dur = new JSONObject();
+                dur.put("google", googleDuration);
+                dur.put("MTO", MTODuration);
+                dur.put("weightedAvg", weightedAvg);
+                duration_list.put(dur);
+                json.put("duration", duration_list);
+
+                incidents = new JSONObject();
+                incidents_list = new JSONArray();
+                for(int i = 0; i <= route.size() - 2 ; i++)
+                {
+                
+                    Util.tryAddIncidents(route, incidents, i);
+                }
+                json.put("incidents", incidents_list);
+            }
+            catch (JSONException e) 
+            {
+                e.printStackTrace();
+            }
+            
+            if(json != null)
+            {
+                 message = json.toString();
+            }
            
-            out.println(updated +"/" + duration.size() + " steps updated, new "
-                        + "travelling time is " + sum + "sec");
+            System.out.println(updated +"/" + duration.size() + " steps updated, new "
+                        + "travelling time is " + weightedAvg + "sec");
+            out.println(message);
+
         }
         else
         {

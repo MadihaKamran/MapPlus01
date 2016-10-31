@@ -23,6 +23,8 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
+import org.json.JSONObject;
+import org.json.JSONException;
 
 class Point
 {
@@ -72,6 +74,8 @@ public class Util
   	public static HashMap<Point, String>    geoToContractId; 
   	public static QuadTree	                monitoredPlaces ; 
   	// the QuadTree data structure provided a quick way find the nearby places
+    public static QuadTree                  incidentPlaces; 
+
     public static HashMap<String, Double>   contractIdToSpeed;
     public static HashMap<Point, String[]>  coordinateToIncidents;
     // the incident data include an origin and destination, we will store the 
@@ -167,6 +171,10 @@ public class Util
     {
       // load the traffic data 
       coordinateToIncidents = new HashMap<Point, String[]>();
+      if(incidentPlaces == null)
+      {
+              incidentPlaces = new QuadTree();
+      }
       try {
            File inputFile = new File(file);
            DocumentBuilderFactory dbFactory 
@@ -262,6 +270,7 @@ public class Util
                       value[0] = dir;
                       value[1] = description;
                       coordinateToIncidents.put(orign,value);
+                      incidentPlaces.insert(origin_lat,origin_lng);
                       count++;
                  }
                  
@@ -375,9 +384,7 @@ public class Util
 	    		// 					+ "/" + origin.longitude + " can be replaced by the speed of contractId " 
 	    		// 					+ contractId);
     		}
-
-    			
-    		
+	
     	}
     	return null;
 
@@ -387,9 +394,9 @@ public class Util
     {
     	double lat = (a.latitude - b.latitude) * 111105.44; 
     	// One degree of latitude = 111105.44m in Toronto
-        double lng = (a.longitude - b.longitude) * 80671.87;
-        // One degree of longitude = 80671.867m in Toronto
-        return Math.sqrt(lat*lat + lng * lng);
+      double lng = (a.longitude - b.longitude) * 80671.87;
+      // One degree of longitude = 80671.867m in Toronto
+      return Math.sqrt(lat*lat + lng * lng);
 
     }
 
@@ -397,14 +404,14 @@ public class Util
     						, ArrayList<Integer> duration
     						, int i)
     {
-
+            // update the i-th duration using MTO data
             Point start = route.get(i);
             Point end = route.get(i+1);
             String sDirection = "";
             String eDirection = "";
             sDirection += (end.latitude > start.latitude) ? "N" : "S";
           	sDirection += (end.longitude > start.longitude)? "E" : "W";
-          	if(i+1 == route.size()-1)
+          	if(i == duration.size() - 1)
           	{
           		// end point is already the last point, we just assume 
           		// it's heading towards the same direction as the starting 
@@ -474,5 +481,46 @@ public class Util
 
             }
     }
+
+
+    public static void tryAddIncidents(ArrayList<Point> route
+                                              , JSONObject incidents
+                                              , int i)
+    {
+            // If there's an incident neart the i-th step of route,
+            // add it to the json array
+
+            Point start = route.get(i);
+            Point end = route.get(i + 1);
+            String dir = ""; 
+            dir += (end.latitude > start.latitude) ? "N" : "S";
+            dir += (end.longitude > start.longitude)? "E" : "W";
+            ArrayList<Point> nearby = incidentPlaces.findNearby(
+                                         start.latitude,
+                                         start.longitude,
+                                         500);
+            for(Point p : nearby)
+            {
+                String [] res = coordinateToIncidents.get(p); 
+                if(res != null)
+                {
+                    if(dir.equals(res[0]))
+                    {
+                        try
+                        {  
+                            // also in the same direction
+                            incidents.put(start.latitude + "," + start.longitude
+                                      , res[1]);
+                        }
+                        catch (JSONException e) 
+                        {
+                            e.printStackTrace();
+                        }
+                      
+                    }
+                }
+            }       
+    }
+    
 
 }

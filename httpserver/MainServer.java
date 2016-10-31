@@ -4,6 +4,8 @@ package org.eclipse.jetty.embedded;
 import org.eclipse.jetty.server.HttpConnectionFactory;
 import org.eclipse.jetty.server.Server;
 import java.util.Scanner;
+import java.text.DecimalFormat;
+
 
 /*
 	The purpose of this server is to get a better estimate of the travelling 
@@ -34,12 +36,11 @@ import java.util.Scanner;
 public class MainServer
 {
 
-	public static void loadAllData()
+	public static void loadAllData( Scanner scanner)
 	{
 
         // MTO contractID -> geo-coordinates
         System.out.println("Enter the file name for geo-coordinates to contractId: ");
-		Scanner scanner = new Scanner(System.in);
 		String geo = scanner.nextLine();
 		System.out.println("Loading data from geo-coordinates to contractId from \"" 
         				  + geo +"\"");
@@ -62,13 +63,30 @@ public class MainServer
 		}
 	}
 
+	public static void setWeight(Scanner scanner)
+	{
+		
+		double google = Double.parseDouble(scanner.nextLine());
+		double mto = Double.parseDouble(scanner.nextLine());
+		Handler.googleWeight = google/(google + mto) *1.0;
+		Handler.MTOWeight = 1 - Handler.googleWeight;
+		System.out.println("The data from google weighs " 
+						  + (new DecimalFormat("##.##").format(Handler.googleWeight * 100))
+						  + "%, while the data from MTO weighs " 
+						  +(new DecimalFormat("##.##").format(Handler.MTOWeight * 100))
+						  + "%" );
+	}
+
     public static void main( String[] args ) throws Exception
     {
         Server server = new Server(8080);
         server.setHandler(new Handler());
+        Scanner scanner = new Scanner(System.in);
+
+        setWeight(scanner);
 
         // load all the data required to start the server
-        loadAllData();
+        loadAllData(scanner);
 
         server.start();
         server.join();

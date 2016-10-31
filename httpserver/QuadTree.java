@@ -1,11 +1,10 @@
 package org.eclipse.jetty.embedded;
 import java.util.ArrayList;
 
-/******************************************************************************
- *  class: QuadTree.
- *	@purpose: this class is a helper class providing the fast processing time
- * 			  for finding the place nearby(in a certain range)
- ******************************************************************************/
+
+  //  class: QuadTree.
+  //  @purpose: this class is a helper class providing the fast processing time
+  //  for finding the place nearby(in a certain range)
 
 class QuadTree  {
     private Node root;
@@ -21,9 +20,9 @@ class QuadTree  {
     }
 
 
-  /***********************************************************************
-    *  Insert (x, y) into appropriate quadrant
-    ***************************************************************************/
+  
+    //  Insert (x, y) into appropriate quadrant
+   
     public void insert(double x, double y) {
         root = insert(root, x, y);
     }
