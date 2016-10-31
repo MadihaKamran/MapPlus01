@@ -146,13 +146,10 @@ public class Handler extends AbstractHandler
                 googleDuration += d;
             }
 
-            System.out.println("I'm here");
-
             int updated = 0;
             for(int i = 0; i <= duration.size()-2 ; i++)
             {
                 // update the i-th duration
-                System.out.println("Try updating duration data");
                 boolean ret = Util.tryUpdateDurations(route, duration, i);
                 if (ret)
                 {
@@ -167,7 +164,7 @@ public class Handler extends AbstractHandler
             }
        
             response.setStatus(HttpServletResponse.SC_OK);
-            PrintWriter out = response.getWriter();  
+            PrintWriter publisher = response.getWriter();  
 
             double weightedAvg = googleDuration * googleWeight 
                                  + MTODuration * MTOWeight;
@@ -177,6 +174,7 @@ public class Handler extends AbstractHandler
             JSONObject json, dur, incidents ;
             JSONArray duration_list,incidents_list ;
             json = new JSONObject();
+            incidents = new JSONObject();
 
             try
             {
@@ -189,14 +187,14 @@ public class Handler extends AbstractHandler
                 duration_list.put(dur);
                 json.put("duration", duration_list);
 
-                incidents = new JSONObject();
+              
                 incidents_list = new JSONArray();
-                System.out.println("Try adding incidents nearby");
                 for(int i = 0; i <= route.size() - 2 ; i++)
                 {
                 
                     Util.tryAddIncidents(route, incidents, i);
                 }
+                incidents_list.put(incidents);
                 json.put("incidents", incidents_list);
             }
             catch (JSONException e) 
@@ -211,7 +209,13 @@ public class Handler extends AbstractHandler
            
             System.out.println(updated +"/" + duration.size() + " steps updated, new "
                         + "travelling time is " + weightedAvg + "sec");
-            out.println(message);
+
+            System.out.println("There're " + incidents.length() 
+                                + " incidents along the route");
+
+            System.out.println(message);
+
+            publisher.println(message);
 
         }
         else

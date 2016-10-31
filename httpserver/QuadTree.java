@@ -7,6 +7,10 @@ import java.util.ArrayList;
   //  for finding the place nearby(in a certain range)
 
 class QuadTree  {
+    public static final double LatToMeters = 111105.44;
+     // One degree of latitude = 111105.44m in Toronto
+    public static final double LngToMeters = 80671.87;
+     // One degree of longitude = 80671.867m in Toronto
     private Node root;
 
     // helper node data type
@@ -44,12 +48,12 @@ class QuadTree  {
     public ArrayList<Point> findNearby(double lat, double lng, double range) {
 
         double[] rect = new double[4];
-        rect[0] = lat - range/111105.44; 
-        // One degree of latitude = 111105.44m in Toronto
-        rect[1] = lng - range/80671.87; 
-        // One degree of longitude = 80671.867m in Toronto
-        rect[2] = lat + range/111105.44;
-        rect[3] = lng + range/111320;
+        rect[0] = lat - range/LatToMeters; 
+       
+        rect[1] = lng - range/LngToMeters; 
+        
+        rect[2] = lat + range/LatToMeters;
+        rect[3] = lng + range/LngToMeters;
         ArrayList<Point> points = new ArrayList<Point>();
         query2D(root, rect, points);
         //System.out.println(points.size() + " nearby location detected");

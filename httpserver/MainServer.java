@@ -49,9 +49,22 @@ public class MainServer
 
        	
        	// MTO traffic data
+       	System.out.println("Enter the file name of the MTO traffic data");
         String traffic = scanner.nextLine();
-        Util.loadTrafficData(traffic);
         System.out.println("Loading traffic data from \"" + traffic +"\"");
+        Util.loadTrafficData(traffic);
+        
+
+        // set up the maximum allowed distance error
+       	System.out.println("Enter max allowed distance when estimate duration");
+       	Util.velocityThreshold = Double.parseDouble(scanner.nextLine());
+       	System.out.println("We can use the MTO speed data within at most "
+       						+ Util.velocityThreshold + " meters tolerance");
+       	
+       	System.out.println("Enter max allowed distance when looking for incidents");
+       	Util.incidentsRange = Double.parseDouble(scanner.nextLine());
+        System.out.println("We will report the incidents within "
+       						+ Util.incidentsRange + " meters range");
 
 
         // traffic data information coming from cellphone based probes.

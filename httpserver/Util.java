@@ -82,6 +82,9 @@ public class Util
     // origin and the direction(since incident usually block only one direction)
     // and use a second string to store the description of the incident
 
+    public static  double velocityThreshold = 500;
+    public static  double incidentsRange = 500;
+
 
     public static void loadTrafficData(String file)
     {
@@ -170,7 +173,11 @@ public class Util
     public static void loadIncidentData(String file)
     {
       // load the traffic data 
-      coordinateToIncidents = new HashMap<Point, String[]>();
+      if(coordinateToIncidents == null)
+      {
+          coordinateToIncidents = new HashMap<Point, String[]>();
+      }
+      
       if(incidentPlaces == null)
       {
               incidentPlaces = new QuadTree();
@@ -264,8 +271,15 @@ public class Util
 
                       Point orign = new Point(origin_lat,origin_lng);
                       String dir = "";
-                      dir += dest_lat > origin_lat ? "N" : "S";
-                      dir += dest_lng > origin_lng ? "E" : "W";
+                      dir += dest_lat > origin_lat ? "N" : "";
+                      dir += dest_lat < origin_lat ? "S" : "";
+                      dir += dest_lng > origin_lng ? "E" : "";
+                      dir += dest_lng < origin_lng ? "E" : "";
+                      if(dir.equals(""))
+                      {
+                          // that means the incident just happened at that point
+                          dir = "N/A";
+                      }
                       String value[] = new String[2];
                       value[0] = dir;
                       value[1] = description;
@@ -432,12 +446,12 @@ public class Util
             ArrayList<Point> nearStart = monitoredPlaces.findNearby(
                                          start.latitude,
                                          start.longitude,
-                                         500);
-            // within 100 meters
+                                         velocityThreshold);
+            // within velocityThreshold meters
             ArrayList<Point> nearEnd = monitoredPlaces.findNearby(
                                          end.latitude,
                                          end.longitude,
-                                         500);
+                                         velocityThreshold);
             if(nearStart.size() == 0 || nearEnd.size() == 0)
             {
             	return false;
@@ -498,13 +512,15 @@ public class Util
             ArrayList<Point> nearby = incidentPlaces.findNearby(
                                          start.latitude,
                                          start.longitude,
-                                         500);
+                                         incidentsRange);
+           
             for(Point p : nearby)
             {
                 String [] res = coordinateToIncidents.get(p); 
                 if(res != null)
                 {
-                    if(dir.equals(res[0]))
+                   
+                    if(dir.equals(res[0]) || res[0].equals("N/A"))
                     {
                         try
                         {  
